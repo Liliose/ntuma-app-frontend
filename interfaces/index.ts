@@ -43,3 +43,14 @@ export interface IMarketsReducer {
   isLoading: boolean;
   selectedMarket: IMarket | undefined;
 }
+export interface ICategoriesReducer {
+  categories: ICategory[];
+  isLoading: boolean;
+  selectedCategory: ICategory | undefined;
+}
+export interface ICategory {
+  id: number;
+  name: string;
+  image: string;
+  createdAt: string;
+}
