@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {Pressable, View, StatusBar} from 'react-native';
+import {Pressable, View, StatusBar, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon3 from 'react-native-vector-icons/Octicons';
@@ -15,6 +15,8 @@ import Products from '../screens/home/products-tabs';
 import Home from '../screens/home';
 import Welcome from '../screens/welcome';
 import SelectMarket from '../screens/select-market';
+import ChooseCategory from '../screens/choose-category';
+import ChooseCategoryHeader from '../screens/choose-category/choose-category-header';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -151,6 +153,16 @@ function Navigation() {
             headerLeftContainerStyle: {
               paddingHorizontal: 10,
             },
+          })}
+        />
+        <Stack.Screen
+          name="ChooseCategory"
+          component={ChooseCategory}
+          options={({route, navigation}: INavigationProp) => ({
+            title: '',
+            headerStyle: {backgroundColor: APP_COLORS.MAROON},
+            headerTintColor: APP_COLORS.WHITE,
+            header: () => <ChooseCategoryHeader navigation={navigation} />,
           })}
         />
       </Stack.Navigator>

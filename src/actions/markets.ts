@@ -17,7 +17,7 @@ export const setMarkets = (markets: IMarket[]): IAction => ({
   payload: markets,
 });
 export const setSelectedMarket = (market: IMarket): IAction => ({
-  type: SET_MARKETS,
+  type: SET_SELECTED_MARKET,
   payload: market,
 });
 export const setIsLoadingMarkets = (value: boolean): IAction => ({
