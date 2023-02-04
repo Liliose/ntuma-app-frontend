@@ -38,7 +38,7 @@ function Navigation() {
   const HomeTabs = ({navigation}: INavigationProp) => {
     const {email} = useSelector((state: RootState) => state.user);
     const [activeColor, setActiveColor] = useState(APP_COLORS.MAROON);
-    const [inactiveColor, setInactiveColor] = useState(APP_COLORS.WHITE);
+    const [inactiveColor, setInactiveColor] = useState(APP_COLORS.BLACK);
     return (
       <Tab.Navigator
         initialRouteName="Home"
