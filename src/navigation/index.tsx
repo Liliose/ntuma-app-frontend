@@ -5,9 +5,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {Pressable, View, StatusBar, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/Octicons';
+import Icon4 from 'react-native-vector-icons/FontAwesome5';
 import {INavigationProp} from '../../interfaces';
 import {APP_COLORS} from '../constants/colors';
 import {RootState} from '../reducers';
@@ -17,12 +18,17 @@ import Welcome from '../screens/welcome';
 import SelectMarket from '../screens/select-market';
 import ChooseCategory from '../screens/choose-category';
 import ChooseCategoryHeader from '../screens/choose-category/choose-category-header';
+import Favourites from '../screens/home/favourites';
+import Dishes from '../screens/home/dishes';
+import Messages from '../screens/home/messages';
+import Cart from '../screens/home/cart';
+import ProductTabsHeader from '../screens/home/products-tabs/product-tabs-header';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
 function Navigation() {
-  function OrderTabs() {
+  function ProductsTabs() {
     return (
       <TopTab.Navigator
         initialRouteName="PendingOrders"
@@ -40,7 +46,6 @@ function Navigation() {
   }
 
   const HomeTabs = ({navigation}: INavigationProp) => {
-    const {email} = useSelector((state: RootState) => state.user);
     const [activeColor, setActiveColor] = useState(APP_COLORS.MAROON);
     const [inactiveColor, setInactiveColor] = useState(APP_COLORS.BLACK);
     return (
@@ -50,42 +55,69 @@ function Navigation() {
           tabBarActiveTintColor: activeColor,
           tabBarInactiveTintColor: inactiveColor,
           headerShown: false,
-
+          tabBarShowLabel: false,
           tabBarStyle: {
             backgroundColor: APP_COLORS.WHITE,
-            height: 55,
           },
         }}>
         <Tab.Screen
           name="Home"
-          component={Home}
+          component={ProductsTabs}
           options={({route, navigation}) => ({
             headerShown: true,
-            headerTitle: 'Home',
-            headerRight: () => (
-              <Pressable onPress={() => navigation.navigate('Search')}>
-                <View style={{paddingRight: 10}}>
-                  <Icon name="search" color={APP_COLORS.MAROON} size={30} />
-                </View>
-              </Pressable>
-            ),
+            headerTitle: '',
+            header: () => <ProductTabsHeader />,
             headerTintColor: APP_COLORS.MAROON,
-            tabBarItemStyle: {marginBottom: 10},
-            tabBarLabelStyle: {fontSize: 14},
             tabBarIcon: ({focused, color, size}) => {
               return <Icon name="home" color={color} size={size} />;
             },
           })}
         />
         <Tab.Screen
-          name="Ord"
-          component={OrderTabs}
+          name="Cart"
+          component={Cart}
           options={{
-            tabBarLabel: 'Orders',
-            tabBarItemStyle: {marginBottom: 10},
-            tabBarLabelStyle: {fontSize: 14},
             tabBarIcon: ({focused, color, size}) => {
               return <Icon name="cart" color={color} size={size} />;
+            },
+          }}
+        />
+
+        <Tab.Screen
+          name="Favourites"
+          component={Favourites}
+          options={{
+            tabBarIcon: ({focused, color, size}) => {
+              return <Icon name="heart" color={color} size={size} />;
+            },
+          }}
+        />
+
+        <Tab.Screen
+          name="Dishes"
+          component={Dishes}
+          options={{
+            tabBarIcon: ({focused, color, size}) => {
+              return <Icon2 name="restaurant-menu" color={color} size={size} />;
+            },
+          }}
+        />
+
+        <Tab.Screen
+          name="Messages"
+          component={Messages}
+          options={{
+            tabBarIcon: ({focused, color, size}) => {
+              return <Icon2 name="message" color={color} size={size} />;
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Messages}
+          options={{
+            tabBarIcon: ({focused, color, size}) => {
+              return <Icon4 name="user-alt" color={color} size={size} />;
             },
           }}
         />
@@ -143,7 +175,7 @@ function Navigation() {
 
             headerLeft: () => (
               <>
-                <Icon2
+                <Icon
                   name="shopping-outline"
                   size={25}
                   color={APP_COLORS.WHITE}
