@@ -29,25 +29,37 @@ const TopTab = createMaterialTopTabNavigator();
 
 function Navigation() {
   function ProductsTabs() {
+    const {categories} = useSelector((state: RootState) => state.categories);
     return (
       <TopTab.Navigator
-        initialRouteName="PendingOrders"
+        // initialRouteName=""
         screenOptions={{
-          tabBarActiveTintColor: APP_COLORS.MAROON,
+          tabBarActiveTintColor: APP_COLORS.BLACK,
           tabBarInactiveTintColor: APP_COLORS.WHITE,
+          tabBarIndicatorContainerStyle: {backgroundColor: APP_COLORS.MAROON},
+          tabBarIndicatorStyle: {
+            backgroundColor: 'white',
+            height: '100%',
+          },
+          tabBarLabelStyle: {textTransform: 'capitalize'},
         }}>
-        <TopTab.Screen
-          options={{tabBarLabel: 'Pending'}}
-          name="PendingOrders"
-          component={Products}
-        />
+        {categories.map((item, i) => (
+          <TopTab.Screen
+            key={i}
+            options={{
+              tabBarLabel: item.name,
+            }}
+            name={'category_' + item.id}
+            component={Products}
+          />
+        ))}
       </TopTab.Navigator>
     );
   }
 
   const HomeTabs = ({navigation}: INavigationProp) => {
-    const [activeColor, setActiveColor] = useState(APP_COLORS.MAROON);
-    const [inactiveColor, setInactiveColor] = useState(APP_COLORS.BLACK);
+    const [activeColor, setActiveColor] = useState(APP_COLORS.WHITE);
+    const [inactiveColor, setInactiveColor] = useState('rgba(255,255,255,0.6)');
     return (
       <Tab.Navigator
         initialRouteName="Home"
@@ -57,7 +69,7 @@ function Navigation() {
           headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: {
-            backgroundColor: APP_COLORS.WHITE,
+            backgroundColor: APP_COLORS.MAROON,
           },
         }}>
         <Tab.Screen
@@ -67,7 +79,6 @@ function Navigation() {
             headerShown: true,
             headerTitle: '',
             header: () => <ProductTabsHeader />,
-            headerTintColor: APP_COLORS.MAROON,
             tabBarIcon: ({focused, color, size}) => {
               return <Icon name="home" color={color} size={size} />;
             },

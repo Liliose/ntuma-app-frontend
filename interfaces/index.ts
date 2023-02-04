@@ -54,3 +54,21 @@ export interface ICategory {
   image: string;
   createdAt: string;
 }
+
+export interface IProduct {
+  pId: number;
+  marketId: number;
+  categoryId: number;
+  name: string;
+  description: string;
+  priceType: string;
+  supportsDynamicPrice: boolean;
+  singlePrice: number;
+  image: string;
+  isActive: boolean;
+}
+
+export interface IProductsReducer {
+  products: IProduct[];
+  isLoading: boolean;
+}
