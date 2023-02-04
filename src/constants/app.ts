@@ -5,7 +5,7 @@ const APP_MODE = 'dev';
 const CONFIG = {
   dev: {
     BACKEND_URL: 'http://192.168.43.3:8080/api',
-    FILE_URL: 'http://192.168.43.3:8080/uploads',
+    FILE_URL: 'http://192.168.43.3:8080/uploads/',
 
     // BACKEND_URL: 'http://172.31.34.64:8080/api',
     // FILE_URL: 'http://172.31.34.64:8080/uploads/',

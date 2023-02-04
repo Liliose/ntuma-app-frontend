@@ -1,3 +1,4 @@
+import {IAction, IUser} from '../../interfaces';
 import {
   SET_USER_NAMES,
   SET_USER_EMAIL,
@@ -5,7 +6,6 @@ import {
   SET_USER_ROLE,
   RESET_USER,
 } from '../actions/user';
-import {IAction, IUser} from '../interfaces';
 
 const initialState: IUser = {
   token: '',

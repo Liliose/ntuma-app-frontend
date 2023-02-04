@@ -24,14 +24,14 @@ export const commonInput = {
   borderColor: APP_COLORS.BORDER_COLOR,
 };
 
-export const commonAdminButtonTextStyles: StyleProp<TextStyle> = {
+export const commonButtonWithBackgroundTextStyles: StyleProp<TextStyle> = {
   color: APP_COLORS.WHITE,
   textAlign: 'center',
   fontSize: 18,
   marginLeft: 10,
 };
 
-export const commonAdminButtonContainerStyles: StyleProp<ViewStyle> = {
+export const commonButtonWithBackgroundContainerStyles: StyleProp<ViewStyle> = {
   backgroundColor: APP_COLORS.MAROON,
   padding: 15,
   marginTop: 10,

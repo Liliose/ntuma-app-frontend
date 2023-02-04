@@ -21,18 +21,25 @@ export interface INavigationProp {
   navigation: StackNavigationProp<any>;
   route?: RouteProp<any>;
 }
-export interface IPatientRegisterRequest {
-  names: string;
-  ages: number;
-  height: number;
-  weight: number;
-  sex: string;
+export interface IMarket {
+  mId: number;
+  name: string;
+  address: string;
+  lat: string;
+  long: string;
+  image: string;
+  isActive: boolean;
+  createdAt: string;
 }
-export interface IPatient {
-  _id: string;
-  names: string;
-  ages: number;
-  height: number;
-  weight: number;
-  sex: string;
+
+export enum TOAST_MESSAGE_TYPES {
+  ERROR = 'error',
+  INFO = 'info',
+  SUCCESS = 'success',
+}
+
+export interface IMarketsReducer {
+  markets: IMarket[];
+  isLoading: boolean;
+  selectedMarket: IMarket | undefined;
 }

@@ -6,13 +6,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {Pressable, View, StatusBar} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Icon2 from 'react-native-vector-icons/Octicons';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon3 from 'react-native-vector-icons/Octicons';
 import {INavigationProp} from '../../interfaces';
 import {APP_COLORS} from '../constants/colors';
 import {RootState} from '../reducers';
 import Products from '../screens/home/products-tabs';
 import Home from '../screens/home';
-
+import Welcome from '../screens/welcome';
+import SelectMarket from '../screens/select-market';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -106,12 +108,50 @@ function Navigation() {
   };
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor={APP_COLORS.MAROON} barStyle="dark-content" />
-      <Stack.Navigator>
+      <StatusBar backgroundColor={APP_COLORS.MAROON} barStyle="light-content" />
+      <Stack.Navigator initialRouteName="Welcome">
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{
+            headerTransparent: true,
+            title: '',
+            headerShadowVisible: false,
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="HomeTabs"
           component={HomeTabs}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SelectMarket"
+          component={SelectMarket}
+          options={({route, navigation}: INavigationProp) => ({
+            headerRight: () => (
+              <>
+                <Icon3 name="search" size={25} color={APP_COLORS.WHITE} />
+              </>
+            ),
+            headerRightContainerStyle: {paddingRight: 20},
+            title: 'Select Market',
+            headerTintColor: APP_COLORS.WHITE,
+            headerStyle: {backgroundColor: APP_COLORS.MAROON},
+
+            headerLeft: () => (
+              <>
+                <Icon2
+                  name="shopping-outline"
+                  size={25}
+                  color={APP_COLORS.WHITE}
+                />
+              </>
+            ),
+            headerLeftContainerStyle: {
+              paddingHorizontal: 10,
+            },
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
