@@ -7,12 +7,22 @@ import {useDispatch} from 'react-redux';
 import {resetUser} from '../actions/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IMarket, TOAST_MESSAGE_TYPES} from '../../interfaces';
+import {fetchProducts} from '../actions/products';
+import {fetchCategories} from '../actions/categories';
 
 //custom dispatcher hook
 export const useResetUser = () => {
   const dispatch = useDispatch();
   return (payload: any) => {
     dispatch(resetUser());
+  };
+};
+
+export const useLoadBasiData = () => {
+  const dispatch = useDispatch();
+  return (payload: any) => {
+    dispatch(fetchProducts());
+    dispatch(fetchCategories());
   };
 };
 

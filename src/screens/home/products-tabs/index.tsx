@@ -1,17 +1,15 @@
-import {View, Text, Image, Dimensions, ScrollView} from 'react-native';
+import {View, Image, Dimensions, ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import {RouteProp, useFocusEffect} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../reducers';
 import {setSelectedCategory} from '../../../actions/categories';
 import {APP_COLORS} from '../../../constants/colors';
-import {viewFlexCenter, viewFlexSpace} from '../../../constants/styles';
-import {fetchProducts, setIsLoadingProducts} from '../../../actions/products';
+import {viewFlexSpace} from '../../../constants/styles';
+import {fetchProducts} from '../../../actions/products';
 import Loader from './loader';
-import {app} from '../../../constants/app';
-import Icon from 'react-native-vector-icons/AntDesign';
-import {currencyFormatter} from '../../../helpers';
-const {height, width} = Dimensions.get('window');
+import ProductItem from './product-item';
+const {height} = Dimensions.get('window');
 interface IProductsProps {
   route: RouteProp<any>;
 }
@@ -36,7 +34,9 @@ const Products = ({route}: IProductsProps) => {
           dispatch(setSelectedCategory(cat));
           dispatch(fetchProducts());
         }
-        setShowLoader(false);
+        setTimeout(() => {
+          setShowLoader(false);
+        }, 100);
       } catch (error) {
         setShowLoader(false);
       }
@@ -62,68 +62,7 @@ const Products = ({route}: IProductsProps) => {
                       item.marketId === selectedMarket?.mId,
                   )
                   .map((item, index) => (
-                    <View
-                      key={index}
-                      style={[
-                        viewFlexSpace,
-                        {
-                          borderBottomColor: APP_COLORS.BLACK,
-                          borderBottomWidth: 1,
-                          marginBottom: 10,
-                        },
-                      ]}>
-                      <View style={{position: 'relative'}}>
-                        <Image
-                          source={{uri: app.FILE_URL + item.image}}
-                          style={{
-                            width: width / 2 - 40,
-                            height: width / 2 - 80,
-                          }}
-                        />
-                        <View
-                          style={[
-                            viewFlexCenter,
-                            {
-                              position: 'absolute',
-                              top: 0,
-                              right: 0,
-                              height: 35,
-                              width: 35,
-                              borderRadius: 100,
-                              backgroundColor: APP_COLORS.WHITE,
-                              marginRight: 5,
-                              marginTop: 5,
-                            },
-                          ]}>
-                          <Icon
-                            name="hearto"
-                            size={25}
-                            color={APP_COLORS.BLACK}
-                          />
-                        </View>
-                      </View>
-                      <View style={{flex: 1, paddingLeft: 10}}>
-                        <Text
-                          style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
-                          {item.name}
-                        </Text>
-                        <Text style={{color: APP_COLORS.TEXT_GRAY}}>
-                          {item.description}
-                        </Text>
-                        {item.priceType === 'single' && (
-                          <Text style={{color: APP_COLORS.TEXT_GRAY}}>
-                            <Text
-                              style={{
-                                color: APP_COLORS.BLACK,
-                                fontWeight: 'bold',
-                              }}>
-                              Price:
-                            </Text>{' '}
-                            {currencyFormatter(item.singlePrice)} RWF
-                          </Text>
-                        )}
-                      </View>
-                    </View>
+                    <ProductItem key={index} item={item} index={index} />
                   ))}
               </View>
             </ScrollView>

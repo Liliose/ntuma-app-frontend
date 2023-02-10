@@ -68,7 +68,19 @@ export interface IProduct {
   isActive: boolean;
 }
 
+export interface IProductPrice {
+  ppId: number;
+  productId: number;
+  name: string;
+  amount: number;
+}
+
 export interface IProductsReducer {
   products: IProduct[];
+  isLoading: boolean;
+}
+
+export interface IProductPricesReducer {
+  prices: IProductPrice[];
   isLoading: boolean;
 }

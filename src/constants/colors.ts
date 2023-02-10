@@ -4,4 +4,5 @@ export const APP_COLORS = {
   MAROON: '#800000',
   BORDER_COLOR: '#e7e7e7',
   TEXT_GRAY: 'rgba(48, 47, 47, 0.8)',
+  PRODUCT_CARD_BORDER: 'rgba(170, 168, 168, 1)',
 };
