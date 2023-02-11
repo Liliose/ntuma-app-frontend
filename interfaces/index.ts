@@ -3,9 +3,13 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 export interface IUser {
   token: string;
-  fullName: string;
+  names: string;
+  phone: string;
+  walletAmounts: number;
   email: string;
+  image: string;
   role: string;
+  userId: number;
 }
 export interface IAction {
   type: string;

@@ -5,21 +5,37 @@ import {
   SET_USER_TOKEN,
   SET_USER_ROLE,
   RESET_USER,
+  SET_USER_PHONE,
+  SET_USER_WALLET_AMOUNTS,
+  SET_USER_ID,
+  SET_USER_IMAGE,
 } from '../actions/user';
 
 const initialState: IUser = {
   token: '',
-  fullName: '',
+  names: '',
   email: '',
+  phone: '',
+  walletAmounts: 0,
+  image: '',
   role: '',
+  userId: 0,
 };
 
 const user = (state: IUser = initialState, action: IAction) => {
   switch (action.type) {
+    case SET_USER_ID:
+      return {...state, userId: action.payload as number};
     case SET_USER_NAMES:
-      return {...state, fullName: action.payload as string};
+      return {...state, names: action.payload as string};
+    case SET_USER_IMAGE:
+      return {...state, image: action.payload as string};
     case SET_USER_EMAIL:
       return {...state, email: action.payload as string};
+    case SET_USER_PHONE:
+      return {...state, phone: action.payload as string};
+    case SET_USER_WALLET_AMOUNTS:
+      return {...state, walletAmounts: action.payload as number};
     case SET_USER_ROLE:
       return {...state, role: action.payload as string};
     case SET_USER_TOKEN:
