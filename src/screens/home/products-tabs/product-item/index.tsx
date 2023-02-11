@@ -36,14 +36,20 @@ const ProductItem = ({
         },
       ]}>
       <View style={{position: 'relative'}}>
-        <Image
-          source={{uri: app.FILE_URL + item.image}}
-          resizeMode="contain"
-          style={{
-            width: width / 2 - 50,
-            height: imageHeight,
-          }}
-        />
+        <Pressable
+          onPress={() => {
+            setSelectedProduct(item);
+            setShowModal(true);
+          }}>
+          <Image
+            source={{uri: app.FILE_URL + item.image}}
+            resizeMode="contain"
+            style={{
+              width: width / 2 - 50,
+              height: imageHeight,
+            }}
+          />
+        </Pressable>
 
         <View
           style={[
