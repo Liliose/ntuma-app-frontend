@@ -23,11 +23,16 @@ import Dishes from '../screens/home/dishes';
 import Messages from '../screens/home/messages';
 import Cart from '../screens/home/cart';
 import ProductTabsHeader from '../screens/home/products-tabs/product-tabs-header';
+import {useLoadBasiData} from '../helpers';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
 function Navigation() {
+  const loadData = useLoadBasiData();
+  useEffect(() => {
+    loadData();
+  }, []);
   function ProductsTabs() {
     const {categories} = useSelector((state: RootState) => state.categories);
     return (

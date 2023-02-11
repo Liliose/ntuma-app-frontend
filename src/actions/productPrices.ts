@@ -31,6 +31,7 @@ export const fetchProductPrices = (): any => (dispatch: any, getState: any) => {
         type: SET_PRODUCT_PRICES,
         payload: res.data.prices,
       });
+      dispatch(setIsLoadingProductPrices(false));
     })
     .catch(error => {
       dispatch(setIsLoadingProductPrices(false));

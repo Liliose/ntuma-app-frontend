@@ -12,11 +12,18 @@ const {width} = Dimensions.get('window');
 interface IProductItemProps {
   index: number;
   item: IProduct;
+  setSelectedProduct: any;
+  setShowModal: any;
 }
 
 const imageHeight = width / 2 - 90;
 
-const ProductItem = ({index, item}: IProductItemProps) => {
+const ProductItem = ({
+  index,
+  item,
+  setSelectedProduct,
+  setShowModal,
+}: IProductItemProps) => {
   return (
     <View
       key={index}
@@ -31,11 +38,13 @@ const ProductItem = ({index, item}: IProductItemProps) => {
       <View style={{position: 'relative'}}>
         <Image
           source={{uri: app.FILE_URL + item.image}}
+          resizeMode="contain"
           style={{
             width: width / 2 - 50,
             height: imageHeight,
           }}
         />
+
         <View
           style={[
             viewFlexCenter,
@@ -43,10 +52,9 @@ const ProductItem = ({index, item}: IProductItemProps) => {
               position: 'absolute',
               top: 0,
               right: 0,
-              height: 35,
-              width: 35,
+              padding: 10,
               borderRadius: 100,
-              backgroundColor: APP_COLORS.WHITE,
+              backgroundColor: APP_COLORS.DARK_GRAY,
               marginRight: 5,
               marginTop: 5,
             },
@@ -88,7 +96,11 @@ const ProductItem = ({index, item}: IProductItemProps) => {
             bottom: 0,
             right: 0,
           }}>
-          <Pressable>
+          <Pressable
+            onPress={() => {
+              setSelectedProduct(item);
+              setShowModal(true);
+            }}>
             <View
               style={{
                 backgroundColor: APP_COLORS.MAROON,

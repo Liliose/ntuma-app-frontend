@@ -2,8 +2,8 @@ import {View, Text, Image, Dimensions, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {APP_COLORS} from '../../constants/colors';
 import {
-  commonButtonWithBackgroundContainerStyles,
-  commonButtonWithBackgroundTextStyles,
+  btnWithBgContainerStyles,
+  btnWithBgTextStyles,
   viewFlexCenter,
 } from '../../constants/styles';
 import FitImage from 'react-native-fit-image';
@@ -44,14 +44,8 @@ const Welcome = ({navigation}: INavigationProp) => {
           industry.
         </Text>
         <TouchableOpacity onPress={() => navigation.navigate('SelectMarket')}>
-          <View
-            style={[
-              commonButtonWithBackgroundContainerStyles,
-              {marginTop: 25},
-            ]}>
-            <Text style={[commonButtonWithBackgroundTextStyles]}>
-              Get Started
-            </Text>
+          <View style={[btnWithBgContainerStyles, {marginTop: 25}]}>
+            <Text style={[btnWithBgTextStyles]}>Get Started</Text>
           </View>
         </TouchableOpacity>
       </View>

@@ -24,15 +24,30 @@ export const commonInput = {
   borderColor: APP_COLORS.BORDER_COLOR,
 };
 
-export const commonButtonWithBackgroundTextStyles: StyleProp<TextStyle> = {
+export const btnWithBgTextStyles: StyleProp<TextStyle> = {
   color: APP_COLORS.WHITE,
   textAlign: 'center',
   fontSize: 18,
-  marginLeft: 10,
 };
 
-export const commonButtonWithBackgroundContainerStyles: StyleProp<ViewStyle> = {
+export const btnWithBgContainerStyles: StyleProp<ViewStyle> = {
   backgroundColor: APP_COLORS.MAROON,
+  padding: 15,
+  borderRadius: 10,
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'row',
+};
+
+export const btnWithoutBgTextStyles: StyleProp<TextStyle> = {
+  color: APP_COLORS.BLACK,
+  textAlign: 'center',
+  fontSize: 18,
+};
+
+export const btnWithoutBgContainerStyles: StyleProp<ViewStyle> = {
+  borderColor: APP_COLORS.MAROON,
+  borderWidth: 1,
   padding: 15,
   marginTop: 10,
   borderRadius: 10,

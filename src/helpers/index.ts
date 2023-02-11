@@ -1,14 +1,11 @@
-import {
-  ALERT_TYPE,
-  AlertNotificationRoot,
-  Toast,
-} from 'react-native-alert-notification';
+import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 import {useDispatch} from 'react-redux';
 import {resetUser} from '../actions/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IMarket, TOAST_MESSAGE_TYPES} from '../../interfaces';
 import {fetchProducts} from '../actions/products';
 import {fetchCategories} from '../actions/categories';
+import {fetchProductPrices} from '../actions/productPrices';
 
 //custom dispatcher hook
 export const useResetUser = () => {
@@ -18,11 +15,12 @@ export const useResetUser = () => {
   };
 };
 
-export const useLoadBasiData = () => {
+export const useLoadBasiData = (): any => {
   const dispatch = useDispatch();
   return (payload: any) => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
+    dispatch(fetchProductPrices());
   };
 };
 

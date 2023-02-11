@@ -9,6 +9,8 @@ import {viewFlexSpace} from '../../../constants/styles';
 import {fetchProducts} from '../../../actions/products';
 import Loader from './loader';
 import ProductItem from './product-item';
+import ProductPreview from './preview';
+import {IProduct} from '../../../../interfaces';
 const {height} = Dimensions.get('window');
 interface IProductsProps {
   route: RouteProp<any>;
@@ -24,6 +26,12 @@ const Products = ({route}: IProductsProps) => {
   const {products, isLoading} = useSelector(
     (state: RootState) => state.products,
   );
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | undefined>(
+    undefined,
+  );
+
   useFocusEffect(
     React.useCallback(() => {
       setShowLoader(true);
@@ -32,7 +40,7 @@ const Products = ({route}: IProductsProps) => {
         const cat = categories.find(item => item.id === Number(categoryId));
         if (cat) {
           dispatch(setSelectedCategory(cat));
-          dispatch(fetchProducts());
+          // dispatch(fetchProducts());
         }
         setTimeout(() => {
           setShowLoader(false);
@@ -62,12 +70,23 @@ const Products = ({route}: IProductsProps) => {
                       item.marketId === selectedMarket?.mId,
                   )
                   .map((item, index) => (
-                    <ProductItem key={index} item={item} index={index} />
+                    <ProductItem
+                      key={index}
+                      item={item}
+                      index={index}
+                      setSelectedProduct={setSelectedProduct}
+                      setShowModal={setShowModal}
+                    />
                   ))}
               </View>
             </ScrollView>
           )}
         </View>
+        <ProductPreview
+          setShowModal={setShowModal}
+          showModal={showModal}
+          product={selectedProduct}
+        />
       </View>
     </View>
   );
