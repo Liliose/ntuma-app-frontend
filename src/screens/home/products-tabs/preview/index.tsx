@@ -11,6 +11,7 @@ import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 import Modal from 'react-native-modal';
 import React, {useState, useEffect} from 'react';
 import {
+  ICartItem,
   INavigationProp,
   IProduct,
   TOAST_MESSAGE_TYPES,
@@ -30,8 +31,9 @@ import {
 import {currencyFormatter, toastMessage} from '../../../../helpers';
 import MultiPrice from './multi-price';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../../reducers';
+import {addCartItem} from '../../../../actions/cart';
 
 const {width} = Dimensions.get('window');
 
@@ -41,11 +43,11 @@ interface IProductPreviewProps extends INavigationProp {
   setShowModal: any;
 }
 
-const initialPrice = {
+const initialPrice: ICartItem = {
   price: 0,
   ppId: 0,
   productId: 0,
-  priceType: '',
+  priceType: '' as any,
   customPrice: false,
 };
 
@@ -55,8 +57,9 @@ const ProductPreview = ({
   setShowModal,
   navigation,
 }: IProductPreviewProps) => {
+  const dispatch = useDispatch();
   const {token} = useSelector((state: RootState) => state.user);
-  const [price, setPrice] = useState(initialPrice);
+  const [price, setPrice] = useState<ICartItem>(initialPrice);
   const [quantity, setQuantity] = useState<number>(1);
   const handlePlus = () => {
     setQuantity(quantity + 1);
@@ -93,6 +96,27 @@ const ProductPreview = ({
       navigation.navigate('Login');
       toastMessage(TOAST_MESSAGE_TYPES.INFO, 'You must be logged in first');
       return;
+    }
+    try {
+      setShowModal(false);
+      dispatch(addCartItem(price));
+      setTimeout(() => {
+        Dialog.show({
+          type: ALERT_TYPE.SUCCESS,
+          title: 'Success',
+          textBody: 'Cart updated successful!',
+          button: 'OK',
+          // onHide: () => {},
+        });
+      }, 200);
+    } catch (error: any) {
+      Dialog.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error',
+        textBody: error.message,
+        button: 'OK',
+        // onHide: () => {},
+      });
     }
   };
   return (

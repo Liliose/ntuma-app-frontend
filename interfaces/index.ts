@@ -91,7 +91,7 @@ export interface IProductPricesReducer {
   isLoading: boolean;
 }
 
-enum PRICE_TYPE_ENUM {
+export enum PRICE_TYPE_ENUM {
   SINGLE = 'single',
   MANY = 'many',
 }
@@ -100,6 +100,6 @@ export interface ICartItem {
   price: number;
   ppId: number;
   productId: number;
-  priceType: PRICE_TYPE_ENUM;
-  customPrice: false;
+  priceType: string;
+  customPrice: boolean;
 }
