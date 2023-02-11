@@ -102,4 +102,5 @@ export interface ICartItem {
   productId: number;
   priceType: string;
   customPrice: boolean;
+  quantity: number;
 }

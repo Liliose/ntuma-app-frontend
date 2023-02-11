@@ -12,8 +12,6 @@ import Icon2 from 'react-native-vector-icons/Entypo';
 
 interface IMultiPriceProps {
   product: IProduct | undefined;
-  quantity: number;
-  setQuantity: any;
   handlePlus: any;
   handleMinus: any;
   setPrice: any;
@@ -22,8 +20,6 @@ interface IMultiPriceProps {
 
 const MultiPrice = ({
   product,
-  quantity,
-  setQuantity,
   handlePlus,
   handleMinus,
   setPrice,
@@ -41,7 +37,8 @@ const MultiPrice = ({
   }, [product]);
   useEffect(() => {
     if (selectedPrice !== undefined) {
-      setQuantity(1);
+      setPrice({...priceState, quantity: 1});
+
       setPrice({
         ...priceState,
         price: selectedPrice.amount,
@@ -106,7 +103,7 @@ const MultiPrice = ({
                           color: APP_COLORS.BLACK,
                           fontSize: 20,
                         }}>
-                        {quantity}
+                        {priceState.quantity}
                       </Text>
                       <Pressable onPress={() => handlePlus()}>
                         <View

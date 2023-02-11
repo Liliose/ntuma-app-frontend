@@ -4,12 +4,14 @@ import markets from './markets';
 import categories from './categories';
 import products from './products';
 import productPrices from './productPrices';
+import cart from './cart';
 const rootReducer = combineReducers({
   user,
   markets,
   categories,
   products,
   productPrices,
+  cart,
 });
 
 export default rootReducer;

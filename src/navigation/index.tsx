@@ -67,6 +67,7 @@ function Navigation() {
   const HomeTabs = ({navigation}: INavigationProp) => {
     const [activeColor, setActiveColor] = useState(APP_COLORS.WHITE);
     const [inactiveColor, setInactiveColor] = useState('rgba(255,255,255,0.6)');
+    const {cart} = useSelector((state: RootState) => state.cart);
     return (
       <Tab.Navigator
         initialRouteName="Home"
@@ -94,11 +95,42 @@ function Navigation() {
         <Tab.Screen
           name="Cart"
           component={Cart}
-          options={{
-            tabBarIcon: ({focused, color, size}) => {
-              return <Icon name="cart" color={color} size={size} />;
-            },
-          }}
+          options={
+            cart.length > 0
+              ? {
+                  tabBarBadge: cart.length,
+                  tabBarIcon: ({focused, color, size}) => {
+                    return <Icon name="cart" color={color} size={size} />;
+                  },
+                  headerShown: true,
+                  headerTintColor: APP_COLORS.WHITE,
+                  headerStyle: {backgroundColor: APP_COLORS.MAROON},
+                  headerTitleAlign: 'center',
+                  headerRight: () => (
+                    <Pressable>
+                      <View style={{marginRight: 15}}>
+                        <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
+                      </View>
+                    </Pressable>
+                  ),
+                }
+              : {
+                  tabBarIcon: ({focused, color, size}) => {
+                    return <Icon name="cart" color={color} size={size} />;
+                  },
+                  headerShown: true,
+                  headerTintColor: APP_COLORS.WHITE,
+                  headerStyle: {backgroundColor: APP_COLORS.MAROON},
+                  headerTitleAlign: 'center',
+                  headerRight: () => (
+                    <Pressable>
+                      <View style={{marginRight: 15}}>
+                        <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
+                      </View>
+                    </Pressable>
+                  ),
+                }
+          }
         />
 
         <Tab.Screen

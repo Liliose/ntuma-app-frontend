@@ -49,6 +49,7 @@ const initialPrice: ICartItem = {
   productId: 0,
   priceType: '' as any,
   customPrice: false,
+  quantity: 1,
 };
 
 const ProductPreview = ({
@@ -60,15 +61,14 @@ const ProductPreview = ({
   const dispatch = useDispatch();
   const {token} = useSelector((state: RootState) => state.user);
   const [price, setPrice] = useState<ICartItem>(initialPrice);
-  const [quantity, setQuantity] = useState<number>(1);
   const handlePlus = () => {
-    setQuantity(quantity + 1);
+    setPrice({...price, quantity: price.quantity + 1});
   };
   const handleMinus = () => {
-    if (quantity - 1 > 0) {
-      setQuantity(quantity - 1);
+    if (price.quantity - 1 > 0) {
+      setPrice({...price, quantity: price.quantity + 1});
     } else {
-      setQuantity(1);
+      setPrice({...price, quantity: 1});
     }
   };
   useEffect(() => {
@@ -252,7 +252,7 @@ const ProductPreview = ({
                             color: APP_COLORS.BLACK,
                             fontSize: 20,
                           }}>
-                          {quantity}
+                          {price.quantity}
                         </Text>
                         <Pressable onPress={() => handlePlus()}>
                           <View
@@ -275,8 +275,6 @@ const ProductPreview = ({
               ) : (
                 <MultiPrice
                   product={product}
-                  quantity={quantity}
-                  setQuantity={setQuantity}
                   handleMinus={handleMinus}
                   handlePlus={handlePlus}
                   setPrice={setPrice}
@@ -294,7 +292,7 @@ const ProductPreview = ({
                           customPrice: true,
                           ppId: 0,
                         });
-                        setQuantity(1);
+                        setPrice({...price, quantity: 1});
                       }}>
                       <View style={[viewFlexSpace]}>
                         <Text
@@ -344,7 +342,7 @@ const ProductPreview = ({
                     fontSize: 20,
                     color: APP_COLORS.BLACK,
                   }}>
-                  Total : {currencyFormatter(price.price * quantity)} RWF
+                  Total : {currencyFormatter(price.price * price.quantity)} RWF
                 </Text>
               </View>
               <View style={{marginVertical: 10}}>
@@ -355,7 +353,7 @@ const ProductPreview = ({
                     <Text style={btnWithBgTextStyles}>Add to cart</Text>
                   </View>
                 </Pressable>
-                <Pressable onPress={() => setQuantity(1)}>
+                <Pressable onPress={() => setPrice({...price, quantity: 1})}>
                   <View style={btnWithoutBgContainerStyles}>
                     <Text style={btnWithoutBgTextStyles}>Reset</Text>
                   </View>
