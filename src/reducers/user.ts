@@ -17,13 +17,13 @@ const initialState: IUser = {
 const user = (state: IUser = initialState, action: IAction) => {
   switch (action.type) {
     case SET_USER_NAMES:
-      return {...state, fullName: action.payload};
+      return {...state, fullName: action.payload as string};
     case SET_USER_EMAIL:
-      return {...state, email: action.payload};
+      return {...state, email: action.payload as string};
     case SET_USER_ROLE:
-      return {...state, role: action.payload};
+      return {...state, role: action.payload as string};
     case SET_USER_TOKEN:
-      return {...state, token: action.payload};
+      return {...state, token: action.payload as string};
     case RESET_USER:
       return initialState;
     default:

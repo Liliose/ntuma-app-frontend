@@ -7,9 +7,14 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
+import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 import Modal from 'react-native-modal';
 import React, {useState, useEffect} from 'react';
-import {IProduct} from '../../../../../interfaces';
+import {
+  INavigationProp,
+  IProduct,
+  TOAST_MESSAGE_TYPES,
+} from '../../../../../interfaces';
 import {APP_COLORS} from '../../../../constants/colors';
 import {app} from '../../../../constants/app';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -22,13 +27,15 @@ import {
   viewFlexCenter,
   viewFlexSpace,
 } from '../../../../constants/styles';
-import {currencyFormatter} from '../../../../helpers';
+import {currencyFormatter, toastMessage} from '../../../../helpers';
 import MultiPrice from './multi-price';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../../reducers';
 
 const {width} = Dimensions.get('window');
 
-interface IProductPreviewProps {
+interface IProductPreviewProps extends INavigationProp {
   product: IProduct | undefined;
   showModal: boolean;
   setShowModal: any;
@@ -46,7 +53,9 @@ const ProductPreview = ({
   product,
   showModal,
   setShowModal,
+  navigation,
 }: IProductPreviewProps) => {
+  const {token} = useSelector((state: RootState) => state.user);
   const [price, setPrice] = useState(initialPrice);
   const [quantity, setQuantity] = useState<number>(1);
   const handlePlus = () => {
@@ -67,6 +76,25 @@ const ProductPreview = ({
       price: product?.priceType === 'single' ? product.singlePrice : 0,
     });
   }, [product]);
+
+  const handleAddToCart = () => {
+    if (price.price === 0) {
+      Dialog.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Warning',
+        textBody:
+          'Price can not be zero or empty. Please increase the quantity or choose a specific pricing category.',
+        button: 'OK',
+        // onHide: () => {},
+      });
+      return;
+    }
+    if (token.trim() === '') {
+      navigation.navigate('Login');
+      toastMessage(TOAST_MESSAGE_TYPES.INFO, 'You must be logged in first');
+      return;
+    }
+  };
   return (
     <Modal
       animationIn="slideInUp"
@@ -296,9 +324,13 @@ const ProductPreview = ({
                 </Text>
               </View>
               <View style={{marginVertical: 10}}>
-                <View style={[btnWithBgContainerStyles, {marginBottom: 10}]}>
-                  <Text style={btnWithBgTextStyles}>Add to cart</Text>
-                </View>
+                <Pressable
+                  onPress={() => handleAddToCart()}
+                  style={{marginBottom: 10}}>
+                  <View style={[btnWithBgContainerStyles]}>
+                    <Text style={btnWithBgTextStyles}>Add to cart</Text>
+                  </View>
+                </Pressable>
                 <Pressable onPress={() => setQuantity(1)}>
                   <View style={btnWithoutBgContainerStyles}>
                     <Text style={btnWithoutBgTextStyles}>Reset</Text>

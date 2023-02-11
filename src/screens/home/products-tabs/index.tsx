@@ -10,13 +10,13 @@ import {fetchProducts} from '../../../actions/products';
 import Loader from './loader';
 import ProductItem from './product-item';
 import ProductPreview from './preview';
-import {IProduct} from '../../../../interfaces';
+import {INavigationProp, IProduct} from '../../../../interfaces';
 const {height} = Dimensions.get('window');
-interface IProductsProps {
+interface IProductsProps extends INavigationProp {
   route: RouteProp<any>;
 }
 
-const Products = ({route}: IProductsProps) => {
+const Products = ({route, navigation}: IProductsProps) => {
   const [showLoader, setShowLoader] = useState(false);
   const dispatch = useDispatch();
   const {categories, selectedCategory} = useSelector(
@@ -86,6 +86,7 @@ const Products = ({route}: IProductsProps) => {
           setShowModal={setShowModal}
           showModal={showModal}
           product={selectedProduct}
+          navigation={navigation}
         />
       </View>
     </View>

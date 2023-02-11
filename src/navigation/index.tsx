@@ -24,6 +24,8 @@ import Messages from '../screens/home/messages';
 import Cart from '../screens/home/cart';
 import ProductTabsHeader from '../screens/home/products-tabs/product-tabs-header';
 import {useLoadBasiData} from '../helpers';
+import Login from '../screens/login';
+import Register from '../screens/register/register';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -211,6 +213,30 @@ function Navigation() {
             headerStyle: {backgroundColor: APP_COLORS.MAROON},
             headerTintColor: APP_COLORS.WHITE,
             header: () => <ChooseCategoryHeader navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Login',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Sign up',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
           })}
         />
       </Stack.Navigator>

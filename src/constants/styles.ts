@@ -17,11 +17,11 @@ export const viewFlexCenter: StyleProp<ViewStyle> = {
 
 export const commonInput = {
   backgroundColor: APP_COLORS.WHITE,
-  marginTop: 10,
+  marginTop: 5,
   borderRadius: 5,
   padding: 10,
   borderWidth: 1,
-  borderColor: APP_COLORS.BORDER_COLOR,
+  borderColor: APP_COLORS.DARK_GRAY,
 };
 
 export const btnWithBgTextStyles: StyleProp<TextStyle> = {
