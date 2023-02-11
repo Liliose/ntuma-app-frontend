@@ -36,10 +36,12 @@ function Navigation() {
     loadData();
   }, []);
   function ProductsTabs() {
-    const {categories} = useSelector((state: RootState) => state.categories);
+    const {categories, selectedCategory} = useSelector(
+      (state: RootState) => state.categories,
+    );
     return (
       <TopTab.Navigator
-        // initialRouteName=""
+        initialRouteName={'category_' + selectedCategory?.id}
         screenOptions={{
           tabBarActiveTintColor: APP_COLORS.BLACK,
           tabBarInactiveTintColor: APP_COLORS.WHITE,
