@@ -41,7 +41,9 @@ export enum TOAST_MESSAGE_TYPES {
   INFO = 'info',
   SUCCESS = 'success',
 }
-
+export interface ICartReducer {
+  cart: ICartItem[];
+}
 export interface IMarketsReducer {
   markets: IMarket[];
   isLoading: boolean;
@@ -87,4 +89,17 @@ export interface IProductsReducer {
 export interface IProductPricesReducer {
   prices: IProductPrice[];
   isLoading: boolean;
+}
+
+enum PRICE_TYPE_ENUM {
+  SINGLE = 'single',
+  MANY = 'many',
+}
+
+export interface ICartItem {
+  price: number;
+  ppId: number;
+  productId: number;
+  priceType: PRICE_TYPE_ENUM;
+  customPrice: false;
 }
