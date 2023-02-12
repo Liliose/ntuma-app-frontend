@@ -30,6 +30,7 @@ import ProductTabsHeader from '../screens/home/products-tabs/product-tabs-header
 import {useLoadBasiData} from '../helpers';
 import Login from '../screens/login';
 import Register from '../screens/register/register';
+import Profile from '../screens/home/profile';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -190,8 +191,12 @@ function Navigation() {
         />
         <Tab.Screen
           name="Profile"
-          component={Messages}
+          component={Profile}
           options={{
+            headerShown: true,
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+            headerStyle: {backgroundColor: APP_COLORS.MAROON},
             tabBarIcon: ({focused, color, size}) => {
               return <Icon4 name="user-alt" color={color} size={size} />;
             },
