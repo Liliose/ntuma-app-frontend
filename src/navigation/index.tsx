@@ -35,26 +35,6 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
-const config = {
-  animation: 'spring',
-  config: {
-    stiffness: 1000,
-    damping: 50,
-    mass: 3,
-    overshootClamping: false,
-    restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
-  },
-};
-
-const closeConfig = {
-  animation: 'timing',
-  config: {
-    duration: 500,
-    easing: Easing.linear,
-  },
-};
-
 function Navigation() {
   const loadData = useLoadBasiData();
   useEffect(() => {
