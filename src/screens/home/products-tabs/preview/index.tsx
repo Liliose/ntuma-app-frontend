@@ -66,14 +66,14 @@ const ProductPreview = ({
   };
   const handleMinus = () => {
     if (price.quantity - 1 > 0) {
-      setPrice({...price, quantity: price.quantity + 1});
+      setPrice({...price, quantity: price.quantity - 1});
     } else {
       setPrice({...price, quantity: 1});
     }
   };
   useEffect(() => {
     setPrice({
-      ...price,
+      ...initialPrice,
       productId: product?.pId as number,
       priceType: product?.priceType as string,
       price: product?.priceType === 'single' ? product.singlePrice : 0,
@@ -291,8 +291,8 @@ const ProductPreview = ({
                           price: 0,
                           customPrice: true,
                           ppId: 0,
+                          quantity: 1,
                         });
-                        setPrice({...price, quantity: 1});
                       }}>
                       <View style={[viewFlexSpace]}>
                         <Text
