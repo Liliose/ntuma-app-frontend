@@ -57,10 +57,8 @@ const Login = ({navigation}: INavigationProp) => {
       .post(app.BACKEND_URL + '/users/login/', {...state})
       .then(res => {
         setIsLoading(false);
-        console.log(res.data);
         const {role, walletAmounts, userId, names, phone, image, email, token} =
           res.data;
-
         dispatch(setUserNames(names));
         dispatch(setUserRole(role));
         dispatch(setUserWalletAmount(walletAmounts));
