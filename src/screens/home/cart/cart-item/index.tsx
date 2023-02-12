@@ -100,9 +100,16 @@ const CartItem = ({
                     TOTAL : {currencyFormatter(item.price * item.quantity)} RWF
                   </Text>
                 </View>
-                <View>
-                  <Icon2 name="edit-2" size={25} color={APP_COLORS.BLACK} />
-                </View>
+                <Pressable
+                  onPress={() => {
+                    setSelectedCartItem(item);
+                    setSelectedProduct(product);
+                    setShowModal(true);
+                  }}>
+                  <View>
+                    <Icon2 name="edit-2" size={25} color={APP_COLORS.BLACK} />
+                  </View>
+                </Pressable>
               </View>
             </View>
           </View>

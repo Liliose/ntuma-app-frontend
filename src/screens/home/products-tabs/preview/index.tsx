@@ -356,7 +356,9 @@ const ProductPreview = ({
                   onPress={() => handleAddToCart()}
                   style={{marginBottom: 10}}>
                   <View style={[btnWithBgContainerStyles]}>
-                    <Text style={btnWithBgTextStyles}>Add to cart</Text>
+                    <Text style={btnWithBgTextStyles}>
+                      {selectedCartItem ? 'Update cart' : 'Add to cart'}
+                    </Text>
                   </View>
                 </Pressable>
                 <Pressable onPress={() => setPrice({...price, quantity: 1})}>
