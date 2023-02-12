@@ -13,10 +13,21 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import CartItem from './cart-item';
 import {currencyFormatter} from '../../../helpers';
+import ProductPreview from '../products-tabs/preview';
+import {ICartItem, INavigationProp, IProduct} from '../../../../interfaces';
 
-const Cart = () => {
+const Cart = ({navigation}: INavigationProp) => {
   const {cart} = useSelector((state: RootState) => state.cart);
   const [total, setTotal] = useState<number>(0);
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | undefined>(
+    undefined,
+  );
+  const [selectedCartItem, setSelectedCartItem] = useState<
+    ICartItem | undefined
+  >(undefined);
+
   useEffect(() => {
     let sm = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -31,7 +42,13 @@ const Cart = () => {
           <View style={{marginTop: 10, flex: 1}}>
             <ScrollView>
               {cart.map((item, index) => (
-                <CartItem key={index} item={item} />
+                <CartItem
+                  key={index}
+                  item={item}
+                  setSelectedCartItem={setSelectedCartItem}
+                  setSelectedProduct={setSelectedProduct}
+                  setShowModal={setShowModal}
+                />
               ))}
             </ScrollView>
           </View>
@@ -76,6 +93,13 @@ const Cart = () => {
           </Text>
         </View>
       )}
+      <ProductPreview
+        showModal={showModal}
+        setShowModal={setShowModal}
+        product={selectedProduct}
+        navigation={navigation}
+        selectedCartItem={selectedCartItem}
+      />
     </View>
   );
 };

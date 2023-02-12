@@ -41,6 +41,7 @@ interface IProductPreviewProps extends INavigationProp {
   product: IProduct | undefined;
   showModal: boolean;
   setShowModal: any;
+  selectedCartItem?: ICartItem;
 }
 
 const initialPrice: ICartItem = {
@@ -57,6 +58,7 @@ const ProductPreview = ({
   showModal,
   setShowModal,
   navigation,
+  selectedCartItem,
 }: IProductPreviewProps) => {
   const dispatch = useDispatch();
   const {token} = useSelector((state: RootState) => state.user);
@@ -72,12 +74,16 @@ const ProductPreview = ({
     }
   };
   useEffect(() => {
-    setPrice({
-      ...initialPrice,
-      productId: product?.pId as number,
-      priceType: product?.priceType as string,
-      price: product?.priceType === 'single' ? product.singlePrice : 0,
-    });
+    if (selectedCartItem) {
+      setPrice(selectedCartItem);
+    } else {
+      setPrice({
+        ...initialPrice,
+        productId: product?.pId as number,
+        priceType: product?.priceType as string,
+        price: product?.priceType === 'single' ? product.singlePrice : 0,
+      });
+    }
   }, [product]);
 
   const handleAddToCart = () => {

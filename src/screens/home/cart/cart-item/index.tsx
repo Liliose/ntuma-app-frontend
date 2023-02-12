@@ -13,8 +13,16 @@ import {currencyFormatter} from '../../../../helpers';
 import {setCart} from '../../../../actions/cart';
 interface ICartItemProps {
   item: ICartItem;
+  setSelectedCartItem: any;
+  setSelectedProduct: any;
+  setShowModal: any;
 }
-const CartItem = ({item}: ICartItemProps) => {
+const CartItem = ({
+  item,
+  setShowModal,
+  setSelectedCartItem,
+  setSelectedProduct,
+}: ICartItemProps) => {
   const dispatch = useDispatch();
   const [product, setProduct] = useState<IProduct | undefined>(undefined);
   const {products} = useSelector((state: RootState) => state.products);
@@ -29,7 +37,7 @@ const CartItem = ({item}: ICartItemProps) => {
   const handleDelete = () => {
     Alert.alert(
       'Confirm the process',
-      'Do you remove this product from cart?',
+      'Do you want to remove this product from cart?',
       [
         {
           text: 'Cancel',
@@ -51,11 +59,18 @@ const CartItem = ({item}: ICartItemProps) => {
         <WhiteCard
           style={{marginHorizontal: 10, marginVertical: 5, padding: 10}}>
           <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
-            <Image
-              source={{uri: app.FILE_URL + product.image}}
-              style={{width: 70, height: 70, borderRadius: 100}}
-              resizeMode="contain"
-            />
+            <Pressable
+              onPress={() => {
+                setSelectedCartItem(item);
+                setSelectedProduct(product);
+                setShowModal(true);
+              }}>
+              <Image
+                source={{uri: app.FILE_URL + product.image}}
+                style={{width: 70, height: 70, borderRadius: 100}}
+                resizeMode="contain"
+              />
+            </Pressable>
             <View style={{flex: 1, marginLeft: 10}}>
               <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
                 <Text
