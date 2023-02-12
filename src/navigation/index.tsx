@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  TransitionPresets,
+  CardStyleInterpolators,
+} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {Pressable, View, StatusBar, Text} from 'react-native';
+import {Pressable, View, StatusBar, Text, Easing} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/Octicons';
@@ -29,6 +33,26 @@ import Register from '../screens/register/register';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
+
+const config = {
+  animation: 'spring',
+  config: {
+    stiffness: 1000,
+    damping: 50,
+    mass: 3,
+    overshootClamping: false,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
+};
+
+const closeConfig = {
+  animation: 'timing',
+  config: {
+    duration: 500,
+    easing: Easing.linear,
+  },
+};
 
 function Navigation() {
   const loadData = useLoadBasiData();
@@ -195,7 +219,16 @@ function Navigation() {
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={APP_COLORS.MAROON} barStyle="light-content" />
-      <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Navigator
+        initialRouteName="Welcome"
+        screenOptions={{
+          // headerMode: 'float',
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
+          // cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          cardStyleInterpolator:
+            CardStyleInterpolators.forFadeFromBottomAndroid,
+        }}>
         <Stack.Screen
           name="Welcome"
           component={Welcome}

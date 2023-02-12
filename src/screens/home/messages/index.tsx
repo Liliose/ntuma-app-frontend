@@ -1,7 +1,12 @@
 import React from 'react';
+import {View, Text} from 'react-native';
 
 function Messages() {
-  return <div>Messages</div>;
+  return (
+    <View>
+      <Text>Messages</Text>
+    </View>
+  );
 }
 
 export default Messages;
