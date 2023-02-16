@@ -63,7 +63,7 @@ const Login = ({navigation}: INavigationProp) => {
         dispatch(setUserRole(role));
         dispatch(setUserWalletAmount(walletAmounts));
         dispatch(setUserId(userId));
-        dispatch(dispatch(setUserPhone(phone)));
+        dispatch(setUserPhone(phone));
         dispatch(setUserEmail(email));
         dispatch(setUserToken(token));
         dispatch(setUserImage(image));
@@ -93,10 +93,10 @@ const Login = ({navigation}: INavigationProp) => {
                     fontWeight: '600',
                     fontSize: 16,
                   }}>
-                  Username
+                  Email or Phone
                 </Text>
                 <TextInput
-                  placeholder="Enter your username"
+                  placeholder="Enter your phone or email address"
                   style={commonInput}
                   onChangeText={text =>
                     setState({...state, emailOrPhone: text})
