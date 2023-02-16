@@ -86,6 +86,10 @@ export interface IProductsReducer {
   isLoading: boolean;
 }
 
+export interface IFavouritesReducer {
+  favourites: IProduct[];
+}
+
 export interface IProductPricesReducer {
   prices: IProductPrice[];
   isLoading: boolean;
