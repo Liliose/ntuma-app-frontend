@@ -71,15 +71,20 @@ export const getRandomPositionOfAnArray = (arraySize: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-export const validateSelectedMarket = (allMarkets: IMarket[], index: any) => {
+export const validateSelectedMarket = (
+  allMarkets: IMarket[],
+  selectedMarket: IMarket | undefined,
+) => {
   try {
-    if (index !== '') {
-      if (Number(index) < allMarkets.length) {
-        return true;
-      }
+    if (selectedMarket === undefined) {
       return false;
     }
-    return false;
+    const exists = allMarkets.find(item => item.mId === selectedMarket?.mId);
+    if (exists) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
     toastMessage(TOAST_MESSAGE_TYPES.ERROR, 'Please choose Market');
     return false;

@@ -1,18 +1,51 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, Alert} from 'react-native';
 import React from 'react';
 import {APP_COLORS} from '../../../../constants/colors';
 import {viewFlexCenter, viewFlexSpace} from '../../../../constants/styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../../reducers';
-const ProductTabsHeader = () => {
+import {INavigationProp} from '../../../../../interfaces';
+import {resetCart} from '../../../../actions/cart';
+import {resetFavourites} from '../../../../actions/favourites';
+import {setSelectedMarket} from '../../../../actions/markets';
+
+const ProductTabsHeader = ({navigation}: INavigationProp) => {
+  const dispatch = useDispatch();
   const {selectedMarket} = useSelector((state: RootState) => state.markets);
+
+  const resetMarket = () => {
+    Alert.alert(
+      'Confirmation',
+      'Do you want to switch to other markets? If yes, your cart and favourite items list will be removed too.',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'confirm',
+          onPress: () => {
+            dispatch(resetCart());
+            dispatch(resetFavourites());
+            dispatch(setSelectedMarket(undefined));
+            navigation.replace('SelectMarket');
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+  };
   return (
     <View style={{padding: 10, backgroundColor: APP_COLORS.MAROON}}>
       <View style={[viewFlexSpace]}>
-        <Icon name="shopping-outline" size={25} color={APP_COLORS.WHITE} />
-        <Pressable style={{flex: 1, marginHorizontal: 10}}>
+        <Pressable onPress={() => resetMarket()}>
+          <Icon name="shopping-outline" size={25} color={APP_COLORS.WHITE} />
+        </Pressable>
+        <Pressable
+          style={{flex: 1, marginHorizontal: 10}}
+          onPress={() => resetMarket()}>
           <View
             style={[
               viewFlexCenter,

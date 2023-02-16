@@ -1,28 +1,33 @@
 import {View, Image, Dimensions, ScrollView} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {RouteProp, useFocusEffect} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../reducers';
 import {setSelectedCategory} from '../../../actions/categories';
 import {APP_COLORS} from '../../../constants/colors';
 import {viewFlexSpace} from '../../../constants/styles';
-import {fetchProducts} from '../../../actions/products';
 import Loader from './loader';
 import ProductItem from './product-item';
 import ProductPreview from './preview';
 import {INavigationProp, IProduct} from '../../../../interfaces';
+import {useLoadBasiData, validateSelectedMarket} from '../../../helpers';
+import {resetCart} from '../../../actions/cart';
+import {resetFavourites} from '../../../actions/favourites';
 const {height} = Dimensions.get('window');
 interface IProductsProps extends INavigationProp {
   route: RouteProp<any>;
 }
 
 const Products = ({route, navigation}: IProductsProps) => {
+  const loadBasicData = useLoadBasiData();
   const [showLoader, setShowLoader] = useState(false);
   const dispatch = useDispatch();
   const {categories, selectedCategory} = useSelector(
     (state: RootState) => state.categories,
   );
-  const {selectedMarket} = useSelector((state: RootState) => state.markets);
+  const {selectedMarket, markets} = useSelector(
+    (state: RootState) => state.markets,
+  );
   const {products, isLoading} = useSelector(
     (state: RootState) => state.products,
   );
@@ -32,6 +37,18 @@ const Products = ({route, navigation}: IProductsProps) => {
     undefined,
   );
 
+  useEffect(() => {
+    loadBasicData();
+  }, []);
+
+  useEffect(() => {
+    if (!validateSelectedMarket(markets, selectedMarket)) {
+      dispatch(resetCart());
+      dispatch(resetFavourites());
+      navigation.replace('SelectMarket');
+    }
+  }, [selectedMarket, markets]);
+
   useFocusEffect(
     React.useCallback(() => {
       setShowLoader(true);
@@ -40,7 +57,6 @@ const Products = ({route, navigation}: IProductsProps) => {
         const cat = categories.find(item => item.id === Number(categoryId));
         if (cat) {
           dispatch(setSelectedCategory(cat));
-          // dispatch(fetchProducts());
         }
         setTimeout(() => {
           setShowLoader(false);

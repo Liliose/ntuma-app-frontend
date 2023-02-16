@@ -94,7 +94,7 @@ function Navigation() {
           options={({route, navigation}) => ({
             headerShown: true,
             headerTitle: '',
-            header: () => <ProductTabsHeader />,
+            header: () => <ProductTabsHeader navigation={navigation} />,
             tabBarIcon: ({focused, color, size}) => {
               return <Icon name="home" color={color} size={size} />;
             },
