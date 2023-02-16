@@ -34,6 +34,11 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../../reducers';
 import {addCartItem} from '../../../../actions/cart';
+import {
+  addFavouriteItem,
+  removeFavouriteItem,
+  setFavourites,
+} from '../../../../actions/favourites';
 
 const {width} = Dimensions.get('window');
 
@@ -62,6 +67,8 @@ const ProductPreview = ({
 }: IProductPreviewProps) => {
   const dispatch = useDispatch();
   const {token} = useSelector((state: RootState) => state.user);
+  const {favourites} = useSelector((state: RootState) => state.favourites);
+  const [productExistsInFavList, setProductExistsInFavList] = useState(false);
   const [price, setPrice] = useState<ICartItem>(initialPrice);
   const handlePlus = () => {
     setPrice({...price, quantity: price.quantity + 1});
@@ -83,6 +90,12 @@ const ProductPreview = ({
         priceType: product?.priceType as string,
         price: product?.priceType === 'single' ? product.singlePrice : 0,
       });
+    }
+    const exists = favourites.find(item => item.pId === product?.pId);
+    if (exists) {
+      setProductExistsInFavList(true);
+    } else {
+      setProductExistsInFavList(false);
     }
   }, [product]);
 
@@ -125,6 +138,17 @@ const ProductPreview = ({
       });
     }
   };
+
+  const addToFavList = (product: IProduct) => {
+    dispatch(addFavouriteItem(product));
+    setProductExistsInFavList(true);
+  };
+
+  const removeFromFavList = (product: IProduct) => {
+    dispatch(removeFavouriteItem(product));
+    setProductExistsInFavList(false);
+  };
+
   return (
     <Modal
       animationIn="slideInUp"
@@ -166,17 +190,36 @@ const ProductPreview = ({
                   }}>
                   {product?.name}
                 </Text>
-                <View
-                  style={[
-                    viewFlexCenter,
-                    {
-                      backgroundColor: APP_COLORS.DARK_GRAY,
-                      padding: 10,
-                      borderRadius: 100,
-                    },
-                  ]}>
-                  <Icon name="heart" size={25} color={APP_COLORS.BLACK} />
-                </View>
+                {productExistsInFavList ? (
+                  <Pressable
+                    onPress={() => product && removeFromFavList(product)}>
+                    <View
+                      style={[
+                        viewFlexCenter,
+                        {
+                          backgroundColor: APP_COLORS.MAROON,
+                          padding: 10,
+                          borderRadius: 100,
+                        },
+                      ]}>
+                      <Icon name="heart" size={25} color={APP_COLORS.WHITE} />
+                    </View>
+                  </Pressable>
+                ) : (
+                  <Pressable onPress={() => product && addToFavList(product)}>
+                    <View
+                      style={[
+                        viewFlexCenter,
+                        {
+                          backgroundColor: APP_COLORS.DARK_GRAY,
+                          padding: 10,
+                          borderRadius: 100,
+                        },
+                      ]}>
+                      <Icon name="heart" size={25} color={APP_COLORS.BLACK} />
+                    </View>
+                  </Pressable>
+                )}
               </View>
               <Text style={{color: APP_COLORS.TEXT_GRAY}}>
                 {product?.description}

@@ -75,6 +75,7 @@ function Navigation() {
     const [activeColor, setActiveColor] = useState(APP_COLORS.WHITE);
     const [inactiveColor, setInactiveColor] = useState('rgba(255,255,255,0.6)');
     const {cart} = useSelector((state: RootState) => state.cart);
+    const {favourites} = useSelector((state: RootState) => state.favourites);
     return (
       <Tab.Navigator
         initialRouteName="Home"
@@ -144,6 +145,11 @@ function Navigation() {
           name="Favourites"
           component={Favourites}
           options={{
+            headerShown: true,
+            title: 'Favourites List (' + favourites.length + ')',
+            headerStyle: {backgroundColor: APP_COLORS.MAROON},
+            headerTintColor: APP_COLORS.WHITE,
+            headerTitleAlign: 'center',
             tabBarIcon: ({focused, color, size}) => {
               return <Icon name="heart" color={color} size={size} />;
             },

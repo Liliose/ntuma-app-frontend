@@ -6,12 +6,12 @@ import {currencyFormatter} from '../../../../helpers';
 import {IProduct} from '../../../../../interfaces';
 import {viewFlexCenter, viewFlexSpace} from '../../../../constants/styles';
 import {APP_COLORS} from '../../../../constants/colors';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../../../reducers';
 import {
   addFavouriteItem,
   removeFavouriteItem,
 } from '../../../../actions/favourites';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../../../reducers';
 
 const {width} = Dimensions.get('window');
 
