@@ -37,8 +37,6 @@ const MultiPrice = ({
   }, [product]);
   useEffect(() => {
     if (selectedPrice !== undefined) {
-      setPrice({...priceState, quantity: 1});
-
       setPrice({
         ...priceState,
         price: selectedPrice.amount,
@@ -55,7 +53,8 @@ const MultiPrice = ({
         <View
           style={{borderColor: APP_COLORS.PRODUCT_CARD_BORDER, borderWidth: 1}}>
           {productPrices.map((item, index) =>
-            selectedPrice?.ppId === item.ppId &&
+            (selectedPrice?.ppId === item.ppId ||
+              priceState.ppId === item.ppId) &&
             priceState.customPrice === false ? (
               <View
                 key={index}
