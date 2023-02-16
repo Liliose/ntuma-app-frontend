@@ -96,18 +96,22 @@ const LoggedIn = ({navigation}: INavigationProp) => {
           </Text>
           <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
-        <View style={[viewFlexSpace, {marginVertical: 10}]}>
-          <Icon3 name="map-marker" size={25} color={APP_COLORS.BLACK} />
-          <Text
-            style={{
-              color: APP_COLORS.TEXT_GRAY,
-              flex: 1,
-              marginHorizontal: 10,
-            }}>
-            Saved Location
-          </Text>
-          <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
-        </View>
+        <Pressable
+          style={{marginVertical: 10}}
+          onPress={() => navigation.navigate('Locations')}>
+          <View style={[viewFlexSpace]}>
+            <Icon3 name="map-marker" size={25} color={APP_COLORS.BLACK} />
+            <Text
+              style={{
+                color: APP_COLORS.TEXT_GRAY,
+                flex: 1,
+                marginHorizontal: 10,
+              }}>
+              Saved Location
+            </Text>
+            <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
+          </View>
+        </Pressable>
         <View style={[viewFlexSpace, {marginVertical: 10}]}>
           <Icon3
             name="help-circle-outline"

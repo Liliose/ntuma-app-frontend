@@ -17,7 +17,6 @@ import {INavigationProp} from '../../interfaces';
 import {APP_COLORS} from '../constants/colors';
 import {RootState} from '../reducers';
 import Products from '../screens/home/products-tabs';
-import Home from '../screens/home';
 import Welcome from '../screens/welcome';
 import SelectMarket from '../screens/select-market';
 import ChooseCategory from '../screens/choose-category';
@@ -31,6 +30,8 @@ import {useLoadBasiData} from '../helpers';
 import Login from '../screens/login';
 import Register from '../screens/register/register';
 import Profile from '../screens/home/profile';
+import Locations from '../screens/locations';
+import AddLocation from '../screens/add-location';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -290,6 +291,36 @@ function Navigation() {
           component={Register}
           options={({route, navigation}: INavigationProp) => ({
             title: 'Sign up',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="Locations"
+          component={Locations}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Saved locations',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTintColor: APP_COLORS.WHITE,
+            headerRight: () => (
+              <Pressable onPress={() => navigation.navigate('AddLocation')}>
+                <View style={{marginRight: 15}}>
+                  <Icon4 name="plus" size={25} color={APP_COLORS.WHITE} />
+                </View>
+              </Pressable>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="AddLocation"
+          component={AddLocation}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Add New Location',
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
