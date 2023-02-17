@@ -2,7 +2,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {View, Text, Dimensions, Pressable} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {TOAST_MESSAGE_TYPES} from '../../../interfaces';
+import {INavigationProp, TOAST_MESSAGE_TYPES} from '../../../interfaces';
 import {toastMessage} from '../../helpers';
 import Modal from 'react-native-modal';
 import {APP_COLORS} from '../../constants/colors';
@@ -13,9 +13,12 @@ import {
   btnWithoutBgTextStyles,
   viewFlexSpace,
 } from '../../constants/styles';
+import {useDispatch} from 'react-redux';
+import {addLocation} from '../../actions/locations';
 navigator.geolocation = require('@react-native-community/geolocation');
 const {width} = Dimensions.get('window');
-const AddLocation = () => {
+const AddLocation = ({navigation}: INavigationProp) => {
+  const dispatch = useDispatch();
   const [selectedLocation, setSelectedLocation] = useState({});
   const [selectedLocationText, setSelectedLocationText] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -31,6 +34,10 @@ const AddLocation = () => {
   const handleClose = () => {
     setShowModal(false);
     locationRef.current.clear();
+  };
+  const handleSave = () => {
+    dispatch(addLocation({name: selectedLocationText, data: selectedLocation}));
+    navigation.navigate('Locations');
   };
   return (
     <>
@@ -96,7 +103,9 @@ const AddLocation = () => {
                 </Text>
               </View>
             </Pressable>
-            <Pressable style={{flex: 1, marginLeft: 5}}>
+            <Pressable
+              style={{flex: 1, marginLeft: 5}}
+              onPress={() => handleSave()}>
               <View style={[btnWithBgContainerStyles]}>
                 <Text style={[btnWithBgTextStyles]}>Save</Text>
               </View>
