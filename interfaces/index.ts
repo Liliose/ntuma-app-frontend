@@ -90,6 +90,10 @@ export interface IFavouritesReducer {
   favourites: IProduct[];
 }
 
+export interface ILocationsReducer {
+  locations: ILocation[];
+}
+
 export interface IProductPricesReducer {
   prices: IProductPrice[];
   isLoading: boolean;
@@ -107,4 +111,9 @@ export interface ICartItem {
   priceType: string;
   customPrice: boolean;
   quantity: number;
+}
+
+export interface ILocation {
+  name: string;
+  data: any;
 }

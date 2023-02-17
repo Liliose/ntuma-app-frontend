@@ -49,7 +49,6 @@ export const btnWithoutBgContainerStyles: StyleProp<ViewStyle> = {
   borderColor: APP_COLORS.MAROON,
   borderWidth: 1,
   padding: 15,
-  marginTop: 10,
   borderRadius: 10,
   justifyContent: 'center',
   alignItems: 'center',

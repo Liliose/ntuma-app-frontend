@@ -37,7 +37,6 @@ import {addCartItem} from '../../../../actions/cart';
 import {
   addFavouriteItem,
   removeFavouriteItem,
-  setFavourites,
 } from '../../../../actions/favourites';
 
 const {width} = Dimensions.get('window');
