@@ -17,6 +17,17 @@ const Checkout = ({navigation}: INavigationProp) => {
   const [activeStep, setActiveStep] = useState(CHECKOUT_STEPS_ENUM.DELIVERY);
   const [vehicle, setVehicle] = useState('');
   const [address, setAddress] = useState<ILocation>({name: '', data: ''});
+
+  const isStepComplete = (step: string) => {
+    if (step === CHECKOUT_STEPS_ENUM.DELIVERY) {
+      if (address.name && address.name.trim() !== '' && vehicle.trim() !== '') {
+        return true;
+      }
+      return false;
+    }
+
+    return false;
+  };
   return (
     <View style={{flex: 1, backgroundColor: APP_COLORS.WHITE}}>
       <View
@@ -25,7 +36,10 @@ const Checkout = ({navigation}: INavigationProp) => {
           {padding: 10, backgroundColor: APP_COLORS.GRAY_BG},
         ]}>
         <View style={[viewFlexSpace]}>
-          <CheckedCircle countNumber={1} isChecked={false} />
+          <CheckedCircle
+            countNumber={1}
+            isChecked={isStepComplete(CHECKOUT_STEPS_ENUM.DELIVERY)}
+          />
           <Text
             style={{color: APP_COLORS.BLACK, fontSize: 16, fontWeight: '600'}}>
             Delivery
