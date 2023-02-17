@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/Octicons';
 import Icon4 from 'react-native-vector-icons/FontAwesome5';
+import Icon5 from 'react-native-vector-icons/AntDesign';
 import {INavigationProp} from '../../interfaces';
 import {APP_COLORS} from '../constants/colors';
 import {RootState} from '../reducers';
@@ -32,6 +33,8 @@ import Register from '../screens/register/register';
 import Profile from '../screens/home/profile';
 import Locations from '../screens/locations';
 import AddLocation from '../screens/add-location';
+import {viewFlexSpace} from '../constants/styles';
+import Checkout from '../screens/checkout';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -309,8 +312,11 @@ function Navigation() {
             headerTintColor: APP_COLORS.WHITE,
             headerRight: () => (
               <Pressable onPress={() => navigation.navigate('AddLocation')}>
-                <View style={{marginRight: 15}}>
-                  <Icon4 name="plus" size={25} color={APP_COLORS.WHITE} />
+                <View style={[viewFlexSpace, {marginRight: 15}]}>
+                  <Icon5 name="plus" size={25} color={APP_COLORS.WHITE} />
+                  <Text style={{color: APP_COLORS.WHITE, marginLeft: 10}}>
+                    Add New
+                  </Text>
                 </View>
               </Pressable>
             ),
@@ -321,6 +327,25 @@ function Navigation() {
           component={AddLocation}
           options={({route, navigation}: INavigationProp) => ({
             title: 'Add New Location',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="Checkout"
+          component={Checkout}
+          options={({route, navigation}: INavigationProp) => ({
+            headerRight: () => (
+              <Pressable>
+                <View style={{marginRight: 15}}>
+                  <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
+                </View>
+              </Pressable>
+            ),
+            title: 'Checkout',
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },

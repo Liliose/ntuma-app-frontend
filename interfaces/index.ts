@@ -117,3 +117,9 @@ export interface ILocation {
   name: string;
   data: any;
 }
+
+export enum VEHICLES_ENUM {
+  BIKE = 'BIKE',
+  CAR = 'CAR',
+  MOTORCYCLE = 'MOTORCYCLE',
+}

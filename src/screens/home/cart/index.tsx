@@ -1,4 +1,4 @@
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, Pressable} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {APP_COLORS} from '../../../constants/colors';
 import {useSelector} from 'react-redux';
@@ -69,11 +69,15 @@ const Cart = ({navigation}: INavigationProp) => {
               }}>
               TOTAL: {currencyFormatter(total)} RWF
             </Text>
-            <View style={[btnWithBgContainerStyles, {marginBottom: 10}]}>
-              <Text style={[btnWithBgTextStyles, {fontWeight: '700'}]}>
-                Checkout
-              </Text>
-            </View>
+            <Pressable
+              style={{marginBottom: 10}}
+              onPress={() => navigation.navigate('Checkout')}>
+              <View style={[btnWithBgContainerStyles]}>
+                <Text style={[btnWithBgTextStyles, {fontWeight: '700'}]}>
+                  Checkout
+                </Text>
+              </View>
+            </Pressable>
             <View style={[btnWithoutBgContainerStyles]}>
               <Text
                 style={[
