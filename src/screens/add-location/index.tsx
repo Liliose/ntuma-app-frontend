@@ -43,11 +43,13 @@ const AddLocation = ({navigation}: INavigationProp) => {
     <>
       <GooglePlacesAutocomplete
         placeholder="Enter search keyword"
+        GooglePlacesDetailsQuery={{fields: 'geometry'}}
+        fetchDetails={true}
         onPress={(data, details = null) => {
           // 'details' is provided when fetchDetails = true
-          console.log('data', data);
+          // console.log('data', data);
           // console.log('details', details);
-          setSelectedLocation(data);
+          setSelectedLocation({data, details});
           setShowModal(true);
         }}
         ref={locationRef}

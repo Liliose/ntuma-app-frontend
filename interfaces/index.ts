@@ -49,6 +49,10 @@ export interface IMarketsReducer {
   isLoading: boolean;
   selectedMarket: IMarket | undefined;
 }
+export interface IDeliveryFeesReducer {
+  fees: IDeliveryFee[];
+  isLoading: boolean;
+}
 export interface ICategoriesReducer {
   categories: ICategory[];
   isLoading: boolean;
@@ -111,6 +115,11 @@ export interface ICartItem {
   priceType: string;
   customPrice: boolean;
   quantity: number;
+}
+
+export interface IDeliveryFee {
+  vehicleType: string;
+  amountPerKilometer: number;
 }
 
 export interface ILocation {
