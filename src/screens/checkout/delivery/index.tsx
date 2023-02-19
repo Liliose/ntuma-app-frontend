@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../reducers';
 import {
+  IDeliveryFee,
   INavigationProp,
   TOAST_MESSAGE_TYPES,
   VEHICLES_ENUM,
@@ -20,7 +21,7 @@ import {toastMessage} from '../../../helpers';
 import {CHECKOUT_STEPS_ENUM} from '..';
 
 interface IDeliverProps extends INavigationProp {
-  vehicle: string;
+  vehicle: IDeliveryFee;
   setVehicle: any;
   address: any;
   setAddress: any;
@@ -35,11 +36,7 @@ const Delivery = ({
   navigation,
 }: IDeliverProps) => {
   const {locations} = useSelector((state: RootState) => state.locations);
-  const vehiclesList = [
-    {name: VEHICLES_ENUM.BIKE, value: VEHICLES_ENUM.BIKE},
-    {name: VEHICLES_ENUM.MOTORCYCLE, value: VEHICLES_ENUM.MOTORCYCLE},
-    {name: VEHICLES_ENUM.CAR, value: VEHICLES_ENUM.CAR},
-  ];
+  const {fees} = useSelector((state: RootState) => state.deliveryFees);
 
   const handleNext = () => {
     if (address.name === undefined) {
@@ -50,7 +47,10 @@ const Delivery = ({
       toastMessage(TOAST_MESSAGE_TYPES.INFO, 'Please select delivery address');
       return;
     }
-    if (vehicle.trim() === '') {
+    if (
+      vehicle.vehicleType.trim() === '' ||
+      vehicle.vehicleType.trim() === 'Choose vehicle type'
+    ) {
       toastMessage(TOAST_MESSAGE_TYPES.INFO, 'Please select vehicle type');
       return;
     }
@@ -83,11 +83,12 @@ const Delivery = ({
               setAddress(itemValue);
             }}
             style={[commonInput]}>
-            {[{name: 'Choose address', data: {}}, ...locations].map(
-              (vehicles, i) => (
-                <Picker.Item key={i} label={vehicles.name} value={vehicles} />
-              ),
-            )}
+            {[
+              {name: 'Choose address', data: {}, details: {}},
+              ...locations,
+            ].map((vehicles, i) => (
+              <Picker.Item key={i} label={vehicles.name} value={vehicles} />
+            ))}
           </Picker>
         </View>
         <View style={{marginHorizontal: 15}}>
@@ -102,15 +103,16 @@ const Delivery = ({
               setVehicle(itemValue);
             }}
             style={[commonInput]}>
-            {[{name: 'Choose vehicle type', value: ''}, ...vehiclesList].map(
-              (vehicles, i) => (
-                <Picker.Item
-                  key={i}
-                  label={vehicles.name}
-                  value={vehicles.value}
-                />
-              ),
-            )}
+            {[
+              {
+                vehicleType: 'Choose vehicle type',
+                amountPerKilometer: 0,
+                id: 0,
+              },
+              ...fees,
+            ].map((fees, i) => (
+              <Picker.Item key={i} label={fees.vehicleType} value={fees} />
+            ))}
           </Picker>
         </View>
       </View>

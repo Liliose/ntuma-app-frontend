@@ -141,6 +141,7 @@ const Register = ({navigation}: INavigationProp) => {
                   placeholder="Enter your email"
                   style={commonInput}
                   onChangeText={text => setState({...state, email: text})}
+                  keyboardType="email-address"
                 />
               </View>
               <View style={{marginVertical: 10}}>
@@ -172,9 +173,10 @@ const Register = ({navigation}: INavigationProp) => {
                     +250
                   </Text>
                   <TextInput
-                    placeholder="Enter your email"
+                    placeholder="Enter your phone number"
                     style={{flex: 1, marginLeft: 10, padding: 10}}
                     onChangeText={text => setState({...state, phone: text})}
+                    keyboardType="number-pad"
                   />
                 </View>
               </View>

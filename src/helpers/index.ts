@@ -6,6 +6,7 @@ import {IMarket, TOAST_MESSAGE_TYPES} from '../../interfaces';
 import {fetchProducts} from '../actions/products';
 import {fetchCategories} from '../actions/categories';
 import {fetchProductPrices} from '../actions/productPrices';
+import {fetchDeliveryFees} from '../actions/deliveryFees';
 
 //custom dispatcher hook
 export const useResetUser = () => {
@@ -21,6 +22,15 @@ export const useLoadBasiData = (): any => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
     dispatch(fetchProductPrices());
+    dispatch(fetchDeliveryFees());
+  };
+};
+
+export const setHeaders = (token: string) => {
+  return {
+    headers: {
+      token: token,
+    },
   };
 };
 
@@ -156,7 +166,7 @@ function exponentialToFixed(x: any) {
 const toRadians = (degree: number) => {
   return (degree * Math.PI) / 180;
 };
-const calCulateDistance = (
+export const calCulateDistance = (
   latitude1: number,
   longitude1: number,
   latitude2: number,

@@ -35,6 +35,7 @@ import Locations from '../screens/locations';
 import AddLocation from '../screens/add-location';
 import {viewFlexSpace} from '../constants/styles';
 import Checkout from '../screens/checkout';
+import PendingOrders from '../screens/orders/pending-orders';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -75,6 +76,53 @@ function Navigation() {
     );
   }
 
+  function OrdersTab() {
+    return (
+      <TopTab.Navigator
+        // initialRouteName=""
+        screenOptions={{
+          tabBarActiveTintColor: APP_COLORS.WHITE,
+          tabBarInactiveTintColor: APP_COLORS.WHITE,
+          tabBarIndicatorContainerStyle: {backgroundColor: APP_COLORS.MAROON},
+          tabBarIndicatorStyle: {
+            backgroundColor: 'white',
+            height: 5,
+          },
+          tabBarLabelStyle: {textTransform: 'capitalize'},
+        }}>
+        <TopTab.Screen
+          options={{
+            tabBarLabel: 'Pending',
+          }}
+          name="PendingOrders"
+          component={PendingOrders}
+        />
+
+        <TopTab.Screen
+          options={{
+            tabBarLabel: 'Schedured',
+          }}
+          name="ScheduledOrders"
+          component={PendingOrders}
+        />
+        <TopTab.Screen
+          options={{
+            tabBarLabel: 'Failed',
+          }}
+          name="FailedOrders"
+          component={PendingOrders}
+        />
+        <TopTab.Screen
+          options={{
+            tabBarLabel: 'Completed',
+          }}
+          name="CompletedOrders"
+          component={PendingOrders}
+        />
+      </TopTab.Navigator>
+    );
+  }
+
   const HomeTabs = ({navigation}: INavigationProp) => {
     const [activeColor, setActiveColor] = useState(APP_COLORS.WHITE);
     const [inactiveColor, setInactiveColor] = useState('rgba(255,255,255,0.6)');
@@ -104,6 +152,7 @@ function Navigation() {
             },
           })}
         />
+
         <Tab.Screen
           name="Cart"
           component={Cart}
@@ -239,6 +288,20 @@ function Navigation() {
           component={HomeTabs}
           options={{headerShown: false}}
         />
+
+        <Stack.Screen
+          name="Orders"
+          component={OrdersTab}
+          options={{
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            title: 'Order History',
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          }}
+        />
+
         <Stack.Screen
           name="SelectMarket"
           component={SelectMarket}

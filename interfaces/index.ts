@@ -118,6 +118,7 @@ export interface ICartItem {
 }
 
 export interface IDeliveryFee {
+  id: number;
   vehicleType: string;
   amountPerKilometer: number;
 }
@@ -125,6 +126,7 @@ export interface IDeliveryFee {
 export interface ILocation {
   name: string;
   data: any;
+  details: any;
 }
 
 export enum VEHICLES_ENUM {

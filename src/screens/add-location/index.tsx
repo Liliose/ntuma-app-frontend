@@ -36,7 +36,13 @@ const AddLocation = ({navigation}: INavigationProp) => {
     locationRef.current.clear();
   };
   const handleSave = () => {
-    dispatch(addLocation({name: selectedLocationText, data: selectedLocation}));
+    dispatch(
+      addLocation({
+        name: selectedLocationText,
+        data: selectedLocation.data,
+        details: selectedLocation?.details,
+      }),
+    );
     navigation.navigate('Locations');
   };
   return (

@@ -23,7 +23,7 @@ export const setIsLoadingDeliveryFees = (value: boolean): IAction => ({
 
 export const resetFees = () => ({type: RESET_DELIVERY_FEES});
 
-export const fetchMarkets = (): any => (dispatch: any, getState: any) => {
+export const fetchDeliveryFees = (): any => (dispatch: any, getState: any) => {
   dispatch(setIsLoadingDeliveryFees(true));
   axios
     .get(app.BACKEND_URL + '/fees/')
