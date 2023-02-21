@@ -1,4 +1,4 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import WhiteCard from '../../../../components/white-card';
 import {viewFlexSpace} from '../../../../constants/styles';
@@ -23,35 +23,41 @@ const Item = ({item, navigation}: IItemProps) => {
     }
   }, [item]);
   return (
-    <WhiteCard style={{marginBottom: 10}}>
-      <View style={[viewFlexSpace]}>
-        <View>
-          <Image
-            source={{uri: app.FILE_URL + product?.image}}
-            style={{width: 100, height: 100}}
-            resizeMode="contain"
-          />
-        </View>
-        <View style={{flex: 1, padding: 10}}>
-          <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
-            {product?.name}
-          </Text>
-          <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
-            <View>
-              <Text style={{color: APP_COLORS.TEXT_GRAY}}>
-                {item.cartItems.length} Items
-              </Text>
-              <Text style={{color: APP_COLORS.TEXT_GRAY}}>
-                {currencyFormatter(item.cartTotalAmount)} RWF
+    <Pressable
+      onPress={() => navigation.navigate('OrderPreview', {order: item})}>
+      <WhiteCard style={{marginBottom: 10}}>
+        <View style={[viewFlexSpace]}>
+          <View>
+            <Image
+              source={{uri: app.FILE_URL + product?.image}}
+              style={{width: 100, height: 100}}
+              resizeMode="contain"
+            />
+          </View>
+          <View style={{flex: 1, padding: 10}}>
+            <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
+              {product?.name}
+            </Text>
+            <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
+              <View>
+                <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+                  {item.cartItems.length} Items
+                </Text>
+                <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+                  {currencyFormatter(
+                    Number(item.cartTotalAmount) + Number(item.deliveryFees),
+                  )}{' '}
+                  RWF
+                </Text>
+              </View>
+              <Text style={{color: APP_COLORS.TEXT_GRAY, width: '50%'}}>
+                {new Date(item.createdAt).toUTCString()}
               </Text>
             </View>
-            <Text style={{color: APP_COLORS.TEXT_GRAY, width: '50%'}}>
-              {new Date(item.createdAt).toUTCString()}
-            </Text>
           </View>
         </View>
-      </View>
-    </WhiteCard>
+      </WhiteCard>
+    </Pressable>
   );
 };
 

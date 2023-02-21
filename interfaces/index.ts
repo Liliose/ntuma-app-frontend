@@ -25,6 +25,12 @@ export interface INavigationProp {
   navigation: StackNavigationProp<any>;
   route?: RouteProp<any>;
 }
+
+export interface INavigationPropWithRouteRequired {
+  navigation: StackNavigationProp<any>;
+  route: RouteProp<any>;
+}
+
 export interface IMarket {
   mId: number;
   name: string;
@@ -157,7 +163,7 @@ export interface IOrder {
   distance: number;
   paymentMethod: string;
   paymentPhoneNumber: number;
-  deliveryAddress: ILocation[];
+  deliveryAddress: ILocation;
   deliveryVehicle: IDeliveryFee;
   deliveryFees: number;
   deliveryStatus: string;

@@ -36,6 +36,7 @@ import AddLocation from '../screens/add-location';
 import {viewFlexSpace} from '../constants/styles';
 import Checkout from '../screens/checkout';
 import PendingOrders from '../screens/orders/pending-orders';
+import OrderPreview from '../screens/orders/preview';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -411,6 +412,18 @@ function Navigation() {
               </Pressable>
             ),
             title: 'Checkout',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="OrderPreview"
+          component={OrderPreview}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Order Information',
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
