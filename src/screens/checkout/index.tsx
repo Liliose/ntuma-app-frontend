@@ -42,6 +42,8 @@ const Checkout = ({navigation}: INavigationProp) => {
     name: '',
     data: {},
     details: {},
+    houseNumber: '',
+    description: '',
   });
   const [distance, setDistance] = useState<number>(0);
   const [cartTotal, setCartTotal] = useState<number>(0);

@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, {useRef, useState, useEffect} from 'react';
-import {View, Text, Dimensions, Pressable} from 'react-native';
+import {View, Text, Dimensions, Pressable, TextInput} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {INavigationProp, TOAST_MESSAGE_TYPES} from '../../../interfaces';
 import {toastMessage} from '../../helpers';
@@ -11,6 +11,7 @@ import {
   btnWithBgTextStyles,
   btnWithoutBgContainerStyles,
   btnWithoutBgTextStyles,
+  commonInput,
   viewFlexSpace,
 } from '../../constants/styles';
 import {useDispatch} from 'react-redux';
@@ -21,6 +22,8 @@ const AddLocation = ({navigation}: INavigationProp) => {
   const dispatch = useDispatch();
   const [selectedLocation, setSelectedLocation] = useState({});
   const [selectedLocationText, setSelectedLocationText] = useState('');
+  const [houseNumber, setHouseNumber] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
   const [showModal, setShowModal] = useState(false);
   const locationRef = useRef();
 
@@ -36,11 +39,20 @@ const AddLocation = ({navigation}: INavigationProp) => {
     locationRef.current.clear();
   };
   const handleSave = () => {
+    if (description.trim() === '') {
+      toastMessage(
+        TOAST_MESSAGE_TYPES.INFO,
+        'Please let us know more about your location. feel free to use any language you want.',
+      );
+      return;
+    }
     dispatch(
       addLocation({
         name: selectedLocationText,
         data: selectedLocation.data,
         details: selectedLocation?.details,
+        houseNumber,
+        description,
       }),
     );
     navigation.navigate('Locations');
@@ -95,11 +107,34 @@ const AddLocation = ({navigation}: INavigationProp) => {
               color: APP_COLORS.BLACK,
               fontSize: 16,
             }}>
-            Choosed location
+            Selected location
           </Text>
           <Text style={{marginBottom: 10, color: APP_COLORS.TEXT_GRAY}}>
             {selectedLocationText}
           </Text>
+          <View>
+            <TextInput
+              style={[commonInput, {marginBottom: 10}]}
+              placeholder="House Number (optional)"
+              onChangeText={text => setHouseNumber(text)}
+            />
+          </View>
+          <View>
+            <Text style={{color: APP_COLORS.BLACK}}>
+              Help us know more about your location
+            </Text>
+            <TextInput
+              style={[
+                commonInput,
+                {marginBottom: 10, textAlignVertical: 'top'},
+              ]}
+              placeholder="Extra Description. Ex near by the church,...."
+              multiline={true}
+              maxLength={100}
+              numberOfLines={4}
+              onChangeText={text => setDescription(text)}
+            />
+          </View>
           <View style={[viewFlexSpace, {marginTop: 10}]}>
             <Pressable
               style={{flex: 1, marginRight: 5}}

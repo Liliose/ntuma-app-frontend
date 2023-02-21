@@ -47,14 +47,23 @@ const Locations = () => {
             <View style={{padding: 10}}>
               <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
                 <Icon2 name="location" size={25} color={APP_COLORS.BLACK} />
-                <Text
-                  style={{
-                    color: APP_COLORS.TEXT_GRAY,
-                    marginHorizontal: 10,
-                    flex: 1,
-                  }}>
-                  {item.name}
-                </Text>
+                <View style={{marginHorizontal: 10, flex: 1}}>
+                  <Text
+                    style={{
+                      color: APP_COLORS.BLACK,
+                    }}>
+                    {item.name}
+                  </Text>
+                  {item.houseNumber.trim() !== '' && (
+                    <Text>House Number: {item.houseNumber} </Text>
+                  )}
+                  <Text
+                    style={{
+                      color: APP_COLORS.TEXT_GRAY,
+                    }}>
+                    {item.description}
+                  </Text>
+                </View>
                 <Pressable
                   onPress={() => {
                     deleteLocation(item);

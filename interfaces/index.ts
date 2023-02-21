@@ -132,6 +132,8 @@ export interface ILocation {
   name: string;
   data: any;
   details: any;
+  description: string;
+  houseNumber: string;
 }
 
 export enum VEHICLES_ENUM {
