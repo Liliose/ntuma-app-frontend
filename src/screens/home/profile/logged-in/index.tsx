@@ -84,18 +84,22 @@ const LoggedIn = ({navigation}: INavigationProp) => {
           </Text>
           <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
-        <View style={[viewFlexSpace, {marginVertical: 10}]}>
-          <Icon3 name="history" size={25} color={APP_COLORS.BLACK} />
-          <Text
-            style={{
-              color: APP_COLORS.TEXT_GRAY,
-              flex: 1,
-              marginHorizontal: 10,
-            }}>
-            Order History
-          </Text>
-          <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
-        </View>
+        <Pressable
+          style={{marginVertical: 10}}
+          onPress={() => navigation.navigate('Orders')}>
+          <View style={[viewFlexSpace, {marginVertical: 10}]}>
+            <Icon3 name="history" size={25} color={APP_COLORS.BLACK} />
+            <Text
+              style={{
+                color: APP_COLORS.TEXT_GRAY,
+                flex: 1,
+                marginHorizontal: 10,
+              }}>
+              Order History
+            </Text>
+            <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
+          </View>
+        </Pressable>
         <Pressable
           style={{marginVertical: 10}}
           onPress={() => navigation.navigate('Locations')}>

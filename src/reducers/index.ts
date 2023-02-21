@@ -8,6 +8,7 @@ import cart from './cart';
 import favourites from './favorites';
 import locations from './locations';
 import deliveryFees from './deliveryFees';
+import orders from './orders';
 const rootReducer = combineReducers({
   user,
   markets,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   favourites,
   locations,
   deliveryFees,
+  orders,
 });
 
 export default rootReducer;

@@ -65,6 +65,11 @@ export interface ICategory {
   createdAt: string;
 }
 
+export interface IOrdersReducer {
+  orders: IOrder[];
+  isLoading: boolean;
+}
+
 export interface IProduct {
   pId: number;
   marketId: number;
@@ -133,4 +138,30 @@ export enum VEHICLES_ENUM {
   BIKE = 'BIKE',
   CAR = 'CAR',
   MOTORCYCLE = 'MOTORCYCLE',
+}
+
+export enum PAYMENT_STATUS_ENUM {
+  PENDING = 'PENDING',
+  FAILED = 'FAILED',
+  SUCCESS = 'SUCCESS',
+}
+
+export interface IOrder {
+  id: number;
+  marketId: number;
+  userId: number;
+  cartItems: ICartItem[];
+  cartTotalAmount: number;
+  distance: number;
+  paymentMethod: string;
+  paymentPhoneNumber: number;
+  deliveryAddress: ILocation[];
+  deliveryVehicle: IDeliveryFee;
+  deliveryFees: number;
+  deliveryStatus: string;
+  transactionId: string;
+  paymentStatus: PAYMENT_STATUS_ENUM;
+  failureReason: string;
+  createdAt: string;
+  updatedAt: string;
 }

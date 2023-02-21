@@ -61,6 +61,8 @@ function Navigation() {
             height: '100%',
           },
           tabBarLabelStyle: {textTransform: 'capitalize'},
+          tabBarScrollEnabled: true,
+          tabBarItemStyle: {width: 100, flex: 1},
         }}>
         {categories.map((item, i) => (
           <TopTab.Screen

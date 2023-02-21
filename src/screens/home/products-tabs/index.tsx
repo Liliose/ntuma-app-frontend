@@ -58,9 +58,7 @@ const Products = ({route, navigation}: IProductsProps) => {
         if (cat) {
           dispatch(setSelectedCategory(cat));
         }
-        setTimeout(() => {
-          setShowLoader(false);
-        }, 100);
+        setShowLoader(false);
       } catch (error) {
         setShowLoader(false);
       }
