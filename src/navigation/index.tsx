@@ -37,6 +37,8 @@ import {viewFlexSpace} from '../constants/styles';
 import Checkout from '../screens/checkout';
 import PendingOrders from '../screens/orders/pending-orders';
 import OrderPreview from '../screens/orders/preview';
+import FailedOrders from '../screens/orders/failed-orders';
+import CompletedOrders from '../screens/orders/completed-orders';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -113,14 +115,14 @@ function Navigation() {
             tabBarLabel: 'Failed',
           }}
           name="FailedOrders"
-          component={PendingOrders}
+          component={FailedOrders}
         />
         <TopTab.Screen
           options={{
             tabBarLabel: 'Completed',
           }}
           name="CompletedOrders"
-          component={PendingOrders}
+          component={CompletedOrders}
         />
       </TopTab.Navigator>
     );

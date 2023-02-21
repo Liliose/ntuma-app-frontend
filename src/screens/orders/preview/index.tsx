@@ -1,6 +1,10 @@
 import {View, Text, ScrollView, Pressable} from 'react-native';
 import React, {useState} from 'react';
-import {INavigationPropWithRouteRequired, IOrder} from '../../../../interfaces';
+import {
+  INavigationPropWithRouteRequired,
+  IOrder,
+  PAYMENT_STATUS_ENUM,
+} from '../../../../interfaces';
 import {APP_COLORS} from '../../../constants/colors';
 import {viewFlexSpace} from '../../../constants/styles';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -215,6 +219,21 @@ const OrderPreview = ({
             {new Date(order.createdAt).toUTCString()}
           </Text>
         </View>
+        {order.paymentStatus === PAYMENT_STATUS_ENUM.FAILED && (
+          <View
+            style={{
+              borderBottomColor: APP_COLORS.BORDER_COLOR,
+              borderBottomWidth: 1,
+              padding: 10,
+            }}>
+            <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
+              Failure Reason:
+            </Text>
+            <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+              {order.failureReason}
+            </Text>
+          </View>
+        )}
       </ScrollView>
     </View>
   );
