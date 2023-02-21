@@ -12,6 +12,9 @@ import {INavigationProp} from '../../../../../interfaces';
 import {resetUser} from '../../../../actions/user';
 import {resetCart} from '../../../../actions/cart';
 import {resetMarkets} from '../../../../actions/markets';
+import {resetLocations} from '../../../../actions/locations';
+import {resetFavourites} from '../../../../actions/favourites';
+import {resetOrders} from '../../../../actions/orders';
 
 const LoggedIn = ({navigation}: INavigationProp) => {
   const dispatch = useDispatch();
@@ -89,18 +92,24 @@ const LoggedIn = ({navigation}: INavigationProp) => {
           </Text>
           <Icon4 name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
-        <View style={[viewFlexSpace, {marginVertical: 10}]}>
-          <Icon3 name="history" size={25} color={APP_COLORS.BLACK} />
-          <Text
-            style={{
-              color: APP_COLORS.TEXT_GRAY,
-              flex: 1,
-              marginHorizontal: 10,
-            }}>
-            Order History
-          </Text>
-          <Icon4 name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
-        </View>
+        <Pressable onPress={() => navigation.navigate('Orders')}>
+          <View style={[viewFlexSpace, {marginVertical: 10}]}>
+            <Icon3 name="history" size={25} color={APP_COLORS.BLACK} />
+            <Text
+              style={{
+                color: APP_COLORS.TEXT_GRAY,
+                flex: 1,
+                marginHorizontal: 10,
+              }}>
+              Order History
+            </Text>
+            <Icon4
+              name="chevron-right"
+              size={25}
+              color={APP_COLORS.TEXT_GRAY}
+            />
+          </View>
+        </Pressable>
         <Pressable
           style={{marginVertical: 10}}
           onPress={() => navigation.navigate('Locations')}>
@@ -142,7 +151,10 @@ const LoggedIn = ({navigation}: INavigationProp) => {
         onPress={() => {
           dispatch(resetUser());
           dispatch(resetCart());
-          //   dispatch(resetMarkets());
+          dispatch(resetMarkets());
+          dispatch(resetLocations());
+          dispatch(resetFavourites());
+          dispatch(resetOrders());
         }}>
         <View style={[viewFlexSpace]}>
           <Icon3 name="logout" size={25} color={APP_COLORS.MAROON} />
