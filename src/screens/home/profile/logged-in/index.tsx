@@ -4,6 +4,7 @@ import {RootState} from '../../../../reducers';
 import {useDispatch, useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/AntDesign';
+import Icon4 from 'react-native-vector-icons/Entypo';
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {APP_COLORS} from '../../../../constants/colors';
 import {viewFlexCenter, viewFlexSpace} from '../../../../constants/styles';
@@ -21,20 +22,24 @@ const LoggedIn = ({navigation}: INavigationProp) => {
     <View>
       <View style={[viewFlexCenter, {flexDirection: 'column'}]}>
         <View
-          style={{
-            width: 120,
-            height: 120,
-            borderRadius: 100,
-            position: 'relative',
-            backgroundColor: APP_COLORS.DARK_GRAY,
-          }}>
-          {/* <Text>LoggedIn</Text> */}
+          style={[
+            {
+              width: 120,
+              height: 120,
+              borderRadius: 100,
+              position: 'relative',
+              backgroundColor: APP_COLORS.MAROON,
+              alignItems: 'center',
+              justifyContent: 'center',
+            },
+          ]}>
+          <Icon2 name="user" size={50} color={APP_COLORS.WHITE} />
           <View
             style={{
               position: 'absolute',
               right: 0,
               marginTop: 60,
-              marginRight: -10,
+              marginRight: -25,
             }}>
             <View
               style={{
@@ -70,7 +75,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
             }}>
             Account Settings
           </Text>
-          <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
+          <Icon4 name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
         <View style={[viewFlexSpace, {marginVertical: 10}]}>
           <Icon2 name="wallet" size={25} color={APP_COLORS.BLACK} />
@@ -82,24 +87,20 @@ const LoggedIn = ({navigation}: INavigationProp) => {
             }}>
             My Wallet
           </Text>
-          <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
+          <Icon4 name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
-        <Pressable
-          style={{marginVertical: 10}}
-          onPress={() => navigation.navigate('Orders')}>
-          <View style={[viewFlexSpace, {marginVertical: 10}]}>
-            <Icon3 name="history" size={25} color={APP_COLORS.BLACK} />
-            <Text
-              style={{
-                color: APP_COLORS.TEXT_GRAY,
-                flex: 1,
-                marginHorizontal: 10,
-              }}>
-              Order History
-            </Text>
-            <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
-          </View>
-        </Pressable>
+        <View style={[viewFlexSpace, {marginVertical: 10}]}>
+          <Icon3 name="history" size={25} color={APP_COLORS.BLACK} />
+          <Text
+            style={{
+              color: APP_COLORS.TEXT_GRAY,
+              flex: 1,
+              marginHorizontal: 10,
+            }}>
+            Order History
+          </Text>
+          <Icon4 name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
+        </View>
         <Pressable
           style={{marginVertical: 10}}
           onPress={() => navigation.navigate('Locations')}>
@@ -113,7 +114,11 @@ const LoggedIn = ({navigation}: INavigationProp) => {
               }}>
               Saved Location
             </Text>
-            <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
+            <Icon4
+              name="chevron-right"
+              size={25}
+              color={APP_COLORS.TEXT_GRAY}
+            />
           </View>
         </Pressable>
         <View style={[viewFlexSpace, {marginVertical: 10}]}>
@@ -130,7 +135,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
             }}>
             Help&Support
           </Text>
-          <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
+          <Icon4 name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
       </View>
       <Pressable
