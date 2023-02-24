@@ -16,6 +16,7 @@ interface IReviewProps {
   paymentPhoneNumber: string;
   cartTotal: number;
   market: IMarket | undefined;
+  deliveryAmount: number;
   handleSubmit: any;
 }
 const Review = ({
@@ -26,6 +27,7 @@ const Review = ({
   paymentPhoneNumber,
   cartTotal,
   market,
+  deliveryAmount,
   handleSubmit,
 }: IReviewProps) => {
   return (
@@ -126,7 +128,7 @@ const Review = ({
             </Text>
             <Text style={{color: APP_COLORS.BLACK}}>{distance}km</Text>
             <Text style={{color: APP_COLORS.BLACK}}>
-              {currencyFormatter(distance * vehicle.amountPerKilometer)} RWF
+              {currencyFormatter(deliveryAmount)} RWF
             </Text>
           </View>
           <View

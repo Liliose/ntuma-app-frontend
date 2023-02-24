@@ -33,10 +33,12 @@ const Checkout = ({navigation}: INavigationProp) => {
   const [activeStep, setActiveStep] = useState(CHECKOUT_STEPS_ENUM.DELIVERY);
   const [paymentMethod, setPaymentMethod] = useState<string>('');
   const [paymentPhoneNumber, setPaymentPhoneNumber] = useState<string>('');
+  const [deliveryAmount, setDeliveryAmount] = useState<number>(0);
   const [vehicle, setVehicle] = useState<IDeliveryFee>({
     id: 0,
     vehicleType: '',
     amountPerKilometer: 0,
+    defaultAmount: 0,
   });
   const [address, setAddress] = useState<ILocation>({
     name: '',
@@ -114,6 +116,19 @@ const Checkout = ({navigation}: INavigationProp) => {
     setCartTotal(sm);
   }, [cart]);
 
+  useEffect(() => {
+    if (vehicle.vehicleType.trim() !== '') {
+      if (distance < 5) {
+        //default kilometer
+        setDeliveryAmount(vehicle.defaultAmount);
+      } else {
+        setDeliveryAmount(vehicle.amountPerKilometer * distance);
+      }
+    } else {
+      setDeliveryAmount(0);
+    }
+  }, [vehicle, distance]);
+
   const handleSubmit = () => {
     setIsLoading(true);
     axios
@@ -124,7 +139,7 @@ const Checkout = ({navigation}: INavigationProp) => {
           cartTotalAmount: cartTotal,
           distance,
           vehicle: JSON.stringify(vehicle),
-          deliveryFees: distance * vehicle.amountPerKilometer,
+          deliveryFees: deliveryAmount,
           deliveryAddress: JSON.stringify(address),
           paymentMethod,
           paymentPhoneNumber: '250' + paymentPhoneNumber,
@@ -238,6 +253,7 @@ const Checkout = ({navigation}: INavigationProp) => {
           paymentPhoneNumber={paymentPhoneNumber}
           cartTotal={cartTotal}
           market={selectedMarket}
+          deliveryAmount={deliveryAmount}
           handleSubmit={handleSubmit}
         />
       )}
