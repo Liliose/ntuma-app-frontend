@@ -1,9 +1,10 @@
 import {View, Text, TextInput} from 'react-native';
 import React from 'react';
 import {commonInput} from '../../constants/styles';
+import {APP_COLORS} from '../../constants/colors';
 
 interface IDisabledInputProps {
-  desabled?: boolean;
+  disabled?: boolean;
   placeHolder?: string;
   onChangeText: any;
   styles?: any;
@@ -12,12 +13,18 @@ interface IDisabledInputProps {
 const DisabledInput = (props: IDisabledInputProps) => {
   return (
     <>
-      {props.desabled ? (
+      {props.disabled ? (
         <View
           style={
-            props.styles ? [commonInput, {...props.styles}] : [commonInput]
+            props.styles
+              ? [
+                  commonInput,
+                  {backgroundColor: APP_COLORS.GRAY_BG},
+                  {...props.styles},
+                ]
+              : [commonInput, {backgroundColor: APP_COLORS.GRAY_BG}]
           }>
-          <Text>{props.value}</Text>
+          <Text style={{color: APP_COLORS.TEXT_GRAY}}>{props.value}</Text>
         </View>
       ) : (
         <TextInput

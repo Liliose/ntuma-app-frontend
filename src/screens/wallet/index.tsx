@@ -16,6 +16,7 @@ import {RootState} from '../../reducers';
 import {currencyFormatter} from '../../helpers';
 import {fetchWalletTransactions} from '../../actions/walletTransactions';
 import FullPageLoader from '../../components/full-page-loader';
+import DisabledInput from '../../components/disabled-input';
 const {height} = Dimensions.get('window');
 
 const Wallet = () => {
@@ -104,6 +105,11 @@ const Wallet = () => {
             style={{fontSize: 18, color: APP_COLORS.BLACK, fontWeight: '600'}}>
             My Transactions
           </Text>
+          <DisabledInput
+            onChangeText={() => {}}
+            value="Testing text"
+            disabled={true}
+          />
         </ScrollView>
         <View
           style={{
@@ -119,7 +125,7 @@ const Wallet = () => {
         </View>
       </View>
       <Deposit showModal={showModal} setShowModal={setShowModal} />
-      <FullPageLoader isLoading={isLoading} />
+      {/* <FullPageLoader isLoading={isLoading} /> */}
     </View>
   );
 };
