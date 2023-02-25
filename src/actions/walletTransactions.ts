@@ -7,6 +7,7 @@ import {setUserWalletAmount} from './user';
 export const SET_WALLET_TRANSACTIONS = 'SET_WALLET_TRANSACTIONS';
 export const SET_IS_LOADING_WALLET_TRANSACTIONS =
   'SET_IS_LOADING_WALLET_TRANSACTIONS';
+export const Add_NEW_TRANSACTION = 'Add_NEW_TRANSACTION';
 export const RESET_WALLET_TRANSACTIONS = 'RESET_WALLET_TRANSACTIONS';
 
 interface IAction {
@@ -18,6 +19,13 @@ export const setWalletTransactions = (
 ): IAction => ({
   type: SET_WALLET_TRANSACTIONS,
   payload: transactions,
+});
+
+export const addNewTransaction = (
+  transaction: IWalletTransaction,
+): IAction => ({
+  type: SET_WALLET_TRANSACTIONS,
+  payload: transaction,
 });
 
 export const setIsLoadingWalletTransactions = (value: boolean): IAction => ({

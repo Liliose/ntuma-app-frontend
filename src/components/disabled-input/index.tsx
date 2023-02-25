@@ -5,9 +5,9 @@ import {APP_COLORS} from '../../constants/colors';
 
 interface IDisabledInputProps {
   disabled?: boolean;
-  placeHolder?: string;
+  placeholder?: string;
   onChangeText: any;
-  styles?: any;
+  style?: any;
   value: string;
 }
 const DisabledInput = (props: IDisabledInputProps) => {
@@ -16,11 +16,11 @@ const DisabledInput = (props: IDisabledInputProps) => {
       {props.disabled ? (
         <View
           style={
-            props.styles
+            props.style
               ? [
                   commonInput,
                   {backgroundColor: APP_COLORS.GRAY_BG},
-                  {...props.styles},
+                  {...props.style},
                 ]
               : [commonInput, {backgroundColor: APP_COLORS.GRAY_BG}]
           }>
@@ -28,11 +28,10 @@ const DisabledInput = (props: IDisabledInputProps) => {
         </View>
       ) : (
         <TextInput
-          style={
-            props.styles ? [commonInput, {...props.styles}] : [commonInput]
-          }
+          style={props.style ? [commonInput, {...props.style}] : [commonInput]}
           onChangeText={props.onChangeText}
           value={props.value}
+          placeholder={props.placeholder}
         />
       )}
     </>
