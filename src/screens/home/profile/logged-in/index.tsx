@@ -42,7 +42,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
         },
         {
           text: 'confirm',
-          onPress: () => handleLogout,
+          onPress: () => handleLogout(),
         },
       ],
       {cancelable: true},
