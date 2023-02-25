@@ -28,6 +28,7 @@ export const fetchDeliveryFees = (): any => (dispatch: any, getState: any) => {
   axios
     .get(app.BACKEND_URL + '/fees/')
     .then(res => {
+      dispatch(setIsLoadingDeliveryFees(false));
       dispatch({
         type: SET_DELIVERY_FEES,
         payload: res.data.fees,

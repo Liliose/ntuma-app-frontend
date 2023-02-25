@@ -39,6 +39,7 @@ import PendingOrders from '../screens/orders/pending-orders';
 import OrderPreview from '../screens/orders/preview';
 import FailedOrders from '../screens/orders/failed-orders';
 import CompletedOrders from '../screens/orders/completed-orders';
+import Wallet from '../screens/wallet';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -429,6 +430,19 @@ function Navigation() {
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="Wallet"
+          component={Wallet}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'My Wallet',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerShadowVisible: false,
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
           })}

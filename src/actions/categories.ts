@@ -32,6 +32,7 @@ export const fetchCategories = (): any => (dispatch: any, getState: any) => {
   axios
     .get(app.BACKEND_URL + '/categories/')
     .then(res => {
+      dispatch(setIsLoadingCategories(false));
       dispatch({
         type: SET_CATEGORIES,
         payload: res.data.categories,

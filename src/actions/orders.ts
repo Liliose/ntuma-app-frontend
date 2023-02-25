@@ -33,6 +33,7 @@ export const fetchOrders = (): any => (dispatch: any, getState: any) => {
   axios
     .get(app.BACKEND_URL + '/orders/', setHeaders(user.token))
     .then(res => {
+      dispatch(setIsLoadingOrders(false));
       dispatch({
         type: SET_ORDERS,
         payload: res.data.orders,

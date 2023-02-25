@@ -1,4 +1,4 @@
-import {View, Text, Pressable, InputAccessoryView} from 'react-native';
+import {View, Text, Pressable, Alert} from 'react-native';
 import React from 'react';
 import {RootState} from '../../../../reducers';
 import {useDispatch, useSelector} from 'react-redux';
@@ -21,6 +21,33 @@ const LoggedIn = ({navigation}: INavigationProp) => {
   const {image, names, email, phone} = useSelector(
     (state: RootState) => state.user,
   );
+
+  const handleLogout = () => {
+    dispatch(resetUser());
+    dispatch(resetCart());
+    dispatch(resetMarkets());
+    dispatch(resetLocations());
+    dispatch(resetFavourites());
+    dispatch(resetOrders());
+  };
+
+  const confirmLogout = () => {
+    Alert.alert(
+      'Confirm the process',
+      'Do you want to logout from your account?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'confirm',
+          onPress: () => handleLogout,
+        },
+      ],
+      {cancelable: true},
+    );
+  };
   return (
     <View>
       <View style={[viewFlexCenter, {flexDirection: 'column'}]}>
@@ -80,18 +107,24 @@ const LoggedIn = ({navigation}: INavigationProp) => {
           </Text>
           <Icon4 name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
-        <View style={[viewFlexSpace, {marginVertical: 10}]}>
-          <Icon2 name="wallet" size={25} color={APP_COLORS.BLACK} />
-          <Text
-            style={{
-              color: APP_COLORS.TEXT_GRAY,
-              flex: 1,
-              marginHorizontal: 10,
-            }}>
-            My Wallet
-          </Text>
-          <Icon4 name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
-        </View>
+        <Pressable onPress={() => navigation.navigate('Wallet')}>
+          <View style={[viewFlexSpace, {marginVertical: 10}]}>
+            <Icon2 name="wallet" size={25} color={APP_COLORS.BLACK} />
+            <Text
+              style={{
+                color: APP_COLORS.TEXT_GRAY,
+                flex: 1,
+                marginHorizontal: 10,
+              }}>
+              My Wallet
+            </Text>
+            <Icon4
+              name="chevron-right"
+              size={25}
+              color={APP_COLORS.TEXT_GRAY}
+            />
+          </View>
+        </Pressable>
         <Pressable onPress={() => navigation.navigate('Orders')}>
           <View style={[viewFlexSpace, {marginVertical: 10}]}>
             <Icon3 name="history" size={25} color={APP_COLORS.BLACK} />
@@ -147,15 +180,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
           <Icon4 name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
       </View>
-      <Pressable
-        onPress={() => {
-          dispatch(resetUser());
-          dispatch(resetCart());
-          dispatch(resetMarkets());
-          dispatch(resetLocations());
-          dispatch(resetFavourites());
-          dispatch(resetOrders());
-        }}>
+      <Pressable onPress={() => confirmLogout()}>
         <View style={[viewFlexSpace]}>
           <Icon3 name="logout" size={25} color={APP_COLORS.MAROON} />
           <Text style={{flex: 1, marginLeft: 10, color: APP_COLORS.MAROON}}>

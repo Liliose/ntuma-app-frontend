@@ -27,6 +27,7 @@ export const fetchProducts = (): any => (dispatch: any, getState: any) => {
   axios
     .get(app.BACKEND_URL + '/products/')
     .then(res => {
+      dispatch(setIsLoadingProducts(false));
       dispatch({
         type: SET_PRODUCTS,
         payload: res.data.products,

@@ -32,6 +32,7 @@ export const fetchMarkets = (): any => (dispatch: any, getState: any) => {
   axios
     .get(app.BACKEND_URL + '/markets/')
     .then(res => {
+      dispatch(setIsLoadingMarkets(false));
       dispatch({
         type: SET_MARKETS,
         payload: res.data.markets,

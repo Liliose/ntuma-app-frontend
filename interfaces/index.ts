@@ -11,6 +11,18 @@ export interface IUser {
   role: string;
   userId: number;
 }
+
+export interface IWalletTransaction {
+  id: number;
+  userId: number;
+  transactionType: string;
+  amount: number;
+  transactionId: string;
+  paymentPhoneNumber: string;
+  paymentStatus: string;
+  createdAt: string;
+}
+
 export interface IAction {
   type: string;
   payload: any;
@@ -98,6 +110,11 @@ export interface IProductPrice {
 
 export interface IProductsReducer {
   products: IProduct[];
+  isLoading: boolean;
+}
+
+export interface IWalletTransactionsReducer {
+  transactions: IWalletTransaction[];
   isLoading: boolean;
 }
 
