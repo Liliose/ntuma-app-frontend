@@ -76,11 +76,36 @@ export interface ICategoriesReducer {
   isLoading: boolean;
   selectedCategory: ICategory | undefined;
 }
+export interface IDishesReducer {
+  dishes: IDish[];
+  isLoading: boolean;
+}
 export interface ICategory {
   id: number;
   name: string;
   image: string;
   createdAt: string;
+}
+
+export interface IDishProduct {
+  dpId: number;
+  marketId: number;
+  dishId: number;
+  productId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IDish {
+  id: number;
+  marketId: number;
+  name: string;
+  utubeLink: string;
+  image: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  products: IDishProduct[];
 }
 
 export interface IOrdersReducer {

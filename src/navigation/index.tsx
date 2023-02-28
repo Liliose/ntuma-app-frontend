@@ -41,6 +41,7 @@ import FailedOrders from '../screens/orders/failed-orders';
 import CompletedOrders from '../screens/orders/completed-orders';
 import Wallet from '../screens/wallet';
 import {fetchWalletTransactions} from '../actions/walletTransactions';
+import DishDetails from '../screens/home/dish-details';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -221,6 +222,11 @@ function Navigation() {
           name="Dishes"
           component={Dishes}
           options={{
+            title: '🔥Hot Dishes😋',
+            headerShown: true,
+            headerStyle: {backgroundColor: APP_COLORS.MAROON},
+            headerTintColor: APP_COLORS.WHITE,
+            headerTitleAlign: 'center',
             tabBarIcon: ({focused, color, size}) => {
               return <Icon2 name="restaurant-menu" color={color} size={size} />;
             },
@@ -445,6 +451,26 @@ function Navigation() {
               <Pressable onPress={() => dispatch(fetchWalletTransactions())}>
                 <View style={{paddingRight: 10}}>
                   <Icon5 name="reload1" size={25} color={APP_COLORS.WHITE} />
+                </View>
+              </Pressable>
+            ),
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerShadowVisible: false,
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="DishDetails"
+          component={DishDetails}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Details',
+            headerRight: () => (
+              <Pressable>
+                <View style={{paddingRight: 10}}>
+                  <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
                 </View>
               </Pressable>
             ),
