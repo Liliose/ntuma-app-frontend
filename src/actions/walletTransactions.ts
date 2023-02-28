@@ -24,7 +24,7 @@ export const setWalletTransactions = (
 export const addNewTransaction = (
   transaction: IWalletTransaction,
 ): IAction => ({
-  type: SET_WALLET_TRANSACTIONS,
+  type: Add_NEW_TRANSACTION,
   payload: transaction,
 });
 

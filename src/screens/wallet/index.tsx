@@ -9,7 +9,8 @@ import {
 import React, {useState, useEffect} from 'react';
 import {APP_COLORS} from '../../constants/colors';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {viewFlexCenter} from '../../constants/styles';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import {viewFlexCenter, viewFlexSpace} from '../../constants/styles';
 import Deposit from './deposit';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../reducers';
@@ -99,11 +100,77 @@ const Wallet = () => {
           paddingVertical: 10,
           position: 'relative',
         }}>
-        <ScrollView>
-          <Text
-            style={{fontSize: 18, color: APP_COLORS.BLACK, fontWeight: '600'}}>
-            My Transactions
-          </Text>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={{paddingBottom: 50}}>
+            <Text
+              style={{
+                fontSize: 18,
+                color: APP_COLORS.BLACK,
+                fontWeight: '600',
+              }}>
+              Wallet Transactions
+            </Text>
+            {transactions.map((item, index) => (
+              <View
+                key={index}
+                style={[
+                  viewFlexSpace,
+                  {
+                    marginVertical: 10,
+                    borderBottomColor: APP_COLORS.BORDER_COLOR,
+                    borderBottomWidth: 1,
+                    paddingBottom: 5,
+                  },
+                ]}>
+                <View>
+                  <Icon2
+                    size={25}
+                    name="layers-triple-outline"
+                    color={APP_COLORS.TEXT_GRAY}
+                  />
+                </View>
+                <View style={{flex: 1, marginHorizontal: 10}}>
+                  <Text
+                    style={{
+                      color:
+                        item.transactionType === 'deposit'
+                          ? APP_COLORS.GREEN
+                          : APP_COLORS.RED,
+                    }}>
+                    {item.transactionType.toUpperCase()}
+                  </Text>
+                  <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+                    {new Date(item.createdAt).toUTCString()}
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={{
+                      textAlign: 'right',
+                      color:
+                        item.paymentStatus === 'SUCCESS'
+                          ? APP_COLORS.GREEN
+                          : item.paymentStatus === 'PENDING'
+                          ? APP_COLORS.WARNING
+                          : APP_COLORS.RED,
+                    }}>
+                    {currencyFormatter(item.amount)} Rwf
+                  </Text>
+                  <Text
+                    style={{
+                      color:
+                        item.paymentStatus === 'SUCCESS'
+                          ? APP_COLORS.GREEN
+                          : item.paymentStatus === 'PENDING'
+                          ? APP_COLORS.WARNING
+                          : APP_COLORS.RED,
+                    }}>
+                    {item.paymentStatus}
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </View>
         </ScrollView>
         <View
           style={{
@@ -119,7 +186,7 @@ const Wallet = () => {
         </View>
       </View>
       <Deposit showModal={showModal} setShowModal={setShowModal} />
-      {/* <FullPageLoader isLoading={isLoading} /> */}
+      <FullPageLoader isLoading={isLoading} />
     </View>
   );
 };

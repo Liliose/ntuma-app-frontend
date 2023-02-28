@@ -65,8 +65,9 @@ const Deposit = ({showModal, setShowModal}: IDepositProps) => {
     } else {
       setErrors({...errors, paymentPhoneNumber: ''});
     }
+    setIsSubmitting(true);
     axios
-      .post(app.BACKEND_URL + '/wallet/', setHeaders(token))
+      .post(app.BACKEND_URL + '/wallet/', state, setHeaders(token))
       .then(res => {
         setShowModal(false);
         setIsSubmitting(false);

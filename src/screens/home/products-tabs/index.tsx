@@ -37,9 +37,9 @@ const Products = ({route, navigation}: IProductsProps) => {
     undefined,
   );
 
-  useEffect(() => {
-    loadBasicData();
-  }, []);
+  // useEffect(() => {
+  //   loadBasicData();
+  // }, []);
 
   useEffect(() => {
     if (!validateSelectedMarket(markets, selectedMarket)) {

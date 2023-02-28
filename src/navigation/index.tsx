@@ -40,11 +40,13 @@ import OrderPreview from '../screens/orders/preview';
 import FailedOrders from '../screens/orders/failed-orders';
 import CompletedOrders from '../screens/orders/completed-orders';
 import Wallet from '../screens/wallet';
+import {fetchWalletTransactions} from '../actions/walletTransactions';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
 function Navigation() {
+  const dispatch = useDispatch();
   const loadData = useLoadBasiData();
   useEffect(() => {
     loadData();
@@ -439,6 +441,13 @@ function Navigation() {
           component={Wallet}
           options={({route, navigation}: INavigationProp) => ({
             title: 'My Wallet',
+            headerRight: () => (
+              <Pressable onPress={() => dispatch(fetchWalletTransactions())}>
+                <View style={{paddingRight: 10}}>
+                  <Icon5 name="reload1" size={25} color={APP_COLORS.WHITE} />
+                </View>
+              </Pressable>
+            ),
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
