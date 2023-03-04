@@ -62,8 +62,15 @@ const ProductTabsHeader = ({navigation}: INavigationProp) => {
             <Icon2 name="angle-down" size={30} color={APP_COLORS.WHITE} />
           </View>
         </Pressable>
-        <View>
-          <Pressable style={{flex: 1, marginHorizontal: 10}}>
+        <View style={[viewFlexSpace]}>
+          <Pressable
+            onPress={() => navigation.navigate('Notifications')}
+            style={{marginHorizontal: 10}}>
+            <View>
+              <Icon2 name="bell" size={25} color={APP_COLORS.WHITE} />
+            </View>
+          </Pressable>
+          <Pressable style={{marginHorizontal: 10}}>
             <View>
               <Icon2 name="search" size={25} color={APP_COLORS.WHITE} />
             </View>

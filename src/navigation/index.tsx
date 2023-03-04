@@ -42,6 +42,7 @@ import CompletedOrders from '../screens/orders/completed-orders';
 import Wallet from '../screens/wallet';
 import {fetchWalletTransactions} from '../actions/walletTransactions';
 import DishDetails from '../screens/home/dish-details';
+import Notifications from '../screens/notifications';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -468,7 +469,7 @@ function Navigation() {
           options={({route, navigation}: INavigationProp) => ({
             title: 'Details',
             headerRight: () => (
-              <Pressable>
+              <Pressable onPress={() => navigation.navigate('Notifications')}>
                 <View style={{paddingRight: 10}}>
                   <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
                 </View>
@@ -479,6 +480,25 @@ function Navigation() {
             },
             headerShadowVisible: false,
             headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="Notifications"
+          component={Notifications}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Notifications',
+            headerRight: () => (
+              <Pressable>
+                <View style={{paddingRight: 10}}>
+                  <Text style={{color: APP_COLORS.WHITE}}>Clear All</Text>
+                </View>
+              </Pressable>
+            ),
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerShadowVisible: false,
             headerTintColor: APP_COLORS.WHITE,
           })}
         />
