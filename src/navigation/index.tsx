@@ -166,7 +166,7 @@ function Navigation() {
         <Tab.Screen
           name="Cart"
           component={Cart}
-          options={
+          options={({route, navigation}) =>
             cart.length > 0
               ? {
                   tabBarBadge: cart.length,
@@ -178,7 +178,8 @@ function Navigation() {
                   headerStyle: {backgroundColor: APP_COLORS.MAROON},
                   headerTitleAlign: 'center',
                   headerRight: () => (
-                    <Pressable>
+                    <Pressable
+                      onPress={() => navigation.navigate('Notifications')}>
                       <View style={{marginRight: 15}}>
                         <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
                       </View>
