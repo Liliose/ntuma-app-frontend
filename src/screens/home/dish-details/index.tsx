@@ -4,6 +4,7 @@ import {
   ICartItem,
   IDish,
   INavigationPropWithRouteRequired,
+  IProduct,
 } from '../../../../interfaces';
 import {APP_COLORS} from '../../../constants/colors';
 import {
@@ -19,6 +20,7 @@ import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../reducers';
 import {addCartItem} from '../../../actions/cart';
+import ProductPreview from '../products-tabs/preview';
 
 const initialPrice: ICartItem = {
   price: 0,
@@ -35,6 +37,14 @@ const DishDetails = ({route, navigation}: INavigationPropWithRouteRequired) => {
   const {prices} = useSelector((state: RootState) => state.productPrices);
   const [productPrices, setProductPrices] = useState<ICartItem[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | undefined>(
+    undefined,
+  );
+  const [selectedCartItem, setSelectedCartItem] = useState<
+    ICartItem | undefined
+  >(undefined);
+
   const handleProductPriceChange = (cartItem: ICartItem) => {
     const index = productPrices.findIndex(
       item => item.productId === cartItem.productId,
@@ -180,11 +190,13 @@ const DishDetails = ({route, navigation}: INavigationPropWithRouteRequired) => {
                 navigation={navigation}
                 dishProduct={item}
                 handleProductPriceChange={handleProductPriceChange}
+                setSelectedProduct={setSelectedProduct}
+                setShowModal={setShowModal}
               />
             ))}
           </ScrollView>
           <View style={{padding: 10}}>
-            <Text style={{color: APP_COLORS.BLACK}}>
+            <Text style={{color: APP_COLORS.BLACK, textAlign: 'center'}}>
               Total: {currencyFormatter(totalPrice)} Rwf
             </Text>
           </View>
@@ -195,6 +207,13 @@ const DishDetails = ({route, navigation}: INavigationPropWithRouteRequired) => {
           </Pressable>
         </View>
       </View>
+      <ProductPreview
+        showModal={showModal}
+        setShowModal={setShowModal}
+        product={selectedProduct}
+        navigation={navigation}
+        selectedCartItem={selectedCartItem}
+      />
     </View>
   );
 };

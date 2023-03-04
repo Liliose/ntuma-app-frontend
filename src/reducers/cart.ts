@@ -12,7 +12,8 @@ const cartReducer = (state = initialState, action: IAction) => {
     case ADD_CART_ITEM: {
       const payload: ICartItem = action.payload;
       const index = state.cart.findIndex(
-        item => item.productId === payload.productId,
+        item =>
+          item.productId === payload.productId && item.ppId === payload.ppId,
       );
       if (index >= 0) {
         let newCart = state.cart;

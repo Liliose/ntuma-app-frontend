@@ -17,6 +17,8 @@ import Icon from 'react-native-vector-icons/Entypo';
 interface IDishProductItemProps extends INavigationProp {
   dishProduct: IDishProduct;
   handleProductPriceChange: any;
+  setSelectedProduct: any;
+  setShowModal: any;
 }
 
 const initialPrice: ICartItem = {
@@ -31,6 +33,8 @@ const DishProductItem = ({
   navigation,
   dishProduct,
   handleProductPriceChange,
+  setShowModal,
+  setSelectedProduct,
 }: IDishProductItemProps) => {
   const {products} = useSelector((state: RootState) => state.products);
   const {prices} = useSelector((state: RootState) => state.productPrices);
@@ -95,11 +99,17 @@ const DishProductItem = ({
     <View style={{marginVertical: 10}}>
       <WhiteCard style={{padding: 10}}>
         <View style={[viewFlexSpace]}>
-          <Image
-            source={{uri: app.FILE_URL + product?.image}}
-            style={{width: 50, height: 50, borderRadius: 100}}
-            resizeMode="contain"
-          />
+          <Pressable
+            onPress={() => {
+              setSelectedProduct(product);
+              setShowModal(true);
+            }}>
+            <Image
+              source={{uri: app.FILE_URL + product?.image}}
+              style={{width: 50, height: 50, borderRadius: 100}}
+              resizeMode="contain"
+            />
+          </Pressable>
           <View style={{flex: 1, marginHorizontal: 10}}>
             <Text style={{color: APP_COLORS.BLACK}}>{product?.name}</Text>
             <Text style={{color: APP_COLORS.TEXT_GRAY}}>
