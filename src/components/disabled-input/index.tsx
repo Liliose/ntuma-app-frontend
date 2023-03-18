@@ -8,6 +8,7 @@ interface IDisabledInputProps {
   placeholder?: string;
   onChangeText: any;
   style?: any;
+  maxLength?: number;
   value: string;
 }
 const DisabledInput = (props: IDisabledInputProps) => {
@@ -32,6 +33,7 @@ const DisabledInput = (props: IDisabledInputProps) => {
           onChangeText={props.onChangeText}
           value={props.value}
           placeholder={props.placeholder}
+          maxLength={props.maxLength}
         />
       )}
     </>

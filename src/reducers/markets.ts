@@ -4,12 +4,16 @@ import {
   SET_IS_LOADING_MARKETS,
   RESET_MARKETS,
   SET_SELECTED_MARKET,
+  SET_IS_HARD_RELOADING_MARKETS,
+  SET_LOADING_MARKETS_ERROR,
 } from '../actions/markets';
 
 const initialState: IMarketsReducer = {
   markets: [],
   selectedMarket: undefined,
   isLoading: false,
+  hardReloading: false,
+  loadingError: '',
 };
 
 const marketsReducer = (state = initialState, action: IAction) => {
@@ -20,6 +24,10 @@ const marketsReducer = (state = initialState, action: IAction) => {
       return {...state, selectedMarket: action.payload as IMarket};
     case SET_IS_LOADING_MARKETS:
       return {...state, isLoading: action.payload as boolean};
+    case SET_IS_HARD_RELOADING_MARKETS:
+      return {...state, hardReloading: action.payload as boolean};
+    case SET_LOADING_MARKETS_ERROR:
+      return {...state, loadingError: action.payload as string};
     case RESET_MARKETS:
       return initialState;
     default:

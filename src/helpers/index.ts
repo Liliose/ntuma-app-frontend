@@ -58,6 +58,16 @@ export const toastMessage = (type: TOAST_MESSAGE_TYPES, message: string) => {
   }
 };
 
+export const returnErroMessage = (error: any) => {
+  if (error?.response?.data?.msg) {
+    return error.response.data.msg;
+  } else if (error.message) {
+    return error.message;
+  } else {
+    return error;
+  }
+};
+
 export const errorHandler = (error: any) => {
   if (error?.response?.data?.msg) {
     toastMessage(TOAST_MESSAGE_TYPES.ERROR, error.response.data.msg);

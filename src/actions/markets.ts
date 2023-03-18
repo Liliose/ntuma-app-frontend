@@ -1,12 +1,15 @@
 import axios from 'axios';
 import {IMarket} from '../../interfaces';
 import {app} from '../constants/app';
-import {errorHandler} from '../helpers';
+import {errorHandler, returnErroMessage} from '../helpers';
 
 export const SET_MARKETS = 'SET_MARKETS';
 export const SET_IS_LOADING_MARKETS = 'SET_IS_LOADING_MARKETS';
 export const SET_SELECTED_MARKET = 'SET_SELECTED_MARKET';
 export const RESET_MARKETS = 'RESET_MARKETS';
+
+export const SET_LOADING_MARKETS_ERROR = 'SET_LOADING_MARKETS_ERROR';
+export const SET_IS_HARD_RELOADING_MARKETS = 'SET_IS_HARD_RELOADING_MARKETS';
 
 interface IAction {
   type: string;
@@ -25,13 +28,25 @@ export const setIsLoadingMarkets = (value: boolean): IAction => ({
   payload: value,
 });
 
+export const setIsHardReloadingMarkets = (value: boolean): IAction => ({
+  type: SET_IS_HARD_RELOADING_MARKETS,
+  payload: value,
+});
+
+export const setLoadingMarketsError = (value: string): IAction => ({
+  type: SET_LOADING_MARKETS_ERROR,
+  payload: value,
+});
+
 export const resetMarkets = () => ({type: RESET_MARKETS});
 
 export const fetchMarkets = (): any => (dispatch: any, getState: any) => {
   dispatch(setIsLoadingMarkets(true));
+  dispatch(setLoadingMarketsError(''));
   axios
     .get(app.BACKEND_URL + '/markets/')
     .then(res => {
+      dispatch(setIsHardReloadingMarkets(false));
       dispatch(setIsLoadingMarkets(false));
       dispatch({
         type: SET_MARKETS,
@@ -39,7 +54,10 @@ export const fetchMarkets = (): any => (dispatch: any, getState: any) => {
       });
     })
     .catch(error => {
+      const err = returnErroMessage(error);
+      dispatch(setIsHardReloadingMarkets(false));
       dispatch(setIsLoadingMarkets(false));
-      errorHandler(error);
+      // errorHandler(error);
+      dispatch(setLoadingMarketsError(err));
     });
 };

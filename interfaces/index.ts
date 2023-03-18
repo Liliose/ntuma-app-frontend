@@ -66,6 +66,8 @@ export interface IMarketsReducer {
   markets: IMarket[];
   isLoading: boolean;
   selectedMarket: IMarket | undefined;
+  hardReloading: boolean;
+  loadingError: string;
 }
 export interface IDeliveryFeesReducer {
   fees: IDeliveryFee[];
@@ -213,6 +215,14 @@ export interface IOrder {
   transactionId: string;
   paymentStatus: PAYMENT_STATUS_ENUM;
   failureReason: string;
+  agentId: number | null;
+  riderId: number | null;
+  confirmationRiderId: number | null;
+  isRiderConfirmed: boolean;
+  areAllSuppliersPaid: boolean;
+  acceptedAt: string;
+  sentAt: string;
+  deliveredAt: string;
   createdAt: string;
   updatedAt: string;
 }
