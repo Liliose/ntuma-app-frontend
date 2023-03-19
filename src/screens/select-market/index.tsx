@@ -84,7 +84,8 @@ const SelectMarket = ({navigation}: INavigationProp) => {
         contentContainerStyle={{flexGrow: 1}}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
+        }
+        showsVerticalScrollIndicator={false}>
         <View style={{padding: 10, flex: 1, backgroundColor: APP_COLORS.WHITE}}>
           {isLoading && markets.length === 0 ? (
             <Loader />

@@ -78,6 +78,8 @@ export interface ICategoriesReducer {
   categories: ICategory[];
   isLoading: boolean;
   selectedCategory: ICategory | undefined;
+  hardReloading: boolean;
+  loadingError: string;
 }
 export interface IDishesReducer {
   dishes: IDish[];

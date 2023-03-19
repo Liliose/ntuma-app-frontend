@@ -6,8 +6,11 @@ import NotFound from '../../components/not-found';
 const Notifications = () => {
   return (
     <View style={{flex: 1, backgroundColor: APP_COLORS.MAROON}}>
-      {/* <Text>Notifications</Text> */}
-      <NotFound title="No data found" textColor={APP_COLORS.WHITE} />
+      <NotFound
+        title="No data found"
+        textColor={APP_COLORS.WHITE}
+        lightImage={true}
+      />
     </View>
   );
 };
