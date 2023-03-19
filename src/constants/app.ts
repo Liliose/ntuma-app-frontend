@@ -1,7 +1,7 @@
 import {IAppConfig} from '../../interfaces';
 
-const APP_MODE = 'dev';
-// const APP_MODE = 'production';
+// const APP_MODE = 'dev';
+const APP_MODE = 'production';
 const CONFIG = {
   dev: {
     BACKEND_URL: 'http://192.168.43.3:8080/api',
@@ -12,7 +12,7 @@ const CONFIG = {
   },
   production: {
     BACKEND_URL: 'http://apis.ntuma.rw/api',
-    FILE_URL: 'http://apis.ntuma.rw/api/uploads/',
+    FILE_URL: 'http://apis.ntuma.rw/uploads/',
   },
 };
 
