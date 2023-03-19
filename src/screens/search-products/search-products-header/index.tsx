@@ -6,14 +6,16 @@ import {RootState} from '../../../reducers';
 import {setMarketsSearchResults} from '../../../actions/markets';
 import {APP_COLORS} from '../../../constants/colors';
 import {
-  resetProducts,
+  setProductsSearchKeyword,
   setProductsSearchResults,
 } from '../../../actions/products';
 import {addRecentSearchItem} from '../../../actions/recentSearches';
 
 const SearchProductsHeader = () => {
   const dispatch = useDispatch();
-  const {products} = useSelector((state: RootState) => state.products);
+  const {products, searchKeyword} = useSelector(
+    (state: RootState) => state.products,
+  );
   const inputRef = useRef<TextInput>(null);
 
   const [keyword, setKeyword] = useState<string>('');
@@ -22,12 +24,28 @@ const SearchProductsHeader = () => {
     inputRef?.current && inputRef.current.focus();
     dispatch(setProductsSearchResults(products));
   }, []);
+
+  useEffect(() => {
+    let sub = true;
+    if (sub) {
+      setKeyword(searchKeyword);
+      if (searchKeyword.trim().length === 0) {
+        dispatch(setProductsSearchResults(products));
+      } else {
+        const results = products.filter(item =>
+          item.name.toLowerCase().includes(searchKeyword.toLowerCase()),
+        );
+        dispatch(setProductsSearchResults(results));
+      }
+    }
+    return () => {
+      sub = false;
+    };
+  }, [searchKeyword]);
+
   const handleSearch = () => {
     if (keyword.trim().length > 0) {
-      const results = products.filter(item =>
-        item.name.toLowerCase().includes(keyword.toLowerCase()),
-      );
-      dispatch(setProductsSearchResults(results));
+      dispatch(setProductsSearchKeyword(keyword));
       dispatch(addRecentSearchItem(keyword));
     } else {
       dispatch(setProductsSearchResults(products));

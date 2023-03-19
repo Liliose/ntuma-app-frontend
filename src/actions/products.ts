@@ -5,6 +5,7 @@ import {errorHandler, returnErroMessage} from '../helpers';
 
 export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const SET_PRODUCTS_SEARCH_RESULTS = 'SET_PRODUCTS_SEARCH_RESULTS';
+export const SET_PRODUCTS_SEARCH_KEYWORD = 'SET_PRODUCTS_SEARCH_KEYWORD';
 export const SET_IS_LOADING_PRODUCTS = 'SET_IS_LOADING_PRODUCTS';
 export const RESET_PRODUCTS = 'RESET_PRODUCTS';
 
@@ -33,6 +34,11 @@ export const setIsHardReLoadingProducts = (value: boolean): IAction => ({
 });
 export const setLoadingProductsError = (value: string): IAction => ({
   type: SET_LOADING_PRODUCTS_ERROR,
+  payload: value,
+});
+
+export const setProductsSearchKeyword = (value: string): IAction => ({
+  type: SET_PRODUCTS_SEARCH_KEYWORD,
   payload: value,
 });
 

@@ -148,6 +148,7 @@ export interface IProductsReducer {
   isLoading: boolean;
   hardReloading: boolean;
   loadingError: string;
+  searchKeyword: string;
 }
 
 export interface IWalletTransactionsReducer {

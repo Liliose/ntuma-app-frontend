@@ -173,7 +173,6 @@ const ProductPreview = ({
           style={{
             borderTopLeftRadius: 50,
             borderTopRightRadius: 50,
-            zIndex: 1,
           }}
         />
         <KeyboardAwareScrollView>
