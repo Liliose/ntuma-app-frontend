@@ -170,7 +170,11 @@ const DishDetails = ({route, navigation}: INavigationPropWithRouteRequired) => {
               <Text style={{color: APP_COLORS.TEXT_GRAY}}>
                 {dish.products.length} Ingredients
               </Text>
-              <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
+              <View
+                style={[
+                  viewFlexSpace,
+                  {alignItems: 'flex-start', marginTop: 5},
+                ]}>
                 <Icon
                   name="info-with-circle"
                   size={25}

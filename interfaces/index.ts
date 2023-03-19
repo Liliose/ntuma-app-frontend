@@ -102,6 +102,8 @@ export interface ICategoriesReducer {
 export interface IDishesReducer {
   dishes: IDish[];
   isLoading: boolean;
+  hardReloading: boolean;
+  loadingError: string;
 }
 export interface ICategory {
   id: number;
