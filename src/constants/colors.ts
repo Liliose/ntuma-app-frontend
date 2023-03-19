@@ -7,6 +7,7 @@ export const APP_COLORS = {
   PRODUCT_CARD_BORDER: 'rgba(170, 168, 168, 1)',
   DARK_GRAY: '#D9D9D9',
   GRAY_BG: '#F5F5F5',
+  CHAT_BG_GRAY: '#EDEDE9',
   GREEN: '#5cb85c',
   RED: '#df4759',
   WARNING: '#f0ad4e',

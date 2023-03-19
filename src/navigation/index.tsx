@@ -48,6 +48,10 @@ import SearchMarketsHeader from '../screens/search-markets/search-markets-header
 import SearchProducts from '../screens/search-products';
 import SearchProductsHeader from '../screens/search-products/search-products-header';
 import {setShowClearAllNotificatonsConfirmation} from '../actions/notifications';
+import ChattRoom from '../screens/chat-room';
+import ChattRoomHeader from '../screens/chat-room/header';
+import ViewAndSendSelectedFile from '../screens/chat-room/view-and-send-selected-file';
+import ImagePreview from '../screens/chat-room/image-preview';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -245,6 +249,10 @@ function Navigation() {
           name="Messages"
           component={Messages}
           options={{
+            headerShown: true,
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+            headerStyle: {backgroundColor: APP_COLORS.MAROON},
             tabBarIcon: ({focused, color, size}) => {
               return <Icon2 name="message" color={color} size={size} />;
             },
@@ -514,6 +522,45 @@ function Navigation() {
               backgroundColor: APP_COLORS.MAROON,
             },
             headerShadowVisible: false,
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="ChatRoom"
+          component={ChattRoom}
+          options={({route, navigation}: INavigationProp) => ({
+            title: '',
+            headerTitle: () => (
+              <ChattRoomHeader route={route as any} navigation={navigation} />
+            ),
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="ImageBeforeSendPreview"
+          component={ViewAndSendSelectedFile}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Send File',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="ImagePreview"
+          component={ImagePreview}
+          options={({route, navigation}: INavigationProp) => ({
+            title: new Date(route?.params?.message?.createdAt).toUTCString(),
+            headerStyle: {
+              backgroundColor: APP_COLORS.BLACK,
+            },
+            headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
           })}
         />

@@ -16,6 +16,20 @@ export interface IRecentSearchesReducer {
   searches: string[];
 }
 
+export interface IClient {
+  agentId: number;
+  names: string;
+  email: string;
+  phone: string;
+  image: string;
+}
+
+export interface IclientsReducer {
+  clients: IClient[];
+  isLoading: boolean;
+  loadingError: string;
+}
+
 export interface IWalletTransaction {
   id: number;
   userId: number;
@@ -253,6 +267,43 @@ export interface INotificationsReducer {
   notifications: INotificaton[];
   isLoading: boolean;
   showConfirmation: boolean;
+  hardReloading: boolean;
+  loadingError: string;
+}
+
+export enum MESSAGE_TYPES_ENUM {
+  TEXT = 'TEXT',
+  IMAGE = 'IMAGE',
+}
+
+export enum MESSAGE_STATUS_ENUM {
+  SENT = 'SENT',
+  DELIVERED = 'DELIVERED',
+  READ = 'READ',
+}
+
+export enum SENDER_TYPE_ENUM {
+  'AGENT' = 'agent',
+  'CLIENT' = 'client',
+}
+
+export interface IMessage {
+  id: number;
+  agentId: number;
+  userId: number;
+  senderId: number;
+  senderType: SENDER_TYPE_ENUM;
+  messageType: MESSAGE_TYPES_ENUM;
+  textMessage: string;
+  file: string;
+  status: MESSAGE_STATUS_ENUM;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IMessagesReducer {
+  messages: IMessage[];
+  isLoading: boolean;
   hardReloading: boolean;
   loadingError: string;
 }

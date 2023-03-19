@@ -13,6 +13,8 @@ import walletTransactions from './walletTransactions';
 import dishes from './dishes';
 import recentSearches from './recentSearches';
 import notifications from './notifications';
+import clients from './clients';
+import messages from './messages';
 const rootReducer = combineReducers({
   user,
   markets,
@@ -28,6 +30,8 @@ const rootReducer = combineReducers({
   notifications,
   recentSearches,
   dishes,
+  clients,
+  messages,
 });
 
 export default rootReducer;
