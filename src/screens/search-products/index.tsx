@@ -70,27 +70,34 @@ const SearchProducts = ({navigation}: INavigationProp) => {
           }}>
           Search Results for '{searchKeyword}'
         </Text>
-        {productsSearchResults.map((item, index) => (
-          <Pressable
-            style={{marginBottom: 10}}
-            key={index}
-            onPress={() => {
-              setSelectedProduct(item);
-              setShowModal(true);
-            }}>
-            <View style={[viewFlexSpace]}>
-              <ImageLoader
-                url={app.FILE_URL + item.image}
-                width={50}
-                height={50}
-                style={{borderRadius: 100}}
-              />
-              <Text style={{flex: 1, color: APP_COLORS.BLACK, marginLeft: 10}}>
-                {item.name}
-              </Text>
-            </View>
-          </Pressable>
-        ))}
+        {productsSearchResults.length === 0 ? (
+          <Text style={{color: APP_COLORS.TEXT_GRAY, marginTop: 10}}>
+            No results found.
+          </Text>
+        ) : (
+          productsSearchResults.map((item, index) => (
+            <Pressable
+              style={{marginBottom: 10}}
+              key={index}
+              onPress={() => {
+                setSelectedProduct(item);
+                setShowModal(true);
+              }}>
+              <View style={[viewFlexSpace]}>
+                <ImageLoader
+                  url={app.FILE_URL + item.image}
+                  width={50}
+                  height={50}
+                  style={{borderRadius: 100}}
+                />
+                <Text
+                  style={{flex: 1, color: APP_COLORS.BLACK, marginLeft: 10}}>
+                  {item.name}
+                </Text>
+              </View>
+            </Pressable>
+          ))
+        )}
       </ScrollView>
       <ProductPreview
         setShowModal={setShowModal}
