@@ -52,6 +52,9 @@ import ChattRoom from '../screens/chat-room';
 import ChattRoomHeader from '../screens/chat-room/header';
 import ViewAndSendSelectedFile from '../screens/chat-room/view-and-send-selected-file';
 import ImagePreview from '../screens/chat-room/image-preview';
+import UpdateUserInfo from '../screens/update-user-info';
+import ChangePassword from '../screens/change-password';
+import AccountSettings from '../screens/account-settings';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -559,6 +562,42 @@ function Navigation() {
             title: new Date(route?.params?.message?.createdAt).toUTCString(),
             headerStyle: {
               backgroundColor: APP_COLORS.BLACK,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="AccountSettings"
+          component={AccountSettings}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Account Settings',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="UpdateUserInfo"
+          component={UpdateUserInfo}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Update Personal Information',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="ChangePassword"
+          component={ChangePassword}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'ChangePassword',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
