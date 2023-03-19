@@ -38,6 +38,7 @@ import {
   addFavouriteItem,
   removeFavouriteItem,
 } from '../../../../actions/favourites';
+import ImageLoader from '../../../../components/image-loader';
 
 const {width} = Dimensions.get('window');
 
@@ -165,14 +166,14 @@ const ProductPreview = ({
           marginTop: 30,
           position: 'relative',
         }}>
-        <Image
-          source={{uri: app.FILE_URL + product?.image}}
-          resizeMode="contain"
+        <ImageLoader
+          url={app.FILE_URL + product?.image}
+          width={width}
+          height={230}
           style={{
-            width,
-            height: 230,
             borderTopLeftRadius: 50,
             borderTopRightRadius: 50,
+            zIndex: 1,
           }}
         />
         <KeyboardAwareScrollView>
@@ -342,7 +343,7 @@ const ProductPreview = ({
                           quantity: 1,
                         });
                       }}>
-                      <View style={[viewFlexSpace]}>
+                      <View style={[viewFlexSpace, {paddingHorizontal: 10}]}>
                         <Text
                           style={{
                             color: APP_COLORS.BLACK,
@@ -355,7 +356,7 @@ const ProductPreview = ({
                       </View>
                     </Pressable>
                   ) : (
-                    <View>
+                    <View style={{paddingHorizontal: 10}}>
                       <Text
                         style={{
                           color: APP_COLORS.BLACK,
@@ -386,11 +387,13 @@ const ProductPreview = ({
               <View style={{marginVertical: 10}}>
                 <Text
                   style={{
-                    fontWeight: 'bold',
-                    fontSize: 20,
+                    fontWeight: '600',
+                    fontSize: 16,
                     color: APP_COLORS.BLACK,
+                    textAlign: 'center',
                   }}>
-                  Total : {currencyFormatter(price.price * price.quantity)} RWF
+                  Total Amount:{' '}
+                  {currencyFormatter(price.price * price.quantity)} RWF
                 </Text>
               </View>
               <View style={{marginVertical: 10}}>
@@ -412,7 +415,7 @@ const ProductPreview = ({
             </ScrollView>
           </View>
         </KeyboardAwareScrollView>
-        <View style={{position: 'absolute', top: 0, right: 0}}>
+        <View style={{position: 'absolute', top: 0, right: 0, zIndex: 2}}>
           <Pressable onPress={() => setShowModal(false)}>
             <View
               style={{

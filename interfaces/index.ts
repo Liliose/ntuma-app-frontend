@@ -141,6 +141,8 @@ export interface IProductPrice {
 export interface IProductsReducer {
   products: IProduct[];
   isLoading: boolean;
+  hardReloading: boolean;
+  loadingError: string;
 }
 
 export interface IWalletTransactionsReducer {
