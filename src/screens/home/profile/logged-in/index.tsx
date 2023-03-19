@@ -130,6 +130,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
               right: 0,
               marginTop: 60,
               marginRight: -25,
+              zIndex: 2,
             }}>
             <Pressable onPress={() => handleDocumentSelect()}>
               <View
