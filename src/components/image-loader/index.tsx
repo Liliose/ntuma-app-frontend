@@ -1,4 +1,10 @@
-import {View, ActivityIndicator, Image} from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  Image,
+  ImageProps,
+  ActivityIndicatorProps,
+} from 'react-native';
 import React, {useState} from 'react';
 import {viewFlexCenter} from '../../constants/styles';
 
@@ -6,11 +12,11 @@ interface IImageLoaderProps {
   url: string;
   width: number;
   height: number;
-  style?: any;
+  style?: ImageProps;
   isBanner?: boolean;
   showLoader?: true;
   loaderWidth?: number;
-  loaderStyle?: any;
+  loaderStyle?: ActivityIndicatorProps;
 }
 const ImageLoader = ({
   url,

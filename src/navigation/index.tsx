@@ -45,6 +45,8 @@ import DishDetails from '../screens/home/dish-details';
 import Notifications from '../screens/notifications';
 import SearchMarkets from '../screens/search-markets';
 import SearchMarketsHeader from '../screens/search-markets/search-markets-header';
+import SearchProducts from '../screens/search-products';
+import SearchProductsHeader from '../screens/search-products/search-products-header';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -336,7 +338,6 @@ function Navigation() {
           name="SearchMarkets"
           component={SearchMarkets}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Select Market',
             headerTitle: () => <SearchMarketsHeader />,
             headerTintColor: APP_COLORS.WHITE,
             headerStyle: {backgroundColor: APP_COLORS.MAROON},
@@ -492,6 +493,18 @@ function Navigation() {
                 </View>
               </Pressable>
             ),
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerShadowVisible: false,
+            headerTintColor: APP_COLORS.WHITE,
+          })}
+        />
+        <Stack.Screen
+          name="SearchProducts"
+          component={SearchProducts}
+          options={({route, navigation}: INavigationProp) => ({
+            headerTitle: () => <SearchProductsHeader />,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },

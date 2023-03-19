@@ -109,7 +109,9 @@ const ProductTabsHeader = ({navigation}: INavigationProp) => {
                 <Icon2 name="bell" size={25} color={APP_COLORS.WHITE} />
               </View>
             </Pressable>
-            <Pressable style={{marginHorizontal: 10}}>
+            <Pressable
+              style={{marginHorizontal: 10}}
+              onPress={() => navigation.navigate('SearchProducts')}>
               <View>
                 <Icon2 name="search" size={25} color={APP_COLORS.WHITE} />
               </View>

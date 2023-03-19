@@ -11,6 +11,7 @@ import deliveryFees from './deliveryFees';
 import orders from './orders';
 import walletTransactions from './walletTransactions';
 import dishes from './dishes';
+import recentSearches from './recentSearches';
 const rootReducer = combineReducers({
   user,
   markets,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   deliveryFees,
   orders,
   walletTransactions,
+  recentSearches,
   dishes,
 });
 

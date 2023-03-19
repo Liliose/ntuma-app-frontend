@@ -5,10 +5,12 @@ import {
   RESET_PRODUCTS,
   SET_IS_HARD_RELOADING_PRODUCTS,
   SET_LOADING_PRODUCTS_ERROR,
+  SET_PRODUCTS_SEARCH_RESULTS,
 } from '../actions/products';
 
 const initialState: IProductsReducer = {
   products: [],
+  productsSearchResults: [],
   isLoading: false,
   hardReloading: false,
   loadingError: '',
@@ -18,6 +20,8 @@ const productReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_PRODUCTS:
       return {...state, products: action.payload as IProduct[]};
+    case SET_PRODUCTS_SEARCH_RESULTS:
+      return {...state, productsSearchResults: action.payload as IProduct[]};
     case SET_IS_LOADING_PRODUCTS:
       return {...state, isLoading: action.payload as boolean};
     case SET_IS_HARD_RELOADING_PRODUCTS:

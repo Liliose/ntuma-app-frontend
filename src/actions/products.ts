@@ -4,6 +4,7 @@ import {app} from '../constants/app';
 import {errorHandler, returnErroMessage} from '../helpers';
 
 export const SET_PRODUCTS = 'SET_PRODUCTS';
+export const SET_PRODUCTS_SEARCH_RESULTS = 'SET_PRODUCTS_SEARCH_RESULTS';
 export const SET_IS_LOADING_PRODUCTS = 'SET_IS_LOADING_PRODUCTS';
 export const RESET_PRODUCTS = 'RESET_PRODUCTS';
 
@@ -14,9 +15,13 @@ interface IAction {
   type: string;
   payload: any;
 }
-export const setProducts = (categories: IProduct[]): IAction => ({
+export const setProducts = (products: IProduct[]): IAction => ({
   type: SET_PRODUCTS,
-  payload: categories,
+  payload: products,
+});
+export const setProductsSearchResults = (products: IProduct[]): IAction => ({
+  type: SET_PRODUCTS_SEARCH_RESULTS,
+  payload: products,
 });
 export const setIsLoadingProducts = (value: boolean): IAction => ({
   type: SET_IS_LOADING_PRODUCTS,

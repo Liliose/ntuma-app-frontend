@@ -12,6 +12,10 @@ export interface IUser {
   userId: number;
 }
 
+export interface IRecentSearchesReducer {
+  searches: string[];
+}
+
 export interface IWalletTransaction {
   id: number;
   userId: number;
@@ -140,6 +144,7 @@ export interface IProductPrice {
 
 export interface IProductsReducer {
   products: IProduct[];
+  productsSearchResults: IProduct[];
   isLoading: boolean;
   hardReloading: boolean;
   loadingError: string;
