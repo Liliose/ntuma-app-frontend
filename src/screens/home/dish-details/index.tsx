@@ -21,6 +21,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../reducers';
 import {addCartItem} from '../../../actions/cart';
 import ProductPreview from '../products-tabs/preview';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const initialPrice: ICartItem = {
   price: 0,
@@ -157,7 +158,7 @@ const DishDetails = ({route, navigation}: INavigationPropWithRouteRequired) => {
 
         <View style={{padding: 20, flex: 1}}>
           <View style={[viewFlexSpace]}>
-            <View>
+            <View style={{flex: 1}}>
               <Text
                 style={{
                   color: APP_COLORS.BLACK,
@@ -169,9 +170,20 @@ const DishDetails = ({route, navigation}: INavigationPropWithRouteRequired) => {
               <Text style={{color: APP_COLORS.TEXT_GRAY}}>
                 {dish.products.length} Ingredients
               </Text>
+              <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
+                <Icon
+                  name="info-with-circle"
+                  size={25}
+                  style={{marginRight: 5}}
+                  color={APP_COLORS.GREEN}
+                />
+                <Text style={{color: APP_COLORS.GREEN, flex: 1}}>
+                  If quantity is zero(0), Product won't be added to cart.
+                </Text>
+              </View>
             </View>
             {dish.utubeLink.trim() !== '' && (
-              <View style={[viewFlexCenter]}>
+              <View style={[viewFlexCenter, {marginLeft: 10}]}>
                 <Image
                   source={require('../../../assets/youtube.png')}
                   style={{width: 40, height: 40}}
