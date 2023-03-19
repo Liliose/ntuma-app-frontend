@@ -47,6 +47,7 @@ import SearchMarkets from '../screens/search-markets';
 import SearchMarketsHeader from '../screens/search-markets/search-markets-header';
 import SearchProducts from '../screens/search-products';
 import SearchProductsHeader from '../screens/search-products/search-products-header';
+import {setShowClearAllNotificatonsConfirmation} from '../actions/notifications';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -199,7 +200,8 @@ function Navigation() {
                   headerStyle: {backgroundColor: APP_COLORS.MAROON},
                   headerTitleAlign: 'center',
                   headerRight: () => (
-                    <Pressable>
+                    <Pressable
+                      onPress={() => navigation.navigate('Notifications')}>
                       <View style={{marginRight: 15}}>
                         <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
                       </View>
@@ -487,7 +489,10 @@ function Navigation() {
           options={({route, navigation}: INavigationProp) => ({
             title: 'Notifications',
             headerRight: () => (
-              <Pressable>
+              <Pressable
+                onPress={() =>
+                  dispatch(setShowClearAllNotificatonsConfirmation(true))
+                }>
                 <View style={{paddingRight: 10}}>
                   <Text style={{color: APP_COLORS.WHITE}}>Clear All</Text>
                 </View>

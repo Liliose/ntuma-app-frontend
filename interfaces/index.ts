@@ -237,3 +237,22 @@ export interface IOrder {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface INotificaton {
+  id: number;
+  userId: number;
+  userType: string;
+  title: string;
+  message: string;
+  isViewed: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface INotificationsReducer {
+  notifications: INotificaton[];
+  isLoading: boolean;
+  showConfirmation: boolean;
+  hardReloading: boolean;
+  loadingError: string;
+}

@@ -15,6 +15,7 @@ import CartItem from './cart-item';
 import {currencyFormatter} from '../../../helpers';
 import ProductPreview from '../products-tabs/preview';
 import {ICartItem, INavigationProp, IProduct} from '../../../../interfaces';
+import NotFound from '../../../components/not-found';
 
 const Cart = ({navigation}: INavigationProp) => {
   const {cart} = useSelector((state: RootState) => state.cart);
@@ -90,12 +91,7 @@ const Cart = ({navigation}: INavigationProp) => {
           </View>
         </View>
       ) : (
-        <View style={[viewFlexCenter, {flex: 1}]}>
-          <Icon name="sad-tear" size={50} color={APP_COLORS.MAROON} />
-          <Text style={{marginTop: 10, color: APP_COLORS.MAROON}}>
-            Your cart is empty
-          </Text>
-        </View>
+        <NotFound title="Your cart is empty" />
       )}
       <ProductPreview
         showModal={showModal}
