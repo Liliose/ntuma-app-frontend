@@ -259,22 +259,6 @@ function Navigation() {
             },
           }}
         />
-
-        {/* <Tab.Screen
-              name="Peoples"
-              component={People}
-              options={{
-                tabBarIcon: ({focused, color, size}) => {
-                  return <Icon name="people" color={color} size={size} />;
-                },
-              }}
-              listeners={{
-                tabPress: e => {
-                  e.preventDefault();
-                  navigation.navigate('People');
-                },
-              }}
-            /> */}
       </Tab.Navigator>
     );
   };
