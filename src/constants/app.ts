@@ -11,8 +11,8 @@ const CONFIG = {
     // FILE_URL: 'http://172.31.34.64:8080/uploads/',
   },
   production: {
-    BACKEND_URL: 'https://health-monitoring-app.onrender.com/api',
-    FILE_URL: 'https://lawyersofhope.org.rw/assets/images/controller/uploads/',
+    BACKEND_URL: 'http://apis.ntuma.rw/api',
+    FILE_URL: 'http://apis.ntuma.rw/api/uploads/',
   },
 };
 
