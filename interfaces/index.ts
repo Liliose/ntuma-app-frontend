@@ -68,6 +68,7 @@ export interface IMarketsReducer {
   selectedMarket: IMarket | undefined;
   hardReloading: boolean;
   loadingError: string;
+  marketSearchResults: IMarket[];
 }
 export interface IDeliveryFeesReducer {
   fees: IDeliveryFee[];

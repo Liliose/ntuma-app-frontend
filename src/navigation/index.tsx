@@ -43,6 +43,8 @@ import Wallet from '../screens/wallet';
 import {fetchWalletTransactions} from '../actions/walletTransactions';
 import DishDetails from '../screens/home/dish-details';
 import Notifications from '../screens/notifications';
+import SearchMarkets from '../screens/search-markets';
+import SearchMarketsHeader from '../screens/search-markets/search-markets-header';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -323,9 +325,9 @@ function Navigation() {
           component={SelectMarket}
           options={({route, navigation}: INavigationProp) => ({
             headerRight: () => (
-              <>
+              <Pressable onPress={() => navigation.navigate('SearchMarkets')}>
                 <Icon3 name="search" size={25} color={APP_COLORS.WHITE} />
-              </>
+              </Pressable>
             ),
             headerRightContainerStyle: {paddingRight: 20},
             title: 'Select Market',
@@ -344,6 +346,16 @@ function Navigation() {
             headerLeftContainerStyle: {
               paddingHorizontal: 10,
             },
+          })}
+        />
+        <Stack.Screen
+          name="SearchMarkets"
+          component={SearchMarkets}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Select Market',
+            headerTitle: () => <SearchMarketsHeader />,
+            headerTintColor: APP_COLORS.WHITE,
+            headerStyle: {backgroundColor: APP_COLORS.MAROON},
           })}
         />
         <Stack.Screen

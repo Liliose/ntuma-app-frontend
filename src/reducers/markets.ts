@@ -6,10 +6,12 @@ import {
   SET_SELECTED_MARKET,
   SET_IS_HARD_RELOADING_MARKETS,
   SET_LOADING_MARKETS_ERROR,
+  SET_MARKET_SEARCH_RESULTS,
 } from '../actions/markets';
 
 const initialState: IMarketsReducer = {
   markets: [],
+  marketSearchResults: [],
   selectedMarket: undefined,
   isLoading: false,
   hardReloading: false,
@@ -19,7 +21,13 @@ const initialState: IMarketsReducer = {
 const marketsReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_MARKETS:
-      return {...state, markets: action.payload as IMarket[]};
+      return {
+        ...state,
+        markets: action.payload as IMarket[],
+        marketSearchResults: action.payload as IMarket[],
+      };
+    case SET_MARKET_SEARCH_RESULTS:
+      return {...state, marketSearchResults: action.payload as IMarket[]};
     case SET_SELECTED_MARKET:
       return {...state, selectedMarket: action.payload as IMarket};
     case SET_IS_LOADING_MARKETS:
