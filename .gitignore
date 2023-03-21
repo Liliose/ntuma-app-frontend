@@ -32,6 +32,8 @@ local.properties
 *.hprof
 .cxx/
 
+android/app/release
+
 # node.js
 #
 node_modules/
