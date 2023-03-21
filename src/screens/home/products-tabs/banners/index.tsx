@@ -1,6 +1,5 @@
 import {View, Linking, Dimensions, Pressable} from 'react-native';
 import React from 'react';
-import {APP_COLORS} from '../../../../constants/colors';
 import {IBanner, INavigationProp} from '../../../../../interfaces';
 import Carousel from 'pinar';
 import FastImageLoader from '../../../../components/fast-image-loader';
