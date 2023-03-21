@@ -31,8 +31,6 @@ const LoggedIn = ({navigation}: INavigationProp) => {
   const handleLogout = () => {
     dispatch(resetUser());
     dispatch(resetCart());
-    dispatch(resetMarkets());
-    dispatch(resetLocations());
     dispatch(resetFavourites());
     dispatch(resetOrders());
   };

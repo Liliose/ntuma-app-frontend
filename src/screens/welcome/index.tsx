@@ -1,15 +1,27 @@
-import {View, Text, Image, Dimensions, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
+import React, {useEffect} from 'react';
 import {APP_COLORS} from '../../constants/colors';
 import {
   btnWithBgContainerStyles,
   btnWithBgTextStyles,
   viewFlexCenter,
 } from '../../constants/styles';
-import FitImage from 'react-native-fit-image';
 import {INavigationProp} from '../../../interfaces';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 const {width, height} = Dimensions.get('window');
 const Welcome = ({navigation}: INavigationProp) => {
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      changeNavigationBarColor('maroon');
+    }
+  }, []);
   return (
     <View style={{flex: 1, backgroundColor: APP_COLORS.MAROON}}>
       <View>

@@ -7,8 +7,9 @@ import {
   ScrollView,
   Pressable,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {APP_COLORS} from '../../constants/colors';
 import {
   btnWithBgContainerStyles,
@@ -25,6 +26,7 @@ import {INavigationProp, TOAST_MESSAGE_TYPES} from '../../../interfaces';
 import {errorHandler, toastMessage} from '../../helpers';
 import axios from 'axios';
 import {app} from '../../constants/app';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import {
   setUserEmail,
   setUserId,
@@ -50,6 +52,13 @@ const Register = ({navigation}: INavigationProp) => {
   const [state, setState] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const validPhoneCode = ['8', '9', '2', '3'];
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      changeNavigationBarColor('maroon');
+    }
+  }, []);
+
   const handleSubmit = () => {
     if (state.phone.trim() === '') {
       toastMessage(TOAST_MESSAGE_TYPES.ERROR, 'Please enter your phone number');

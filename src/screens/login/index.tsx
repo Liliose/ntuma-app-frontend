@@ -7,8 +7,9 @@ import {
   ScrollView,
   Pressable,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {APP_COLORS} from '../../constants/colors';
 import {
   btnWithBgContainerStyles,
@@ -36,6 +37,7 @@ import {
   setUserToken,
   setUserWalletAmount,
 } from '../../actions/user';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 const {height} = Dimensions.get('window');
 const initialState = {
@@ -46,6 +48,12 @@ const Login = ({navigation}: INavigationProp) => {
   const dispatch = useDispatch();
   const [state, setState] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      changeNavigationBarColor('maroon');
+    }
+  }, []);
 
   const handleSubmit = () => {
     if (state.emailOrPhone.trim() === '' || state.password.trim() === '') {
