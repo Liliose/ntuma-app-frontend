@@ -15,6 +15,7 @@ import recentSearches from './recentSearches';
 import notifications from './notifications';
 import clients from './clients';
 import messages from './messages';
+import banners from './banners';
 const rootReducer = combineReducers({
   user,
   markets,
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   dishes,
   clients,
   messages,
+  banners,
 });
 
 export default rootReducer;

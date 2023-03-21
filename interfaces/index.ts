@@ -99,6 +99,12 @@ export interface ICategoriesReducer {
   hardReloading: boolean;
   loadingError: string;
 }
+export interface IBannersReducer {
+  banners: IBanner[];
+  isLoading: boolean;
+  hardReloading: boolean;
+  loadingError: string;
+}
 export interface IDishesReducer {
   dishes: IDish[];
   isLoading: boolean;
@@ -109,6 +115,16 @@ export interface ICategory {
   id: number;
   name: string;
   image: string;
+  createdAt: string;
+}
+
+export interface IBanner {
+  id: number;
+  urlOrComponentValue: string;
+  image: string;
+  hasUrl: boolean;
+  hasScreenComponent: boolean;
+  isActive: boolean;
   createdAt: string;
 }
 

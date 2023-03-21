@@ -286,8 +286,8 @@ function Navigation() {
         initialRouteName="Welcome"
         screenOptions={{
           // headerMode: 'float',
-          gestureEnabled: true,
-          gestureDirection: 'horizontal',
+          // gestureEnabled: true,
+          // gestureDirection: 'horizontal',
           // cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           cardStyleInterpolator:
             CardStyleInterpolators.forFadeFromBottomAndroid,
