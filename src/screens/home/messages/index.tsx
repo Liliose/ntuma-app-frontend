@@ -9,7 +9,6 @@ import {
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../reducers';
-import NotVerified from '../../../components/not-verified';
 import {
   IClient,
   IMessage,
@@ -22,12 +21,14 @@ import {
 import {APP_COLORS} from '../../../constants/colors';
 import {TextInput} from 'react-native-gesture-handler';
 import {
+  btnWithBgContainerStyles,
   commonInput,
   viewFlexCenter,
   viewFlexSpace,
 } from '../../../constants/styles';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Entypo';
+import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   fetchMessages,
   setIsHardReloadingMessages,
@@ -127,6 +128,7 @@ const Messages = ({navigation}: INavigationProp) => {
   const {messages, isLoading, loadingError} = useSelector(
     (state: RootState) => state.messages,
   );
+  const {token} = useSelector((state: RootState) => state.user);
   const {clients} = useSelector((state: RootState) => state.clients);
   const userReducer = useSelector((state: RootState) => state.user);
   const [showAlert, setShowAlert] = useState(false);
@@ -147,6 +149,7 @@ const Messages = ({navigation}: INavigationProp) => {
 
   useEffect(() => {
     dispatch(fetchMessages());
+    dispatch(fetchClients());
   }, []);
 
   useEffect(() => {
@@ -226,79 +229,112 @@ const Messages = ({navigation}: INavigationProp) => {
 
   return (
     <KeyboardAvoidingView style={{flex: 1}}>
-      <ScrollView
-        contentContainerStyle={{flexGrow: 1}}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: APP_COLORS.GRAY_BG,
-          }}>
-          {isLoading && messages.length === 0 ? (
-            <Loader />
-          ) : messages.length > 0 ? (
-            <View>
-              <View style={{paddingHorizontal: 10, paddingTop: 10}}>
-                <View style={{position: 'relative'}}>
-                  <TextInput
-                    style={[commonInput, {height: 45, paddingLeft: 45}]}
-                    placeholder="Search Messages"
-                    value={keyword}
-                    onChangeText={text => setKeyword(text)}
-                  />
-                  <View
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      width: 45,
-                      height: 45,
-                    }}>
-                    <View style={[viewFlexCenter, {flex: 1, paddingTop: 10}]}>
-                      <Icon name="search1" color={APP_COLORS.BLACK} size={25} />
+      {token.trim() !== '' ? (
+        <>
+          <ScrollView
+            contentContainerStyle={{flexGrow: 1}}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: APP_COLORS.GRAY_BG,
+              }}>
+              {isLoading && messages.length === 0 ? (
+                <Loader />
+              ) : messages.length > 0 ? (
+                <View>
+                  <View style={{paddingHorizontal: 10, paddingTop: 10}}>
+                    <View style={{position: 'relative'}}>
+                      <TextInput
+                        style={[commonInput, {height: 45, paddingLeft: 45}]}
+                        placeholder="Search Messages"
+                        value={keyword}
+                        onChangeText={text => setKeyword(text)}
+                      />
+                      <View
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          width: 45,
+                          height: 45,
+                        }}>
+                        <View
+                          style={[viewFlexCenter, {flex: 1, paddingTop: 10}]}>
+                          <Icon
+                            name="search1"
+                            color={APP_COLORS.BLACK}
+                            size={25}
+                          />
+                        </View>
+                      </View>
                     </View>
                   </View>
+                  <View style={{marginTop: 15}}>
+                    {messagesToShow.map((item, index) => (
+                      <MessageItem
+                        key={index}
+                        navigation={navigation}
+                        item={item}
+                        currentUser={userReducer}
+                        clients={clients}
+                      />
+                    ))}
+                  </View>
                 </View>
-              </View>
-              <View style={{marginTop: 15}}>
-                {messagesToShow.map((item, index) => (
-                  <MessageItem
-                    key={index}
-                    navigation={navigation}
-                    item={item}
-                    currentUser={userReducer}
-                    clients={clients}
-                  />
-                ))}
-              </View>
+              ) : (
+                <NotFound
+                  title="No messages found"
+                  textColor={APP_COLORS.BLACK}
+                />
+              )}
             </View>
-          ) : (
-            <NotFound title="No messages found" textColor={APP_COLORS.BLACK} />
-          )}
+          </ScrollView>
+          <CustomAlert
+            showAlert={showAlert}
+            setShowAlert={setShowAlert}
+            confirmationTitle="Try Again"
+            callBack={alertCallBack}>
+            <View style={[viewFlexCenter]}>
+              <FastImage
+                source={require('../../../assets/error-black.gif')}
+                style={{width: 120, height: 120}}
+              />
+              <Text
+                style={{
+                  color: APP_COLORS.MAROON,
+                  fontWeight: 'bold',
+                  fontSize: 18,
+                }}>
+                Something Went Wrong
+              </Text>
+              <Text style={{color: APP_COLORS.TEXT_GRAY}}>{loadingError}</Text>
+            </View>
+          </CustomAlert>
+        </>
+      ) : (
+        <View style={{padding: 10}}>
+          <Pressable
+            onPress={() => navigation.navigate('Login')}
+            style={{marginBottom: 15}}>
+            <View style={[btnWithBgContainerStyles]}>
+              <Icon3 name="login" size={25} color={APP_COLORS.WHITE} />
+              <Text style={{flex: 1, marginLeft: 10, color: APP_COLORS.WHITE}}>
+                Sign in
+              </Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={() => navigation.navigate('Register')}>
+            <View style={[btnWithBgContainerStyles]}>
+              <Icon name="adduser" size={25} color={APP_COLORS.WHITE} />
+              <Text style={{flex: 1, marginLeft: 10, color: APP_COLORS.WHITE}}>
+                Sign up
+              </Text>
+            </View>
+          </Pressable>
         </View>
-      </ScrollView>
-      <CustomAlert
-        showAlert={showAlert}
-        setShowAlert={setShowAlert}
-        confirmationTitle="Try Again"
-        callBack={alertCallBack}>
-        <View style={[viewFlexCenter]}>
-          <FastImage
-            source={require('../../../assets/error-black.gif')}
-            style={{width: 120, height: 120}}
-          />
-          <Text
-            style={{
-              color: APP_COLORS.MAROON,
-              fontWeight: 'bold',
-              fontSize: 18,
-            }}>
-            Something Went Wrong
-          </Text>
-          <Text style={{color: APP_COLORS.TEXT_GRAY}}>{loadingError}</Text>
-        </View>
-      </CustomAlert>
+      )}
     </KeyboardAvoidingView>
   );
 };
