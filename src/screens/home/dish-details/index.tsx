@@ -1,4 +1,4 @@
-import {View, Text, Image, ScrollView, Pressable} from 'react-native';
+import {View, Text, Image, ScrollView, Pressable, Linking} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {
   ICartItem,
@@ -138,6 +138,14 @@ const DishDetails = ({route, navigation}: INavigationPropWithRouteRequired) => {
     }
   };
 
+  const openLink = async (url: string) => {
+    if (await Linking.canOpenURL(url)) {
+      await Linking.openURL(url);
+    } else {
+      console.log(`Unable to open URL: ${url}`);
+    }
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: APP_COLORS.MAROON}}>
       <View
@@ -187,16 +195,18 @@ const DishDetails = ({route, navigation}: INavigationPropWithRouteRequired) => {
               </View>
             </View>
             {dish.utubeLink.trim() !== '' && (
-              <View style={[viewFlexCenter, {marginLeft: 10}]}>
-                <Image
-                  source={require('../../../assets/youtube.png')}
-                  style={{width: 40, height: 40}}
-                  resizeMode="contain"
-                />
-                <Text style={{color: APP_COLORS.TEXT_GRAY}}>
-                  Watch on youtube
-                </Text>
-              </View>
+              <Pressable onPress={() => openLink(dish.utubeLink)}>
+                <View style={[viewFlexCenter, {marginLeft: 10}]}>
+                  <Image
+                    source={require('../../../assets/youtube.png')}
+                    style={{width: 40, height: 40}}
+                    resizeMode="contain"
+                  />
+                  <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+                    Watch on youtube
+                  </Text>
+                </View>
+              </Pressable>
             )}
           </View>
           <ScrollView>
