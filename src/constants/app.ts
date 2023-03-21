@@ -11,8 +11,8 @@ const CONFIG = {
     // FILE_URL: 'http://172.31.34.64:8080/uploads/',
   },
   production: {
-    BACKEND_URL: 'http://apis.ntuma.rw/api',
-    FILE_URL: 'http://apis.ntuma.rw/uploads/',
+    BACKEND_URL: 'https://apis.ntuma.rw/api',
+    FILE_URL: 'https://apis.ntuma.rw/uploads/',
   },
 };
 

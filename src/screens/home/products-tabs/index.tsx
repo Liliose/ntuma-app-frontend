@@ -5,6 +5,7 @@ import {
   ScrollView,
   RefreshControl,
   Text,
+  Platform,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {RouteProp, useFocusEffect} from '@react-navigation/native';
@@ -29,6 +30,7 @@ import {fetchMarkets} from '../../../actions/markets';
 import NotFound from '../../../components/not-found';
 import CustomAlert from '../../../components/custom-alert';
 import FastImage from 'react-native-fast-image';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 const {height} = Dimensions.get('window');
 interface IProductsProps extends INavigationProp {
   route: RouteProp<any>;
@@ -121,6 +123,12 @@ const Products = ({route, navigation}: IProductsProps) => {
     dispatch(fetchProductPrices());
     dispatch(fetchMarkets());
   };
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      changeNavigationBarColor('maroon');
+    }
+  }, []);
 
   return (
     <View style={{flex: 1, backgroundColor: APP_COLORS.WHITE}}>

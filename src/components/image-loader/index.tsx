@@ -65,7 +65,7 @@ const ImageLoader = ({
         </View>
       )}
       <Image
-        source={{uri: url, cache: 'force-cache'}}
+        source={{uri: url}}
         style={
           style !== undefined
             ? {width, height, zIndex: 1, ...style}

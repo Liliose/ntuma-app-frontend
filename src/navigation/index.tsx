@@ -160,6 +160,8 @@ function Navigation() {
           tabBarShowLabel: false,
           tabBarStyle: {
             backgroundColor: APP_COLORS.MAROON,
+            borderBottomColor: 'rgba(255,255,255,0.6)',
+            borderBottomWidth: 1,
           },
         }}>
         <Tab.Screen
