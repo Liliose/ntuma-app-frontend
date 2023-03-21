@@ -5,7 +5,6 @@ import {IBanner, INavigationProp} from '../../../../../interfaces';
 import Carousel from 'pinar';
 import FastImageLoader from '../../../../components/fast-image-loader';
 import {app} from '../../../../constants/app';
-import ImageLoader from '../../../../components/image-loader';
 
 interface IBannersProps extends INavigationProp {
   banners: IBanner[];
@@ -34,7 +33,12 @@ const Banners = ({banners, navigation}: IBannersProps) => {
 
   return (
     <View style={{padding: 10, height: 100}}>
-      <Carousel loop={true} showsControls={false} autoplay={banners.length > 0}>
+      <Carousel
+        loop={true}
+        showsDots={false}
+        autoplayInterval={5000}
+        autoplay={banners.length > 0}
+        containerStyle={{flexGrow: 1}}>
         {banners.map((item, index) => (
           <Pressable key={index} onPress={() => handleClick(item)}>
             <View>
