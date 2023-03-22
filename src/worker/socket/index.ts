@@ -186,8 +186,8 @@ const dispatchUserData = (data: ISocketData, store: any) => {
   }
   //notifications
   if (
-    data.type === EVENT_NAMES_ENUM.ADD_MESSAGE ||
-    data.type === EVENT_NAMES_ENUM.UPDATE_MESSAGE
+    data.type === EVENT_NAMES_ENUM.ADD_NOTIFICATON ||
+    data.type === EVENT_NAMES_ENUM.UPDATE_NOTIFICATON
   ) {
     const notification = data.data as INotificaton;
     if (
@@ -203,8 +203,8 @@ const dispatchUserData = (data: ISocketData, store: any) => {
   }
   //orders
   if (
-    data.type === EVENT_NAMES_ENUM.ADD_MESSAGE ||
-    data.type === EVENT_NAMES_ENUM.UPDATE_MESSAGE
+    data.type === EVENT_NAMES_ENUM.ADD_ORDER ||
+    data.type === EVENT_NAMES_ENUM.UPDATE_ORDER
   ) {
     const order = data.data as IOrder;
     if (order.userId !== undefined && order.userId == userId) {
@@ -216,8 +216,8 @@ const dispatchUserData = (data: ISocketData, store: any) => {
   }
   //wallet transaction
   if (
-    data.type === EVENT_NAMES_ENUM.ADD_MESSAGE ||
-    data.type === EVENT_NAMES_ENUM.UPDATE_MESSAGE
+    data.type === EVENT_NAMES_ENUM.ADD_WALLET ||
+    data.type === EVENT_NAMES_ENUM.UPDATE_WALLET
   ) {
     const trans = data.data as IWalletTransaction;
     if (trans.userId !== undefined && trans.userId == userId) {
