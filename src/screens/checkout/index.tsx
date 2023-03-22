@@ -1,13 +1,18 @@
 import {View, Text, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {APP_COLORS} from '../../constants/colors';
-import {viewFlexSpace} from '../../constants/styles';
+import {viewFlexCenter, viewFlexSpace} from '../../constants/styles';
 import CheckedCircle from '../../components/checked-circle';
 import Delivery from './delivery';
 import Payment from './payment';
 import Review from './review';
 import {IDeliveryFee, ILocation, INavigationProp} from '../../../interfaces';
-import {calCulateDistance, errorHandler, setHeaders} from '../../helpers';
+import {
+  calCulateDistance,
+  errorHandler,
+  returnErroMessage,
+  setHeaders,
+} from '../../helpers';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../reducers';
 import axios from 'axios';
@@ -15,6 +20,8 @@ import {app} from '../../constants/app';
 import FullPageLoader from '../../components/full-page-loader';
 import {resetCart} from '../../actions/cart';
 import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
+import CustomAlert from '../../components/custom-alert';
+import FastImage from 'react-native-fast-image';
 
 export enum CHECKOUT_STEPS_ENUM {
   DELIVERY = 'DELIVERY',
@@ -34,6 +41,10 @@ const Checkout = ({navigation}: INavigationProp) => {
   const [paymentMethod, setPaymentMethod] = useState<string>('');
   const [paymentPhoneNumber, setPaymentPhoneNumber] = useState<string>('');
   const [deliveryAmount, setDeliveryAmount] = useState<number>(0);
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const [vehicle, setVehicle] = useState<IDeliveryFee>({
     id: 0,
     vehicleType: '',
@@ -130,6 +141,7 @@ const Checkout = ({navigation}: INavigationProp) => {
   }, [vehicle, distance]);
 
   const handleSubmit = () => {
+    setShowAlert(false);
     setIsLoading(true);
     axios
       .post(
@@ -161,12 +173,15 @@ const Checkout = ({navigation}: INavigationProp) => {
         });
       })
       .catch(error => {
+        const err = returnErroMessage(error);
         setIsLoading(false);
-        errorHandler(error);
-        if (!error.message.includes('Network')) {
-          dispatch(resetCart());
-          navigation.replace('Orders');
-        }
+        setErrorMessage(err);
+        setShowAlert(true);
+        // errorHandler(error);
+        // if (!error.message.includes('Network')) {
+        //   dispatch(resetCart());
+        //   navigation.replace('Orders');
+        // }
       });
   };
 
@@ -257,6 +272,27 @@ const Checkout = ({navigation}: INavigationProp) => {
           handleSubmit={handleSubmit}
         />
       )}
+      <CustomAlert
+        showAlert={showAlert}
+        setShowAlert={setShowAlert}
+        confirmationTitle="Try Again"
+        callBack={handleSubmit}>
+        <View style={[viewFlexCenter]}>
+          <FastImage
+            source={require('../../assets/error-black.gif')}
+            style={{width: 120, height: 120}}
+          />
+          <Text
+            style={{
+              color: APP_COLORS.MAROON,
+              fontWeight: 'bold',
+              fontSize: 18,
+            }}>
+            Something Went Wrong
+          </Text>
+          <Text style={{color: APP_COLORS.TEXT_GRAY}}>{errorMessage}</Text>
+        </View>
+      </CustomAlert>
       <FullPageLoader isLoading={isLoading} />
     </View>
   );

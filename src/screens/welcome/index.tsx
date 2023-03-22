@@ -52,8 +52,9 @@ const Welcome = ({navigation}: INavigationProp) => {
           <Text style={{color: APP_COLORS.MAROON}}>Food</Text>
         </Text>
         <Text style={{marginTop: 10, color: APP_COLORS.BLACK}}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
+          Ntuma App, the fastest and most reliable delivery service in Rwanda!.
+          With just a few taps, you can order a wide range of products and have
+          them delivered straight to your doorstep.
         </Text>
         <TouchableOpacity onPress={() => navigation.navigate('SelectMarket')}>
           <View style={[btnWithBgContainerStyles, {marginTop: 25}]}>
