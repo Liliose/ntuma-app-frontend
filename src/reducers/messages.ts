@@ -4,7 +4,6 @@ import {
   SET_IS_HARD_RELOADING_MESSAGES,
   SET_IS_LOADING_MESSAGES,
   SET_LOADING_MESSAGES_ERROR,
-  SET_REMOVE_MESSAGE,
   RESET_MESSAGES,
   SET_SINGLE_MESSAGE,
   SET_ADD_OR_UPDATE_MESSAGE,
@@ -39,15 +38,6 @@ const acceptedOrdersReducer = (state = initialState, action: IAction) => {
       }
     }
     case SET_DELETE_MESSAGE: {
-      const newState = state.messages.filter(
-        item => item.id != action.payload.id,
-      );
-      return {
-        ...state,
-        messages: newState as IMessage[],
-      };
-    }
-    case SET_REMOVE_MESSAGE: {
       const newState = state.messages.filter(
         item => item.id != action.payload.id,
       );

@@ -25,7 +25,7 @@ const categoriesReducer = (state = initialState, action: IAction) => {
     case SET_ADD_OR_UPDATE_CATEGORY: {
       const newState = state.categories;
       const index = newState.findIndex(item => item.id == action.payload.id);
-      if (index) {
+      if (index >= 0) {
         newState[index] = action.payload;
         return {
           ...state,

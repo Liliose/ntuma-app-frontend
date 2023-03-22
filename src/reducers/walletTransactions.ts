@@ -1,7 +1,5 @@
 import {
   IAction,
-  IProductsReducer,
-  IProduct,
   IWalletTransaction,
   IWalletTransactionsReducer,
 } from '../../interfaces';
@@ -11,6 +9,7 @@ import {
   RESET_WALLET_TRANSACTIONS,
   Add_NEW_TRANSACTION,
   SET_ADD_OR_UPDATE_WALLET_TRANSACTION,
+  SET_DELETE_WALLET_TRANSACTIONS,
 } from '../actions/walletTransactions';
 
 const initialState: IWalletTransactionsReducer = {
@@ -37,6 +36,15 @@ const walletTransactionsReducer = (state = initialState, action: IAction) => {
           transactions: [action.payload, ...newState] as IWalletTransaction[],
         };
       }
+    }
+    case SET_DELETE_WALLET_TRANSACTIONS: {
+      const newState = state.transactions.filter(
+        item => item.id != action.payload,
+      );
+      return {
+        ...state,
+        transactions: newState as IWalletTransaction[],
+      };
     }
     case Add_NEW_TRANSACTION:
       return {

@@ -4,6 +4,7 @@ import {
   SET_IS_LOADING_DELIVERY_FEES,
   RESET_DELIVERY_FEES,
   SET_DELETE_DELIVERY_FEES,
+  SET_ADD_OR_UPDATE_DELIVERY_FEES,
 } from '../actions/deliveryFees';
 
 const initialState: IDeliveryFeesReducer = {
@@ -15,7 +16,7 @@ const feesReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_DELIVERY_FEES:
       return {...state, fees: action.payload as IDeliveryFee[]};
-    case SET_DELIVERY_FEES: {
+    case SET_ADD_OR_UPDATE_DELIVERY_FEES: {
       const newState = state.fees;
       const index = newState.findIndex(item => item.id == action.payload.id);
       if (index >= 0) {
