@@ -6,6 +6,7 @@ import {
   Pressable,
   ScrollView,
   TextInput,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 import Modal from 'react-native-modal';
@@ -30,7 +31,6 @@ import {
 } from '../../../../constants/styles';
 import {currencyFormatter, toastMessage} from '../../../../helpers';
 import MultiPrice from './multi-price';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../../reducers';
 import {addCartItem} from '../../../../actions/cart';
@@ -175,7 +175,7 @@ const ProductPreview = ({
             borderTopRightRadius: 50,
           }}
         />
-        <KeyboardAwareScrollView>
+        <KeyboardAvoidingView>
           <View style={{padding: 10}}>
             <ScrollView>
               <View style={[viewFlexSpace, {marginBottom: 10}]}>
@@ -413,7 +413,7 @@ const ProductPreview = ({
               </View>
             </ScrollView>
           </View>
-        </KeyboardAwareScrollView>
+        </KeyboardAvoidingView>
         <View style={{position: 'absolute', top: 0, right: 0, zIndex: 2}}>
           <Pressable onPress={() => setShowModal(false)}>
             <View

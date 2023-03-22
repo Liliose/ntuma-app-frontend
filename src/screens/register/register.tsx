@@ -8,6 +8,7 @@ import {
   Pressable,
   ActivityIndicator,
   Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {APP_COLORS} from '../../constants/colors';
@@ -21,7 +22,6 @@ import {
   viewFlexSpace,
 } from '../../constants/styles';
 
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {INavigationProp, TOAST_MESSAGE_TYPES} from '../../../interfaces';
 import {errorHandler, toastMessage} from '../../helpers';
 import axios from 'axios';
@@ -119,7 +119,7 @@ const Register = ({navigation}: INavigationProp) => {
           source={require('../../assets/imigongo.png')}
           style={{width: 10, height}}
         />
-        <KeyboardAwareScrollView>
+        <KeyboardAvoidingView>
           <ScrollView>
             <View style={{padding: 10, paddingBottom: 50}}>
               <View style={{marginVertical: 10}}>
@@ -272,7 +272,7 @@ const Register = ({navigation}: INavigationProp) => {
               </View>
             </View>
           </ScrollView>
-        </KeyboardAwareScrollView>
+        </KeyboardAvoidingView>
       </View>
     </View>
   );
