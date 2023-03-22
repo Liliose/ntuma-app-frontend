@@ -1,4 +1,6 @@
 import {io} from 'socket.io-client';
+import {EVENT_NAMES_ENUM, ISocketData} from '../../../interfaces';
+import {setAddOrUpdateMarket} from '../../actions/markets';
 import {app} from '../../constants/app';
 
 let mSocket: any = undefined;
@@ -17,8 +19,14 @@ export const subscribeToSocket = (store: any) => {
     console.log('connected to socket');
   });
   emitSocket('addUser', {userType: 'client', userId: user.userId});
-  mSocket.on('NtumaClientEventName', (data: {type: string; data: any}) => {
-    // console.log(data);
+  mSocket.on('NtumaEventNames', (data: ISocketData) => {
+    console.log(data);
+    if (data.type !== undefined && data.data !== undefined) {
+      dispatchBasicAppData(data, mStore);
+    }
+  });
+  mSocket.on('NtumaClientEventNames', (data: {type: string; data: any}) => {
+    console.log(data);
   });
   mSocket.on('disconnect', () => {
     console.log('disconnected from socket');
@@ -27,6 +35,15 @@ export const subscribeToSocket = (store: any) => {
     console.log(`socket connect_error due to ${err.message}`);
     console.log(JSON.stringify(err));
   });
+};
+
+const dispatchBasicAppData = (data: ISocketData, store: any) => {
+  if (
+    data.type === EVENT_NAMES_ENUM.ADD_MARKET ||
+    data.type === EVENT_NAMES_ENUM.UPDATE_MARKET
+  ) {
+    store.dispatch(setAddOrUpdateMarket(data.data));
+  }
 };
 
 export const unSubscribeToSocket = () => {

@@ -7,6 +7,7 @@ import {
   SET_IS_HARD_RELOADING_MARKETS,
   SET_LOADING_MARKETS_ERROR,
   SET_MARKET_SEARCH_RESULTS,
+  SET_ADD_OR_UPDATE_MARKET,
 } from '../actions/markets';
 
 const initialState: IMarketsReducer = {
@@ -26,6 +27,24 @@ const marketsReducer = (state = initialState, action: IAction) => {
         markets: action.payload as IMarket[],
         marketSearchResults: action.payload as IMarket[],
       };
+    case SET_ADD_OR_UPDATE_MARKET: {
+      let newState = state.markets;
+      const index = newState.findIndex(item => item.mId == action.payload.mId);
+      if (index >= 0) {
+        newState[index] = action.payload;
+        return {
+          ...state,
+          markets: newState as IMarket[],
+          marketSearchResults: newState as IMarket[],
+        };
+      } else {
+        return {
+          ...state,
+          markets: [...state.markets, action.payload] as IMarket[],
+          marketSearchResults: [...state.markets, action.payload] as IMarket[],
+        };
+      }
+    }
     case SET_MARKET_SEARCH_RESULTS:
       return {...state, marketSearchResults: action.payload as IMarket[]};
     case SET_SELECTED_MARKET:
