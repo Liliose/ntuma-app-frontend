@@ -48,6 +48,7 @@ export interface IAction {
 
 export interface IAppConfig {
   BACKEND_URL: string;
+  SOCKET_URL: string;
   FILE_URL: string;
 }
 
