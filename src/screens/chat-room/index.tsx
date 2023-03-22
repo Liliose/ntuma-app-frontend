@@ -19,7 +19,7 @@ import {APP_COLORS} from '../../constants/colors';
 import ChatFooter from './footer';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../reducers';
-import {fetchMessages, removeMessage} from '../../actions/messages';
+import {fetchMessages, setDeleteMessage} from '../../actions/messages';
 import ImageLoader from '../../components/image-loader';
 import {app} from '../../constants/app';
 import Icon from 'react-native-vector-icons/Feather';
@@ -46,7 +46,7 @@ const MessageItem = ({item, clientId, navigation}: IMessageItemProps) => {
       .delete(app.BACKEND_URL + '/messages/' + item.id, setHeaders(token))
       .then(res => {
         setIsDeleting(false);
-        dispatch(removeMessage(item));
+        dispatch(setDeleteMessage(item));
       })
       .catch(error => {
         setIsDeleting(false);

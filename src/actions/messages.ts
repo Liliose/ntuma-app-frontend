@@ -9,7 +9,6 @@ export const SET_DELETE_MESSAGE = 'SET_DELETE_MESSAGE';
 export const SET_SINGLE_MESSAGE = 'SET_SINGLE_MESSAGE';
 export const SET_IS_LOADING_MESSAGES = 'SET_IS_LOADING_MESSAGES';
 export const SET_LOADING_MESSAGES_ERROR = 'SET_LOADING_MESSAGES_ERROR';
-export const SET_REMOVE_MESSAGE = 'SET_REMOVE_MESSAGE';
 export const SET_IS_HARD_RELOADING_MESSAGES = 'SET_IS_HARD_RELOADING_MESSAGES';
 export const RESET_MESSAGES = 'RESET_MESSAGES';
 
@@ -25,16 +24,12 @@ export const setAddOrUpdateMessages = (message: IMessage): IAction => ({
   type: SET_ADD_OR_UPDATE_MESSAGE,
   payload: message,
 });
-export const setDeleteMessages = (message: IMessage): IAction => ({
+export const setDeleteMessage = (message: IMessage): IAction => ({
   type: SET_DELETE_MESSAGE,
   payload: message,
 });
 export const setAddSingleMessage = (message: IMessage): IAction => ({
   type: SET_SINGLE_MESSAGE,
-  payload: message,
-});
-export const removeMessage = (message: IMessage): IAction => ({
-  type: SET_REMOVE_MESSAGE,
   payload: message,
 });
 export const setIsLoadingMessages = (value: boolean): IAction => ({
