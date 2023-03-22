@@ -4,8 +4,9 @@ import {app} from '../constants/app';
 import {errorHandler, setHeaders} from '../helpers';
 
 export const SET_ORDERS = 'SET_ORDERS';
+export const SET_ADD_OR_UPDATE_ORDER = 'SET_ADD_OR_UPDATE_ORDER';
+export const SET_DELETE_ORDER = 'SET_DELETE_ORDER';
 export const SET_IS_LOADING_ORDERS = 'SET_IS_LOADING_ORDERS';
-export const SET_UPDATE_ORDER = 'SET_UPDATE_ORDER';
 export const RESET_ORDERS = 'RESET_ORDERS';
 
 interface IAction {
@@ -16,8 +17,12 @@ export const setOrders = (orders: IOrder[]): IAction => ({
   type: SET_ORDERS,
   payload: orders,
 });
-export const setUpdateOrder = (order: IOrder): IAction => ({
-  type: SET_UPDATE_ORDER,
+export const setAddOrUpdateOrder = (order: IOrder): IAction => ({
+  type: SET_ADD_OR_UPDATE_ORDER,
+  payload: order,
+});
+export const setDeleteOrder = (order: IOrder): IAction => ({
+  type: SET_DELETE_ORDER,
   payload: order,
 });
 export const setIsLoadingOrders = (value: boolean): IAction => ({

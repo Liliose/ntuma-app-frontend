@@ -4,6 +4,9 @@ import {app} from '../constants/app';
 import {errorHandler} from '../helpers';
 
 export const SET_DELIVERY_FEES = 'SET_DELIVERY_FEES';
+export const SET_ADD_OR_UPDATE_DELIVERY_FEES =
+  'SET_ADD_OR_UPDATE_DELIVERY_FEES';
+export const SET_DELETE_DELIVERY_FEES = 'SET_DELETE_DELIVERY_FEES';
 export const SET_IS_LOADING_DELIVERY_FEES = 'SET_IS_LOADING_DELIVERY_FEES';
 export const RESET_DELIVERY_FEES = 'RESET_DELIVERY_FEES';
 
@@ -13,6 +16,14 @@ interface IAction {
 }
 export const setDeliveryFees = (fees: IDeliveryFee[]): IAction => ({
   type: SET_DELIVERY_FEES,
+  payload: fees,
+});
+export const setAddOrUpdateDeliveryFees = (fees: IDeliveryFee): IAction => ({
+  type: SET_ADD_OR_UPDATE_DELIVERY_FEES,
+  payload: fees,
+});
+export const setDeleteDeliveryFees = (fees: IDeliveryFee): IAction => ({
+  type: SET_DELETE_DELIVERY_FEES,
   payload: fees,
 });
 

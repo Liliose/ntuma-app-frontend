@@ -1,6 +1,6 @@
 import {io} from 'socket.io-client';
 import {EVENT_NAMES_ENUM, ISocketData} from '../../../interfaces';
-import {setAddOrUpdateMarket} from '../../actions/markets';
+import {setAddOrUpdateMarket, setDeleteMarket} from '../../actions/markets';
 import {app} from '../../constants/app';
 
 let mSocket: any = undefined;
@@ -21,7 +21,11 @@ export const subscribeToSocket = (store: any) => {
   emitSocket('addUser', {userType: 'client', userId: user.userId});
   mSocket.on('NtumaEventNames', (data: ISocketData) => {
     console.log(data);
-    if (data.type !== undefined && data.data !== undefined) {
+    if (
+      data.type !== undefined &&
+      data.data !== undefined &&
+      mStore !== undefined
+    ) {
       dispatchBasicAppData(data, mStore);
     }
   });
@@ -38,11 +42,15 @@ export const subscribeToSocket = (store: any) => {
 };
 
 const dispatchBasicAppData = (data: ISocketData, store: any) => {
+  //markets
   if (
     data.type === EVENT_NAMES_ENUM.ADD_MARKET ||
     data.type === EVENT_NAMES_ENUM.UPDATE_MARKET
   ) {
     store.dispatch(setAddOrUpdateMarket(data.data));
+  }
+  if (data.type === EVENT_NAMES_ENUM.DELETE_MARKET) {
+    store.dispatch(setDeleteMarket(data.data));
   }
 };
 

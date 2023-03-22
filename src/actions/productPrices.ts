@@ -4,6 +4,9 @@ import {app} from '../constants/app';
 import {errorHandler} from '../helpers';
 
 export const SET_PRODUCT_PRICES = 'SET_PRODUCT_PRICES';
+export const SET_ADD_OR_UPDATE_PRODUCT_PRICE =
+  'SET_ADD_OR_UPDATE_PRODUCT_PRICE';
+export const SET_DELETE_PRODUCT_PRICE = 'SET_DELETE_PRODUCT_PRICE';
 export const SET_IS_LOADING_PRODUCT_PRICES = 'SET_IS_LOADING_PRODUCT_PRICES';
 export const RESET_PRODUCT_PRICES = 'RESET_PRODUCT_PRICES';
 
@@ -14,6 +17,14 @@ interface IAction {
 export const setProductPrices = (categories: IProductPrice[]): IAction => ({
   type: SET_PRODUCT_PRICES,
   payload: categories,
+});
+export const setAddOrUpdateProductPrice = (price: IProductPrice): IAction => ({
+  type: SET_ADD_OR_UPDATE_PRODUCT_PRICE,
+  payload: price,
+});
+export const setDeleteProductPrice = (price: IProductPrice): IAction => ({
+  type: SET_DELETE_PRODUCT_PRICE,
+  payload: price,
 });
 export const setIsLoadingProductPrices = (value: boolean): IAction => ({
   type: SET_IS_LOADING_PRODUCT_PRICES,

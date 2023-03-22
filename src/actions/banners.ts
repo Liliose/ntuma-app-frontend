@@ -6,6 +6,8 @@ import {errorHandler, returnErroMessage} from '../helpers';
 export const SET_BANNERS = 'SET_BANNERS';
 export const SET_IS_LOADING_BANNERS = 'SET_IS_LOADING_BANNERS';
 export const RESET_BANNERS = 'RESET_BANNERS';
+export const SET_ADD_OR_UPDATE_BANNER = 'SET_ADD_OR_UPDATE_BANNER';
+export const SET_DELETE_BANNER = 'SET_DELETE_BANNER';
 export const SET_LOADING_BANNERS_ERROR = 'SET_LOADING_BANNERS_ERROR';
 export const SET_IS_HARD_RELOADING_BANNERS = 'SET_IS_HARD_RELOADING_BANNERS';
 
@@ -16,6 +18,14 @@ interface IAction {
 export const setBanners = (banners: IBanner[]): IAction => ({
   type: SET_BANNERS,
   payload: banners,
+});
+export const setAddOrUpdateBanner = (banner: IBanner): IAction => ({
+  type: SET_ADD_OR_UPDATE_BANNER,
+  payload: banner,
+});
+export const setDeleteBanner = (banner: IBanner): IAction => ({
+  type: SET_DELETE_BANNER,
+  payload: banner,
 });
 export const setIsLoadingBanners = (value: boolean): IAction => ({
   type: SET_IS_LOADING_BANNERS,

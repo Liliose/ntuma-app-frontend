@@ -4,6 +4,8 @@ import {app} from '../constants/app';
 import {errorHandler, returnErroMessage} from '../helpers';
 
 export const SET_DISHES = 'SET_DISHES';
+export const SET_ADD_OR_UPDATE_DISH = 'SET_ADD_OR_UPDATE_DISH';
+export const SET_DELETE_DISH = 'SET_DELETE_DISH';
 export const SET_IS_LOADING_DISHES = 'SET_IS_LOADING_DISHES';
 export const RESET_DISHES = 'RESET_DISHES';
 
@@ -17,6 +19,14 @@ interface IAction {
 export const setDishes = (dishes: IDish[]): IAction => ({
   type: SET_DISHES,
   payload: dishes,
+});
+export const setAddOrUpdateDish = (dish: IDish): IAction => ({
+  type: SET_ADD_OR_UPDATE_DISH,
+  payload: dish,
+});
+export const setDeleteDish = (dish: IDish): IAction => ({
+  type: SET_DELETE_DISH,
+  payload: dish,
 });
 
 export const setIsLoadingDishes = (value: boolean): IAction => ({

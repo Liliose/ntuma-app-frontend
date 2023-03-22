@@ -4,6 +4,8 @@ import {app} from '../constants/app';
 import {returnErroMessage, setHeaders} from '../helpers';
 
 export const SET_CLIENTS = 'SET_CLIENTS';
+export const SET_ADD_OR_UPDATE_CLIENT = 'SET_ADD_OR_UPDATE_CLIENT';
+export const SET_DELETE_CLIENT = 'SET_DELETE_CLIENT';
 export const SET_IS_LOADING_CLIENTS = 'SET_IS_LOADING_CLIENTS';
 export const SET_LOADING_CLIENTS_ERROR = 'SET_LOADING_CLIENTS_ERROR';
 export const RESET_CLIENTS = 'RESET_CLIENTS';
@@ -15,6 +17,14 @@ interface IAction {
 export const setClients = (categories: IClient[]): IAction => ({
   type: SET_CLIENTS,
   payload: categories,
+});
+export const setAddOrDeleteClient = (client: IClient): IAction => ({
+  type: SET_CLIENTS,
+  payload: client,
+});
+export const setDeleteClient = (client: IClient): IAction => ({
+  type: SET_DELETE_CLIENT,
+  payload: client,
 });
 
 export const setIsLoadingClients = (value: boolean): IAction => ({

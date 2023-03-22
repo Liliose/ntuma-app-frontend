@@ -7,6 +7,8 @@ export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const SET_IS_LOADING_CATEGORIES = 'SET_IS_LOADING_CATEGORIES';
 export const SET_SELECTED_CATEGORY = 'SET_SELECTED_CATEGORY';
 export const RESET_CATEGORIES = 'RESET_CATEGORIES';
+export const SET_ADD_OR_UPDATE_CATEGORY = 'SET_ADD_OR_UPDATE_CATEGORY';
+export const SET_DELETE_CATEGORY = 'SET_DELETE_CATEGORY';
 export const SET_LOADING_CATEGORIES_ERROR = 'SET_LOADING_CATEGORIES_ERROR';
 export const SET_IS_HARD_RELOADING_CATEGORIES =
   'SET_IS_HARD_RELOADING_CATEGORIES';
@@ -18,6 +20,14 @@ interface IAction {
 export const setCategories = (categories: ICategory[]): IAction => ({
   type: SET_CATEGORIES,
   payload: categories,
+});
+export const setAddOrUpdateCategory = (category: ICategory): IAction => ({
+  type: SET_ADD_OR_UPDATE_CATEGORY,
+  payload: category,
+});
+export const setDeleteCategory = (category: ICategory): IAction => ({
+  type: SET_DELETE_CATEGORY,
+  payload: category,
 });
 export const setSelectedCategory = (category: ICategory): IAction => ({
   type: SET_SELECTED_CATEGORY,

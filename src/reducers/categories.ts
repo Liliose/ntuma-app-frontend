@@ -6,6 +6,8 @@ import {
   SET_SELECTED_CATEGORY,
   SET_IS_HARD_RELOADING_CATEGORIES,
   SET_LOADING_CATEGORIES_ERROR,
+  SET_ADD_OR_UPDATE_CATEGORY,
+  SET_DELETE_CATEGORY,
 } from '../actions/categories';
 
 const initialState: ICategoriesReducer = {
@@ -20,6 +22,31 @@ const categoriesReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_CATEGORIES:
       return {...state, categories: action.payload as ICategory[]};
+    case SET_ADD_OR_UPDATE_CATEGORY: {
+      const newState = state.categories;
+      const index = newState.findIndex(item => item.id == action.payload.id);
+      if (index) {
+        newState[index] = action.payload;
+        return {
+          ...state,
+          categories: newState as ICategory[],
+        };
+      } else {
+        return {
+          ...state,
+          categories: [action.payload, ...newState] as ICategory[],
+        };
+      }
+    }
+    case SET_DELETE_CATEGORY: {
+      const newState = state.categories.filter(
+        item => item.id != action.payload.id,
+      );
+      return {
+        ...state,
+        categories: newState as ICategory[],
+      };
+    }
     case SET_SELECTED_CATEGORY:
       return {...state, selectedCategory: action.payload as ICategory};
     case SET_IS_LOADING_CATEGORIES:

@@ -8,6 +8,7 @@ import {
   SET_LOADING_MARKETS_ERROR,
   SET_MARKET_SEARCH_RESULTS,
   SET_ADD_OR_UPDATE_MARKET,
+  SET_DELETE_MARKET,
 } from '../actions/markets';
 
 const initialState: IMarketsReducer = {
@@ -44,6 +45,16 @@ const marketsReducer = (state = initialState, action: IAction) => {
           marketSearchResults: [...state.markets, action.payload] as IMarket[],
         };
       }
+    }
+    case SET_DELETE_MARKET: {
+      let newState = state.markets.filter(
+        item => item.mId != action.payload.mId,
+      );
+      return {
+        ...state,
+        markets: newState as IMarket[],
+        marketSearchResults: newState as IMarket[],
+      };
     }
     case SET_MARKET_SEARCH_RESULTS:
       return {...state, marketSearchResults: action.payload as IMarket[]};

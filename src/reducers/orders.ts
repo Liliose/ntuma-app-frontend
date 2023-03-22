@@ -2,8 +2,9 @@ import {IAction, IOrdersReducer, IOrder} from '../../interfaces';
 import {
   SET_ORDERS,
   SET_IS_LOADING_ORDERS,
-  SET_UPDATE_ORDER,
   RESET_ORDERS,
+  SET_ADD_OR_UPDATE_ORDER,
+  SET_DELETE_ORDER,
 } from '../actions/orders';
 
 const initialState: IOrdersReducer = {
@@ -15,21 +16,21 @@ const ordersReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_ORDERS:
       return {...state, orders: action.payload as IOrder[]};
-    case SET_UPDATE_ORDER: {
-      let newState = state.orders;
-      const index = newState.findIndex(item => item.id === action.payload.id);
+    case SET_ADD_OR_UPDATE_ORDER: {
+      const newState = state.orders;
+      const index = newState.findIndex(item => item.id == action.payload.id);
       if (index >= 0) {
-        newState[index] = action.payload as IOrder;
-        return {
-          ...state,
-          orders: newState as IOrder[],
-        };
+        newState[index] = action.payload;
+        return {...state, orders: newState as IOrder[]};
       } else {
-        return {
-          ...state,
-          orders: [...state.orders, action.payload] as IOrder[],
-        };
+        return {...state, orders: [action.payload, ...newState] as IOrder[]};
       }
+    }
+    case SET_DELETE_ORDER: {
+      const newState = state.orders.filter(
+        item => item.id != action.payload.id,
+      );
+      return {...state, orders: newState as IOrder[]};
     }
     case SET_IS_LOADING_ORDERS:
       return {...state, isLoading: action.payload as boolean};

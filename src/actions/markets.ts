@@ -6,6 +6,7 @@ import {errorHandler, returnErroMessage} from '../helpers';
 export const SET_MARKETS = 'SET_MARKETS';
 export const SET_IS_LOADING_MARKETS = 'SET_IS_LOADING_MARKETS';
 export const SET_ADD_OR_UPDATE_MARKET = 'SET_ADD_OR_UPDATE_MARKET';
+export const SET_DELETE_MARKET = 'SET_DELETE_MARKET';
 export const SET_SELECTED_MARKET = 'SET_SELECTED_MARKET';
 export const SET_MARKET_SEARCH_RESULTS = 'SET_MARKET_SEARCH_RESULTS';
 export const RESET_MARKETS = 'RESET_MARKETS';
@@ -24,6 +25,10 @@ export const setMarkets = (markets: IMarket[]): IAction => ({
 
 export const setAddOrUpdateMarket = (market: IMarket): IAction => ({
   type: SET_ADD_OR_UPDATE_MARKET,
+  payload: market,
+});
+export const setDeleteMarket = (market: IMarket): IAction => ({
+  type: SET_DELETE_MARKET,
   payload: market,
 });
 

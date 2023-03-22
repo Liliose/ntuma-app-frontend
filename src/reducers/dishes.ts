@@ -5,6 +5,8 @@ import {
   SET_IS_LOADING_DISHES,
   RESET_DISHES,
   SET_LOADING_DISH_ERROR,
+  SET_ADD_OR_UPDATE_DISH,
+  SET_DELETE_DISH,
 } from '../actions/dishes';
 
 const initialState: IDishesReducer = {
@@ -18,6 +20,22 @@ const categoriesReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_DISHES:
       return {...state, dishes: action.payload as IDish[]};
+    case SET_ADD_OR_UPDATE_DISH: {
+      const newState = state.dishes;
+      const index = newState.findIndex(item => item.id == action.payload.id);
+      if (index >= 0) {
+        newState[index] = action.payload;
+        return {...state, dishes: newState as IDish[]};
+      } else {
+        return {...state, dishes: [action.payload, ...newState] as IDish[]};
+      }
+    }
+    case SET_DELETE_DISH: {
+      const newState = state.dishes.filter(
+        item => item.id != action.payload.id,
+      );
+      return {...state, dishes: newState as IDish[]};
+    }
     case SET_IS_LOADING_DISHES:
       return {...state, isLoading: action.payload as boolean};
     case SET_IS_HARD_RELOADING_CATEGORIES:

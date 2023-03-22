@@ -7,6 +7,8 @@ import {
   SET_REMOVE_MESSAGE,
   RESET_MESSAGES,
   SET_SINGLE_MESSAGE,
+  SET_ADD_OR_UPDATE_MESSAGE,
+  SET_DELETE_MESSAGE,
 } from '../actions/messages';
 
 const initialState: IMessagesReducer = {
@@ -20,6 +22,31 @@ const acceptedOrdersReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_MESSAGES:
       return {...state, messages: action.payload as IMessage[]};
+    case SET_ADD_OR_UPDATE_MESSAGE: {
+      const newState = state.messages;
+      const index = newState.findIndex(item => item.id == action.payload.id);
+      if (index >= 0) {
+        newState[index] = action.payload;
+        return {
+          ...state,
+          messages: newState as IMessage[],
+        };
+      } else {
+        return {
+          ...state,
+          messages: [action.payload, ...newState] as IMessage[],
+        };
+      }
+    }
+    case SET_DELETE_MESSAGE: {
+      const newState = state.messages.filter(
+        item => item.id != action.payload.id,
+      );
+      return {
+        ...state,
+        messages: newState as IMessage[],
+      };
+    }
     case SET_REMOVE_MESSAGE: {
       const newState = state.messages.filter(
         item => item.id != action.payload.id,

@@ -7,6 +7,8 @@ import {
   SET_LOADING_PRODUCTS_ERROR,
   SET_PRODUCTS_SEARCH_RESULTS,
   SET_PRODUCTS_SEARCH_KEYWORD,
+  SET_ADD_OR_UPDATE_PRODUCT,
+  SET_DELETE_PRODUCT,
 } from '../actions/products';
 
 const initialState: IProductsReducer = {
@@ -22,6 +24,31 @@ const productReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_PRODUCTS:
       return {...state, products: action.payload as IProduct[]};
+    case SET_ADD_OR_UPDATE_PRODUCT: {
+      const newState = state.products;
+      const index = newState.findIndex(item => item.pId == action.payload.pId);
+      if (index >= 0) {
+        newState[index] = action.payload;
+        return {
+          ...state,
+          products: newState as IProduct[],
+        };
+      } else {
+        return {
+          ...state,
+          products: [action.payload, ...newState] as IProduct[],
+        };
+      }
+    }
+    case SET_DELETE_PRODUCT: {
+      const newState = state.products.filter(
+        item => item.pId != action.payload.pId,
+      );
+      return {
+        ...state,
+        products: newState as IProduct[],
+      };
+    }
     case SET_PRODUCTS_SEARCH_RESULTS:
       return {...state, productsSearchResults: action.payload as IProduct[]};
     case SET_IS_LOADING_PRODUCTS:

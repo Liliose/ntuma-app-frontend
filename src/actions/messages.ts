@@ -4,6 +4,8 @@ import {app} from '../constants/app';
 import {returnErroMessage, setHeaders} from '../helpers';
 
 export const SET_MESSAGES = 'SET_MESSAGES';
+export const SET_ADD_OR_UPDATE_MESSAGE = 'SET_ADD_OR_UPDATE_MESSAGE';
+export const SET_DELETE_MESSAGE = 'SET_DELETE_MESSAGE';
 export const SET_SINGLE_MESSAGE = 'SET_SINGLE_MESSAGE';
 export const SET_IS_LOADING_MESSAGES = 'SET_IS_LOADING_MESSAGES';
 export const SET_LOADING_MESSAGES_ERROR = 'SET_LOADING_MESSAGES_ERROR';
@@ -18,6 +20,14 @@ interface IAction {
 export const setMessages = (messages: IMessage[]): IAction => ({
   type: SET_MESSAGES,
   payload: messages,
+});
+export const setAddOrUpdateMessages = (message: IMessage): IAction => ({
+  type: SET_ADD_OR_UPDATE_MESSAGE,
+  payload: message,
+});
+export const setDeleteMessages = (message: IMessage): IAction => ({
+  type: SET_DELETE_MESSAGE,
+  payload: message,
 });
 export const setAddSingleMessage = (message: IMessage): IAction => ({
   type: SET_SINGLE_MESSAGE,

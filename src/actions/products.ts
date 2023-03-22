@@ -4,6 +4,8 @@ import {app} from '../constants/app';
 import {errorHandler, returnErroMessage} from '../helpers';
 
 export const SET_PRODUCTS = 'SET_PRODUCTS';
+export const SET_ADD_OR_UPDATE_PRODUCT = 'SET_ADD_OR_UPDATE_PRODUCT';
+export const SET_DELETE_PRODUCT = 'SET_DELETE_PRODUCT';
 export const SET_PRODUCTS_SEARCH_RESULTS = 'SET_PRODUCTS_SEARCH_RESULTS';
 export const SET_PRODUCTS_SEARCH_KEYWORD = 'SET_PRODUCTS_SEARCH_KEYWORD';
 export const SET_IS_LOADING_PRODUCTS = 'SET_IS_LOADING_PRODUCTS';
@@ -19,6 +21,14 @@ interface IAction {
 export const setProducts = (products: IProduct[]): IAction => ({
   type: SET_PRODUCTS,
   payload: products,
+});
+export const setAddOrUpdateProduct = (product: IProduct): IAction => ({
+  type: SET_ADD_OR_UPDATE_PRODUCT,
+  payload: product,
+});
+export const setDeleteProduct = (product: IProduct): IAction => ({
+  type: SET_DELETE_PRODUCT,
+  payload: product,
 });
 export const setProductsSearchResults = (products: IProduct[]): IAction => ({
   type: SET_PRODUCTS_SEARCH_RESULTS,

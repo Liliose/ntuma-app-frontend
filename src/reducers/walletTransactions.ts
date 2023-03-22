@@ -10,6 +10,7 @@ import {
   SET_WALLET_TRANSACTIONS,
   RESET_WALLET_TRANSACTIONS,
   Add_NEW_TRANSACTION,
+  SET_ADD_OR_UPDATE_WALLET_TRANSACTION,
 } from '../actions/walletTransactions';
 
 const initialState: IWalletTransactionsReducer = {
@@ -21,6 +22,22 @@ const walletTransactionsReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SET_WALLET_TRANSACTIONS:
       return {...state, transactions: action.payload as IWalletTransaction[]};
+    case SET_ADD_OR_UPDATE_WALLET_TRANSACTION: {
+      const newState = state.transactions;
+      const index = newState.findIndex(item => item.id == action.payload);
+      if (index >= 0) {
+        newState[index] = action.payload;
+        return {
+          ...state,
+          transactions: newState as IWalletTransaction[],
+        };
+      } else {
+        return {
+          ...state,
+          transactions: [action.payload, ...newState] as IWalletTransaction[],
+        };
+      }
+    }
     case Add_NEW_TRANSACTION:
       return {
         ...state,
