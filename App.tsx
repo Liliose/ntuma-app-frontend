@@ -5,6 +5,7 @@ import messaging from '@react-native-firebase/messaging';
 import Navigation from './src/navigation';
 import {store} from './src/store';
 import {subscribeToSocket, unSubscribeToSocket} from './src/worker/socket';
+import {saveAppToken, setFbToken} from './src/actions/user';
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -18,6 +19,17 @@ const requestCloudMessagingNotificationPermissionFromUser = async () => {
 
   if (enabled) {
     console.log('Authorization status:', authStatus);
+    //get tokent
+    const token = await messaging().getToken();
+    console.log({token});
+    if (token) {
+      //subscribe to broadcast topic
+      const subscription = await messaging().subscribeToTopic('broadcast');
+      console.log({subscription});
+      //save token to db
+      store.dispatch(setFbToken(token));
+      store.dispatch(saveAppToken());
+    }
   }
 };
 

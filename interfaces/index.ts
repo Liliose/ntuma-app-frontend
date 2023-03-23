@@ -9,6 +9,7 @@ export interface IUser {
   email: string;
   image: string;
   role: string;
+  fbToken: string;
   userId: number;
 }
 

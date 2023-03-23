@@ -28,6 +28,7 @@ import axios from 'axios';
 import {app} from '../../constants/app';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import {
+  saveAppToken,
   setUserEmail,
   setUserId,
   setUserImage,
@@ -100,8 +101,9 @@ const Register = ({navigation}: INavigationProp) => {
           dispatch(setUserId(userId));
           dispatch(setUserPhone(phone));
           dispatch(setUserEmail(email));
-          dispatch(setUserToken(token));
           dispatch(setUserImage(image));
+          dispatch(saveAppToken());
+          dispatch(setUserToken(token));
           toastMessage(TOAST_MESSAGE_TYPES.SUCCESS, res.data.msg);
           navigation.replace('HomeTabs');
         })
