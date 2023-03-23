@@ -63,11 +63,15 @@ export const resetUser = () => ({type: RESET_USER});
 export const saveAppToken = (): any => (dispatch: any, getState: any) => {
   const {user} = getState();
   axios
-    .post(app.BACKEND_URL + '/apptokens', {
+    .post(app.BACKEND_URL + '/apptokens/', {
       userId: user.userId,
       fbToken: user.fbToken,
       appType: 'CLIENT',
     })
-    .then(res => {})
-    .catch(error => {});
+    .then(res => {
+      // console.log({res});
+    })
+    .catch(error => {
+      // console.log({error});
+    });
 };
