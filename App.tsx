@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {LogBox} from 'react-native';
+import {LogBox,SafeAreaView} from 'react-native';
 import {AlertNotificationRoot} from 'react-native-alert-notification';
 import Navigation from './src/navigation';
 import {store} from './src/store';
@@ -23,9 +23,11 @@ function App(): JSX.Element {
     };
   }, []);
   return (
-    <AlertNotificationRoot theme="dark">
-      <Navigation />
-    </AlertNotificationRoot>
+    <SafeAreaView>
+      <AlertNotificationRoot theme="dark">
+          <Navigation />
+      </AlertNotificationRoot>
+    </SafeAreaView>
   );
 }
 
