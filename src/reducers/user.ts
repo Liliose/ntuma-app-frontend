@@ -9,6 +9,7 @@ import {
   SET_USER_WALLET_AMOUNTS,
   SET_USER_ID,
   SET_USER_IMAGE,
+  SET_FB_TOKEN,
 } from '../actions/user';
 
 const initialState: IUser = {
@@ -19,6 +20,7 @@ const initialState: IUser = {
   walletAmounts: 0,
   image: '',
   role: '',
+  fbToken: '',
   userId: 0,
 };
 
@@ -40,6 +42,8 @@ const user = (state: IUser = initialState, action: IAction) => {
       return {...state, role: action.payload as string};
     case SET_USER_TOKEN:
       return {...state, token: action.payload as string};
+    case SET_FB_TOKEN:
+      return {...state, fbToken: action.payload as string};
     case RESET_USER:
       return initialState;
     default:

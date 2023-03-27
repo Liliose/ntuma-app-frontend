@@ -1,4 +1,8 @@
+import axios from 'axios';
+import {app} from '../constants/app';
+
 export const SET_USER_NAMES = 'SET_USER_NAMES';
+export const SET_FB_TOKEN = 'SET_FB_TOKEN';
 export const SET_USER_EMAIL = 'SET_USER_EMAIL';
 export const SET_USER_PHONE = 'SET_USER_PHONE';
 export const SET_USER_WALLET_AMOUNTS = 'SET_USER_WALLET_AMOUNTS';
@@ -15,6 +19,10 @@ interface IAction {
 export const setUserNames = (names: string): IAction => ({
   type: SET_USER_NAMES,
   payload: names,
+});
+export const setFbToken = (token: string): IAction => ({
+  type: SET_FB_TOKEN,
+  payload: token,
 });
 export const setUserImage = (image: string): IAction => ({
   type: SET_USER_IMAGE,
@@ -51,3 +59,19 @@ export const setUserRole = (value: string): IAction => ({
 });
 
 export const resetUser = () => ({type: RESET_USER});
+
+export const saveAppToken = (): any => (dispatch: any, getState: any) => {
+  const {user} = getState();
+  axios
+    .post(app.BACKEND_URL + '/apptokens/', {
+      userId: user.userId,
+      fbToken: user.fbToken,
+      appType: 'CLIENT',
+    })
+    .then(res => {
+      // console.log({res});
+    })
+    .catch(error => {
+      // console.log({error});
+    });
+};

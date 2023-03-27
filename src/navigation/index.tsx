@@ -6,6 +6,7 @@ import {
   TransitionPresets,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
+import messaging from '@react-native-firebase/messaging';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {Pressable, View, StatusBar, Text, Easing} from 'react-native';
@@ -59,231 +60,248 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
+function ProductsTabs() {
+  const {categories, selectedCategory} = useSelector(
+    (state: RootState) => state.categories,
+  );
+  return (
+    <TopTab.Navigator
+      initialRouteName={'category_' + selectedCategory?.id}
+      screenOptions={{
+        tabBarActiveTintColor: APP_COLORS.BLACK,
+        tabBarInactiveTintColor: APP_COLORS.WHITE,
+        tabBarIndicatorContainerStyle: {backgroundColor: APP_COLORS.MAROON},
+        tabBarIndicatorStyle: {
+          backgroundColor: 'white',
+          height: '100%',
+        },
+        tabBarLabelStyle: {textTransform: 'capitalize'},
+        tabBarScrollEnabled: true,
+        tabBarItemStyle: {width: 100, flex: 1},
+      }}>
+      {categories.map((item, i) => (
+        <TopTab.Screen
+          key={i}
+          options={{
+            tabBarLabel: item.name,
+          }}
+          name={'category_' + item.id}
+          component={Products}
+        />
+      ))}
+    </TopTab.Navigator>
+  );
+}
+
+function OrdersTab() {
+  return (
+    <TopTab.Navigator
+      // initialRouteName=""
+      screenOptions={{
+        tabBarActiveTintColor: APP_COLORS.WHITE,
+        tabBarInactiveTintColor: APP_COLORS.WHITE,
+        tabBarIndicatorContainerStyle: {backgroundColor: APP_COLORS.MAROON},
+        tabBarIndicatorStyle: {
+          backgroundColor: 'white',
+          height: 5,
+        },
+        tabBarLabelStyle: {textTransform: 'capitalize'},
+      }}>
+      <TopTab.Screen
+        options={{
+          tabBarLabel: 'Pending',
+        }}
+        name="PendingOrders"
+        component={PendingOrders}
+      />
+
+      <TopTab.Screen
+        options={{
+          tabBarLabel: 'Schedured',
+        }}
+        name="ScheduledOrders"
+        component={PendingOrders}
+      />
+      <TopTab.Screen
+        options={{
+          tabBarLabel: 'Failed',
+        }}
+        name="FailedOrders"
+        component={FailedOrders}
+      />
+      <TopTab.Screen
+        options={{
+          tabBarLabel: 'Completed',
+        }}
+        name="CompletedOrders"
+        component={CompletedOrders}
+      />
+    </TopTab.Navigator>
+  );
+}
+
+const HomeTabs = ({navigation}: INavigationProp) => {
+  const [activeColor, setActiveColor] = useState(APP_COLORS.WHITE);
+  const [inactiveColor, setInactiveColor] = useState('rgba(255,255,255,0.6)');
+  const {cart} = useSelector((state: RootState) => state.cart);
+  const {favourites} = useSelector((state: RootState) => state.favourites);
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarActiveTintColor: activeColor,
+        tabBarInactiveTintColor: inactiveColor,
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: APP_COLORS.MAROON,
+          borderBottomColor: 'rgba(255,255,255,0.6)',
+          borderBottomWidth: 1,
+        },
+      }}>
+      <Tab.Screen
+        name="Home"
+        component={ProductsTabs}
+        options={({route, navigation}) => ({
+          headerShown: true,
+          headerTitle: '',
+          header: () => <ProductTabsHeader navigation={navigation} />,
+          tabBarIcon: ({focused, color, size}) => {
+            return <Icon name="home" color={color} size={size} />;
+          },
+        })}
+      />
+
+      <Tab.Screen
+        name="Cart"
+        component={Cart}
+        options={({route, navigation}) =>
+          cart.length > 0
+            ? {
+                tabBarBadge: cart.length,
+                tabBarIcon: ({focused, color, size}) => {
+                  return <Icon name="cart" color={color} size={size} />;
+                },
+                headerShown: true,
+                headerTintColor: APP_COLORS.WHITE,
+                headerStyle: {backgroundColor: APP_COLORS.MAROON},
+                headerTitleAlign: 'center',
+                headerRight: () => (
+                  <Pressable
+                    onPress={() => navigation.navigate('Notifications')}>
+                    <View style={{marginRight: 15}}>
+                      <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
+                    </View>
+                  </Pressable>
+                ),
+              }
+            : {
+                tabBarIcon: ({focused, color, size}) => {
+                  return <Icon name="cart" color={color} size={size} />;
+                },
+                headerShown: true,
+                headerTintColor: APP_COLORS.WHITE,
+                headerStyle: {backgroundColor: APP_COLORS.MAROON},
+                headerTitleAlign: 'center',
+                headerRight: () => (
+                  <Pressable
+                    onPress={() => navigation.navigate('Notifications')}>
+                    <View style={{marginRight: 15}}>
+                      <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
+                    </View>
+                  </Pressable>
+                ),
+              }
+        }
+      />
+
+      <Tab.Screen
+        name="Favourites"
+        component={Favourites}
+        options={{
+          headerShown: true,
+          title: 'Favourites List (' + favourites.length + ')',
+          headerStyle: {backgroundColor: APP_COLORS.MAROON},
+          headerTintColor: APP_COLORS.WHITE,
+          headerTitleAlign: 'center',
+          tabBarIcon: ({focused, color, size}) => {
+            return <Icon name="heart" color={color} size={size} />;
+          },
+        }}
+      />
+
+      <Tab.Screen
+        name="Dishes"
+        component={Dishes}
+        options={{
+          title: '🔥Hot Dishes😋',
+          headerShown: true,
+          headerStyle: {backgroundColor: APP_COLORS.MAROON},
+          headerTintColor: APP_COLORS.WHITE,
+          headerTitleAlign: 'center',
+          tabBarIcon: ({focused, color, size}) => {
+            return <Icon2 name="restaurant-menu" color={color} size={size} />;
+          },
+        }}
+      />
+
+      <Tab.Screen
+        name="Messages"
+        component={Messages}
+        options={{
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerTintColor: APP_COLORS.WHITE,
+          headerStyle: {backgroundColor: APP_COLORS.MAROON},
+          tabBarIcon: ({focused, color, size}) => {
+            return <Icon2 name="message" color={color} size={size} />;
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerTintColor: APP_COLORS.WHITE,
+          headerStyle: {backgroundColor: APP_COLORS.MAROON},
+          tabBarIcon: ({focused, color, size}) => {
+            return <Icon4 name="user-alt" color={color} size={size} />;
+          },
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
+
 function Navigation() {
   const dispatch = useDispatch();
   const loadData = useLoadBasiData();
+  const [initialRoute, setInitialRoute] = useState('Welcome');
   useEffect(() => {
     loadData();
-  }, []);
-  function ProductsTabs() {
-    const {categories, selectedCategory} = useSelector(
-      (state: RootState) => state.categories,
-    );
-    return (
-      <TopTab.Navigator
-        initialRouteName={'category_' + selectedCategory?.id}
-        screenOptions={{
-          tabBarActiveTintColor: APP_COLORS.BLACK,
-          tabBarInactiveTintColor: APP_COLORS.WHITE,
-          tabBarIndicatorContainerStyle: {backgroundColor: APP_COLORS.MAROON},
-          tabBarIndicatorStyle: {
-            backgroundColor: 'white',
-            height: '100%',
-          },
-          tabBarLabelStyle: {textTransform: 'capitalize'},
-          tabBarScrollEnabled: true,
-          tabBarItemStyle: {width: 100, flex: 1},
-        }}>
-        {categories.map((item, i) => (
-          <TopTab.Screen
-            key={i}
-            options={{
-              tabBarLabel: item.name,
-            }}
-            name={'category_' + item.id}
-            component={Products}
-          />
-        ))}
-      </TopTab.Navigator>
-    );
-  }
 
-  function OrdersTab() {
-    return (
-      <TopTab.Navigator
-        // initialRouteName=""
-        screenOptions={{
-          tabBarActiveTintColor: APP_COLORS.WHITE,
-          tabBarInactiveTintColor: APP_COLORS.WHITE,
-          tabBarIndicatorContainerStyle: {backgroundColor: APP_COLORS.MAROON},
-          tabBarIndicatorStyle: {
-            backgroundColor: 'white',
-            height: 5,
-          },
-          tabBarLabelStyle: {textTransform: 'capitalize'},
-        }}>
-        <TopTab.Screen
-          options={{
-            tabBarLabel: 'Pending',
-          }}
-          name="PendingOrders"
-          component={PendingOrders}
-        />
-
-        <TopTab.Screen
-          options={{
-            tabBarLabel: 'Schedured',
-          }}
-          name="ScheduledOrders"
-          component={PendingOrders}
-        />
-        <TopTab.Screen
-          options={{
-            tabBarLabel: 'Failed',
-          }}
-          name="FailedOrders"
-          component={FailedOrders}
-        />
-        <TopTab.Screen
-          options={{
-            tabBarLabel: 'Completed',
-          }}
-          name="CompletedOrders"
-          component={CompletedOrders}
-        />
-      </TopTab.Navigator>
-    );
-  }
-
-  const HomeTabs = ({navigation}: INavigationProp) => {
-    const [activeColor, setActiveColor] = useState(APP_COLORS.WHITE);
-    const [inactiveColor, setInactiveColor] = useState('rgba(255,255,255,0.6)');
-    const {cart} = useSelector((state: RootState) => state.cart);
-    const {favourites} = useSelector((state: RootState) => state.favourites);
-    return (
-      <Tab.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          tabBarActiveTintColor: activeColor,
-          tabBarInactiveTintColor: inactiveColor,
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarStyle: {
-            backgroundColor: APP_COLORS.MAROON,
-            borderBottomColor: 'rgba(255,255,255,0.6)',
-            borderBottomWidth: 1,
-          },
-        }}>
-        <Tab.Screen
-          name="Home"
-          component={ProductsTabs}
-          options={({route, navigation}) => ({
-            headerShown: true,
-            headerTitle: '',
-            header: () => <ProductTabsHeader navigation={navigation} />,
-            tabBarIcon: ({focused, color, size}) => {
-              return <Icon name="home" color={color} size={size} />;
-            },
-          })}
-        />
-
-        <Tab.Screen
-          name="Cart"
-          component={Cart}
-          options={({route, navigation}) =>
-            cart.length > 0
-              ? {
-                  tabBarBadge: cart.length,
-                  tabBarIcon: ({focused, color, size}) => {
-                    return <Icon name="cart" color={color} size={size} />;
-                  },
-                  headerShown: true,
-                  headerTintColor: APP_COLORS.WHITE,
-                  headerStyle: {backgroundColor: APP_COLORS.MAROON},
-                  headerTitleAlign: 'center',
-                  headerRight: () => (
-                    <Pressable
-                      onPress={() => navigation.navigate('Notifications')}>
-                      <View style={{marginRight: 15}}>
-                        <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
-                      </View>
-                    </Pressable>
-                  ),
-                }
-              : {
-                  tabBarIcon: ({focused, color, size}) => {
-                    return <Icon name="cart" color={color} size={size} />;
-                  },
-                  headerShown: true,
-                  headerTintColor: APP_COLORS.WHITE,
-                  headerStyle: {backgroundColor: APP_COLORS.MAROON},
-                  headerTitleAlign: 'center',
-                  headerRight: () => (
-                    <Pressable
-                      onPress={() => navigation.navigate('Notifications')}>
-                      <View style={{marginRight: 15}}>
-                        <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
-                      </View>
-                    </Pressable>
-                  ),
-                }
+    // Check whether an initial notification is available
+    messaging()
+      .getInitialNotification()
+      .then(remoteMessage => {
+        if (remoteMessage) {
+          // console.log(
+          //   'Notification caused app to open from quit state:',
+          //   remoteMessage.notification,
+          // );
+          if (remoteMessage?.data?.type) {
+            setInitialRoute(remoteMessage.data.type); // navigate to this screen
           }
-        />
-
-        <Tab.Screen
-          name="Favourites"
-          component={Favourites}
-          options={{
-            headerShown: true,
-            title: 'Favourites List (' + favourites.length + ')',
-            headerStyle: {backgroundColor: APP_COLORS.MAROON},
-            headerTintColor: APP_COLORS.WHITE,
-            headerTitleAlign: 'center',
-            tabBarIcon: ({focused, color, size}) => {
-              return <Icon name="heart" color={color} size={size} />;
-            },
-          }}
-        />
-
-        <Tab.Screen
-          name="Dishes"
-          component={Dishes}
-          options={{
-            title: '🔥Hot Dishes😋',
-            headerShown: true,
-            headerStyle: {backgroundColor: APP_COLORS.MAROON},
-            headerTintColor: APP_COLORS.WHITE,
-            headerTitleAlign: 'center',
-            tabBarIcon: ({focused, color, size}) => {
-              return <Icon2 name="restaurant-menu" color={color} size={size} />;
-            },
-          }}
-        />
-
-        <Tab.Screen
-          name="Messages"
-          component={Messages}
-          options={{
-            headerShown: true,
-            headerTitleAlign: 'center',
-            headerTintColor: APP_COLORS.WHITE,
-            headerStyle: {backgroundColor: APP_COLORS.MAROON},
-            tabBarIcon: ({focused, color, size}) => {
-              return <Icon2 name="message" color={color} size={size} />;
-            },
-          }}
-        />
-        <Tab.Screen
-          name="Profile"
-          component={Profile}
-          options={{
-            headerShown: true,
-            headerTitleAlign: 'center',
-            headerTintColor: APP_COLORS.WHITE,
-            headerStyle: {backgroundColor: APP_COLORS.MAROON},
-            tabBarIcon: ({focused, color, size}) => {
-              return <Icon4 name="user-alt" color={color} size={size} />;
-            },
-          }}
-        />
-      </Tab.Navigator>
-    );
-  };
+        }
+      });
+  }, []);
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={APP_COLORS.MAROON} barStyle="light-content" />
       <Stack.Navigator
-        initialRouteName="Welcome"
+        initialRouteName={initialRoute}
         screenOptions={{
           // headerMode: 'float',
           // gestureEnabled: true,
