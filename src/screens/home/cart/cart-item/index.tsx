@@ -36,7 +36,7 @@ const CartItem = ({
 
   const handleDelete = () => {
     Alert.alert(
-      'Confirm the process',
+      'confirmation',
       'Do you want to remove this product from cart?',
       [
         {

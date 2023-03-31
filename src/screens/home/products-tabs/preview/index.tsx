@@ -112,6 +112,7 @@ const ProductPreview = ({
       return;
     }
     if (token.trim() === '') {
+      setShowModal(false);
       navigation.navigate('Login');
       toastMessage(TOAST_MESSAGE_TYPES.INFO, 'You must be logged in first');
       return;
@@ -175,9 +176,9 @@ const ProductPreview = ({
             borderTopRightRadius: 50,
           }}
         />
-        <KeyboardAvoidingView>
-          <View style={{padding: 10}}>
-            <ScrollView>
+        <KeyboardAvoidingView style={{flex: 1}}>
+          <ScrollView contentContainerStyle={{flexGrow: 1}}>
+            <View style={{padding: 10}}>
               <View style={[viewFlexSpace, {marginBottom: 10}]}>
                 <Text
                   style={{
@@ -239,14 +240,13 @@ const ProductPreview = ({
                         {
                           marginVertical: 15,
                           padding: 10,
-                          borderColor: APP_COLORS.PRODUCT_CARD_BORDER,
-                          borderWidth: 1,
+                          borderBottomColor: APP_COLORS.PRODUCT_CARD_BORDER,
+                          borderBottomWidth: 1,
                         },
                       ]}>
                       <Text
                         style={{
                           color: APP_COLORS.BLACK,
-                          fontSize: 20,
                           fontWeight: '600',
                         }}>
                         Price
@@ -258,14 +258,13 @@ const ProductPreview = ({
                   <View
                     style={{
                       marginVertical: 15,
+                      borderBottomColor: APP_COLORS.PRODUCT_CARD_BORDER,
+                      borderBottomWidth: 1,
                       padding: 10,
-                      borderColor: APP_COLORS.PRODUCT_CARD_BORDER,
-                      borderWidth: 1,
                     }}>
                     <Text
                       style={{
                         color: APP_COLORS.BLACK,
-                        fontSize: 20,
                         fontWeight: '600',
                       }}>
                       Price
@@ -342,16 +341,24 @@ const ProductPreview = ({
                           quantity: 1,
                         });
                       }}>
-                      <View style={[viewFlexSpace, {paddingHorizontal: 10}]}>
+                      <View
+                        style={[
+                          viewFlexSpace,
+                          {
+                            paddingBottom: 10,
+                            paddingHorizontal: 10,
+                            borderBottomColor: APP_COLORS.PRODUCT_CARD_BORDER,
+                            borderBottomWidth: 1,
+                          },
+                        ]}>
                         <Text
                           style={{
                             color: APP_COLORS.BLACK,
-                            fontSize: 20,
                             fontWeight: '600',
                           }}>
                           Custom Price
                         </Text>
-                        <Icon name="down" size={25} color={APP_COLORS.BLACK} />
+                        <Icon name="down" size={20} color={APP_COLORS.BLACK} />
                       </View>
                     </Pressable>
                   ) : (
@@ -359,7 +366,6 @@ const ProductPreview = ({
                       <Text
                         style={{
                           color: APP_COLORS.BLACK,
-                          fontSize: 20,
                           fontWeight: '600',
                         }}>
                         Custom Price
@@ -411,8 +417,8 @@ const ProductPreview = ({
                   </View>
                 </Pressable>
               </View>
-            </ScrollView>
-          </View>
+            </View>
+          </ScrollView>
         </KeyboardAvoidingView>
         <View style={{position: 'absolute', top: 0, right: 0, zIndex: 2}}>
           <Pressable onPress={() => setShowModal(false)}>

@@ -50,8 +50,7 @@ const MultiPrice = ({
       {isLoading ? (
         <Loader />
       ) : (
-        <View
-          style={{borderColor: APP_COLORS.PRODUCT_CARD_BORDER, borderWidth: 1}}>
+        <View>
           {productPrices.map((item, index) =>
             (selectedPrice?.ppId === item.ppId ||
               priceState.ppId === item.ppId) &&
@@ -138,14 +137,13 @@ const MultiPrice = ({
                     <Text
                       style={{
                         color: APP_COLORS.BLACK,
-                        fontSize: 20,
                         fontWeight: '600',
                       }}>
                       {item.name}
                     </Text>
                   </View>
                   <View>
-                    <Icon name="down" size={25} color={APP_COLORS.BLACK} />
+                    <Icon name="down" size={20} color={APP_COLORS.BLACK} />
                   </View>
                 </View>
               </Pressable>

@@ -37,7 +37,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
 
   const confirmLogout = () => {
     Alert.alert(
-      'Confirm the process',
+      'confirmation',
       'Do you want to logout from your account?',
       [
         {
