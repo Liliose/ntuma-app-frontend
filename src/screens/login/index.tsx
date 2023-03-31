@@ -38,6 +38,12 @@ import {
   setUserWalletAmount,
 } from '../../actions/user';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import FullPageLoader from '../../components/full-page-loader';
 
 const {height} = Dimensions.get('window');
 const initialState = {
@@ -85,16 +91,49 @@ const Login = ({navigation}: INavigationProp) => {
       });
   };
 
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '731820953075-c37jroehbn7lmnoe6qc9kg0irkmog7jb.apps.googleusercontent.com',
+      offlineAccess: true,
+      forceCodeForRefreshToken: true,
+    });
+  }, []);
+
+  const handleGoogleSignIn = async () => {
+    try {
+      // await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log({userInfo});
+    } catch (error: any) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+      setIsLoading(false);
+      toastMessage(
+        TOAST_MESSAGE_TYPES.ERROR,
+        'Something went wrong while signing in with google',
+      );
+      console.log({error: JSON.stringify(error)});
+    }
+  };
+
   return (
-    <View style={{flex: 1, backgroundColor: APP_COLORS.WHITE}}>
-      <View style={[viewFlexSpace]}>
-        <Image
-          source={require('../../assets/imigongo.png')}
-          style={{width: 10, height}}
-        />
-        <KeyboardAvoidingView style={{flex: 1, height: '100%'}}>
-          <ScrollView>
-            <View style={{padding: 10}}>
+    <KeyboardAvoidingView style={{flex: 1, height: '100%'}}>
+      <View style={{flex: 1, backgroundColor: APP_COLORS.WHITE}}>
+        <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
+          <Image
+            source={require('../../assets/imigongo.png')}
+            style={{width: 10, height}}
+          />
+          <ScrollView contentContainerStyle={{flexGrow: 1}}>
+            <View style={{padding: 10, flex: 1}}>
               <View style={{marginVertical: 10}}>
                 <Text
                   style={{
@@ -102,7 +141,7 @@ const Login = ({navigation}: INavigationProp) => {
                     fontWeight: '600',
                     fontSize: 16,
                   }}>
-                  Email or Phone
+                  Email or Phone(07...)
                 </Text>
                 <TextInput
                   placeholder="Enter your phone or email address"
@@ -164,23 +203,22 @@ const Login = ({navigation}: INavigationProp) => {
                 <View
                   style={{
                     marginVertical: 30,
-                    paddingVertical: 10,
-                    paddingHorizontal: 20,
-                    borderColor: APP_COLORS.DARK_GRAY,
-                    borderWidth: 1,
                   }}>
-                  <Image
-                    source={require('../../assets/google.png')}
-                    style={{width: 50}}
-                    resizeMode="contain"
+                  <GoogleSigninButton
+                    style={{width: 192, height: 48}}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Dark}
+                    onPress={handleGoogleSignIn}
+                    disabled={isLoading}
                   />
                 </View>
               </View>
             </View>
           </ScrollView>
-        </KeyboardAvoidingView>
+        </View>
       </View>
-    </View>
+      <FullPageLoader isLoading={isLoading} />
+    </KeyboardAvoidingView>
   );
 };
 

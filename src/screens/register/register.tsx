@@ -115,15 +115,15 @@ const Register = ({navigation}: INavigationProp) => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: APP_COLORS.WHITE}}>
-      <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
-        <Image
-          source={require('../../assets/imigongo.png')}
-          style={{width: 10, height}}
-        />
-        <KeyboardAvoidingView>
-          <ScrollView>
-            <View style={{padding: 10, paddingBottom: 50}}>
+    <KeyboardAvoidingView style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: APP_COLORS.WHITE}}>
+        <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
+          <Image
+            source={require('../../assets/imigongo.png')}
+            style={{width: 10, height}}
+          />
+          <ScrollView contentContainerStyle={{flexGrow: 1}}>
+            <View style={{padding: 10, paddingBottom: 50, flex: 1}}>
               <View style={{marginVertical: 10}}>
                 <Text
                   style={{
@@ -274,9 +274,9 @@ const Register = ({navigation}: INavigationProp) => {
               </View>
             </View>
           </ScrollView>
-        </KeyboardAvoidingView>
+        </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
