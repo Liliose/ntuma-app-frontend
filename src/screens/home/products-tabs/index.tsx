@@ -67,11 +67,17 @@ const Products = ({route, navigation}: IProductsProps) => {
   // }, []);
 
   useEffect(() => {
-    if (!validateSelectedMarket(markets, selectedMarket)) {
-      dispatch(resetCart());
-      dispatch(resetFavourites());
-      navigation.replace('SelectMarket');
+    let sub = true;
+    if (sub) {
+      if (!validateSelectedMarket(markets, selectedMarket)) {
+        dispatch(resetCart());
+        dispatch(resetFavourites());
+        navigation.replace('SelectMarket');
+      }
     }
+    return () => {
+      sub = false;
+    };
   }, [selectedMarket, markets]);
 
   useFocusEffect(

@@ -27,6 +27,7 @@ import Modal from 'react-native-modal';
 import ImageLoader from '../../../../components/image-loader';
 import {app} from '../../../../constants/app';
 import {setSelectedCategory} from '../../../../actions/categories';
+import NotificationsCounter from '../../../../components/notification-counter';
 
 const {height} = Dimensions.get('window');
 const ProductTabsHeader = ({navigation}: INavigationProp) => {
@@ -48,6 +49,7 @@ const ProductTabsHeader = ({navigation}: INavigationProp) => {
         {
           text: 'confirm',
           onPress: () => {
+            setShowModal(false);
             dispatch(resetCart());
             dispatch(resetFavourites());
             dispatch(setSelectedMarket(undefined));
@@ -105,9 +107,7 @@ const ProductTabsHeader = ({navigation}: INavigationProp) => {
             <Pressable
               onPress={() => navigation.navigate('Notifications')}
               style={{marginHorizontal: 10}}>
-              <View>
-                <Icon2 name="bell" size={25} color={APP_COLORS.WHITE} />
-              </View>
+              <NotificationsCounter />
             </Pressable>
             <Pressable
               style={{marginHorizontal: 10}}

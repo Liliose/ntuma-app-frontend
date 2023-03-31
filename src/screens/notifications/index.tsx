@@ -43,7 +43,7 @@ const Notifications = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchNotifications());
+    token && token.trim() !== '' && dispatch(fetchNotifications());
   }, []);
 
   useEffect(() => {

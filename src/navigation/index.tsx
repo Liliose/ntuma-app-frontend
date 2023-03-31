@@ -56,6 +56,7 @@ import ImagePreview from '../screens/chat-room/image-preview';
 import UpdateUserInfo from '../screens/update-user-info';
 import ChangePassword from '../screens/change-password';
 import AccountSettings from '../screens/account-settings';
+import NotificationsCounter from '../components/notification-counter';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -190,7 +191,7 @@ const HomeTabs = ({navigation}: INavigationProp) => {
                   <Pressable
                     onPress={() => navigation.navigate('Notifications')}>
                     <View style={{marginRight: 15}}>
-                      <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
+                      <NotificationsCounter />
                     </View>
                   </Pressable>
                 ),
@@ -207,7 +208,7 @@ const HomeTabs = ({navigation}: INavigationProp) => {
                   <Pressable
                     onPress={() => navigation.navigate('Notifications')}>
                     <View style={{marginRight: 15}}>
-                      <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
+                      <NotificationsCounter />
                     </View>
                   </Pressable>
                 ),
@@ -448,9 +449,9 @@ function Navigation() {
           component={Checkout}
           options={({route, navigation}: INavigationProp) => ({
             headerRight: () => (
-              <Pressable>
+              <Pressable onPress={() => navigation.navigate('Notifications')}>
                 <View style={{marginRight: 15}}>
-                  <Icon name="bell" size={25} color={APP_COLORS.WHITE} />
+                  <NotificationsCounter />
                 </View>
               </Pressable>
             ),
