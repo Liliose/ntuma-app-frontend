@@ -37,7 +37,7 @@ const CompletedOrders = ({navigation}: INavigationProp) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: APP_COLORS.WHITE,
+        backgroundColor: APP_COLORS.GRAY_BG,
         paddingHorizontal: 10,
         paddingVertical: 20,
       }}>

@@ -54,6 +54,16 @@ const Item = ({item, navigation}: IItemProps) => {
                 {new Date(item.createdAt).toUTCString()}
               </Text>
             </View>
+            <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
+              <View>
+                <Text style={{color: APP_COLORS.BLACK, fontWeight: 'bold'}}>
+                  Delivery Status:
+                </Text>
+              </View>
+              <Text style={{color: APP_COLORS.BLACK, width: '50%'}}>
+                {item.deliveryStatus}
+              </Text>
+            </View>
           </View>
         </View>
       </WhiteCard>
