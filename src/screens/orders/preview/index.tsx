@@ -33,8 +33,26 @@ const OrderPreview = ({
           <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
             Order ID:
           </Text>
-          <Text style={{color: APP_COLORS.TEXT_GRAY}}>{order.id}</Text>
+          <Text style={{color: APP_COLORS.TEXT_GRAY}}>#{order.id}</Text>
         </View>
+        {order.paymentStatus === PAYMENT_STATUS_ENUM.SUCCESS && (
+          <View
+            style={[
+              viewFlexSpace,
+              {
+                borderBottomColor: APP_COLORS.BORDER_COLOR,
+                borderBottomWidth: 1,
+                padding: 10,
+              },
+            ]}>
+            <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
+              Delivery Code:
+            </Text>
+            <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+              {order.deliveryCode}
+            </Text>
+          </View>
+        )}
         <View
           style={{
             borderBottomColor: APP_COLORS.BORDER_COLOR,
@@ -203,6 +221,24 @@ const OrderPreview = ({
             {order.paymentStatus}
           </Text>
         </View>
+        {order.paymentStatus === PAYMENT_STATUS_ENUM.SUCCESS && (
+          <View
+            style={[
+              viewFlexSpace,
+              {
+                borderBottomColor: APP_COLORS.BORDER_COLOR,
+                borderBottomWidth: 1,
+                padding: 10,
+              },
+            ]}>
+            <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
+              Delivery Status:
+            </Text>
+            <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+              {order.deliveryStatus}
+            </Text>
+          </View>
+        )}
         <View
           style={[
             viewFlexSpace,

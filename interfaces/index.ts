@@ -270,6 +270,7 @@ export interface IOrder {
   deliveredAt: string;
   createdAt: string;
   updatedAt: string;
+  deliveryCode: number;
 }
 
 export interface INotificaton {
