@@ -24,23 +24,37 @@ const Welcome = ({navigation}: INavigationProp) => {
   }, []);
   return (
     <View style={{flex: 1, backgroundColor: APP_COLORS.MAROON}}>
-      <View>
-        <View style={[viewFlexCenter]}>
-          <Image
-            source={require('../../assets/woman.png')}
-            style={{width: width - 50, height: undefined, aspectRatio: 1}}
-            resizeMode="contain"
-          />
+      <View style={{flex: 1}}>
+        <View style={[viewFlexCenter, {flex: 1, marginBottom: 100}]}>
+          <Text
+            style={{color: APP_COLORS.WHITE, fontSize: 25, fontWeight: '600'}}>
+            Ntuma App
+          </Text>
         </View>
       </View>
       <View
         style={{
-          height: height - 200,
+          height: height - 300,
           backgroundColor: APP_COLORS.WHITE,
           borderTopRightRadius: 50,
           borderTopLeftRadius: 50,
+          position: 'relative',
           padding: 50,
         }}>
+        <View
+          style={[
+            viewFlexCenter,
+            {position: 'absolute', top: -(width - 220), width},
+          ]}>
+          <Image
+            source={require('../../assets/fruits.png')}
+            style={{
+              width: width - 100,
+              height: width - 100,
+            }}
+            resizeMode="contain"
+          />
+        </View>
         <Text
           style={{
             color: APP_COLORS.BLACK,

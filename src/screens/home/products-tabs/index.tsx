@@ -140,7 +140,6 @@ const Products = ({route, navigation}: IProductsProps) => {
     if (Platform.OS === 'android') {
       changeNavigationBarColor('maroon');
     }
-    dispatch(fetchBanners());
   }, []);
 
   return (
