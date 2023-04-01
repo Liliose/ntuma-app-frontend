@@ -303,14 +303,15 @@ function Navigation() {
       <StatusBar backgroundColor={APP_COLORS.MAROON} barStyle="light-content" />
       <Stack.Navigator
         initialRouteName={initialRoute}
-        screenOptions={{
-          // headerMode: 'float',
-          // gestureEnabled: true,
-          // gestureDirection: 'horizontal',
-          // cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          cardStyleInterpolator:
-            CardStyleInterpolators.forFadeFromBottomAndroid,
-        }}>
+        // screenOptions={{
+        //   // headerMode: 'float',
+        //   // gestureEnabled: true,
+        //   // gestureDirection: 'horizontal',
+        //   // cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        //   cardStyleInterpolator:
+        //     CardStyleInterpolators.forFadeFromBottomAndroid,
+        // }}
+      >
         <Stack.Screen
           name="Welcome"
           component={Welcome}
@@ -319,12 +320,18 @@ function Navigation() {
             title: '',
             headerShadowVisible: false,
             headerShown: false,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           }}
         />
         <Stack.Screen
           name="HomeTabs"
           component={HomeTabs}
-          options={{headerShown: false}}
+          options={{
+            headerShown: false,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
+          }}
         />
 
         <Stack.Screen
@@ -337,6 +344,8 @@ function Navigation() {
             title: 'Order History',
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           }}
         />
 
@@ -366,6 +375,8 @@ function Navigation() {
             headerLeftContainerStyle: {
               paddingHorizontal: 10,
             },
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -375,6 +386,8 @@ function Navigation() {
             headerTitle: () => <SearchMarketsHeader />,
             headerTintColor: APP_COLORS.WHITE,
             headerStyle: {backgroundColor: APP_COLORS.MAROON},
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -385,6 +398,8 @@ function Navigation() {
             headerStyle: {backgroundColor: APP_COLORS.MAROON},
             headerTintColor: APP_COLORS.WHITE,
             header: () => <ChooseCategoryHeader navigation={navigation} />,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -397,6 +412,8 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -409,6 +426,8 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -430,6 +449,8 @@ function Navigation() {
                 </View>
               </Pressable>
             ),
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -442,6 +463,8 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -461,6 +484,8 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -473,6 +498,7 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
         <Stack.Screen
@@ -493,6 +519,7 @@ function Navigation() {
             headerShadowVisible: false,
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
         <Stack.Screen
@@ -513,6 +540,8 @@ function Navigation() {
             headerShadowVisible: false,
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -535,6 +564,8 @@ function Navigation() {
             },
             headerShadowVisible: false,
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -547,6 +578,7 @@ function Navigation() {
             },
             headerShadowVisible: false,
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
         <Stack.Screen
@@ -562,6 +594,8 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forFadeFromBottomAndroid,
           })}
         />
         <Stack.Screen
@@ -574,6 +608,7 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
         <Stack.Screen
@@ -586,6 +621,7 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
         <Stack.Screen
@@ -598,6 +634,7 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
         <Stack.Screen
@@ -610,6 +647,7 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
         <Stack.Screen
@@ -622,6 +660,7 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
       </Stack.Navigator>
