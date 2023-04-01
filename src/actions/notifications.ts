@@ -74,3 +74,36 @@ export const fetchNotifications = (): any => (dispatch: any, getState: any) => {
       dispatch(setLoadingNotificationsError(err));
     });
 };
+
+export const fetchNotifications2 =
+  (): any => (dispatch: any, getState: any) => {
+    dispatch(setIsLoadingNotifications(true));
+    dispatch(setLoadingNotificationsError(''));
+    const {user} = getState();
+    axios
+      .get(app.BACKEND_URL + '/notifications/read/', setHeaders(user.token))
+      .then(r => {
+        axios
+          .get(
+            app.BACKEND_URL + '/notifications/client/',
+            setHeaders(user.token),
+          )
+          .then(res => {
+            dispatch(setIsLoadingNotifications(false));
+            dispatch(setIsHardReloadingNotifications(false));
+            dispatch(setNotifications(res.data.notifications));
+          })
+          .catch(error => {
+            const err = returnErroMessage(error);
+            dispatch(setIsLoadingNotifications(false));
+            dispatch(setIsHardReloadingNotifications(false));
+            dispatch(setLoadingNotificationsError(err));
+          });
+      })
+      .catch(error => {
+        const err = returnErroMessage(error);
+        dispatch(setIsLoadingNotifications(false));
+        dispatch(setIsHardReloadingNotifications(false));
+        dispatch(setLoadingNotificationsError(err));
+      });
+  };

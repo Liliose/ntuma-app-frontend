@@ -15,6 +15,7 @@ import CustomAlert from '../../components/custom-alert';
 import FastImage from 'react-native-fast-image';
 import {
   fetchNotifications,
+  fetchNotifications2,
   resetNotifications,
   setIsHardReloadingNotifications,
   setShowClearAllNotificatonsConfirmation,
@@ -43,7 +44,7 @@ const Notifications = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    token && token.trim() !== '' && dispatch(fetchNotifications());
+    token && token.trim() !== '' && dispatch(fetchNotifications2());
   }, []);
 
   useEffect(() => {
@@ -75,13 +76,13 @@ const Notifications = () => {
   const alertCallBack = () => {
     setShowErrorAlert(false);
     dispatch(setIsHardReloadingNotifications(true));
-    dispatch(fetchNotifications());
+    dispatch(fetchNotifications2());
   };
 
   const onRefresh = () => {
     setRefreshing(true);
     dispatch(setIsHardReloadingNotifications(true));
-    dispatch(fetchNotifications());
+    dispatch(fetchNotifications2());
   };
 
   const handleClearAll = () => {
