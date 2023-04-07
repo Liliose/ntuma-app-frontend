@@ -12,6 +12,7 @@ import {
   btnWithBgContainerStyles,
   btnWithBgTextStyles,
   viewFlexCenter,
+  viewFlexSpace,
 } from '../../constants/styles';
 import {INavigationProp} from '../../../interfaces';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
@@ -23,14 +24,16 @@ const Welcome = ({navigation}: INavigationProp) => {
     }
   }, []);
   return (
-    <View style={{flex: 1, backgroundColor: APP_COLORS.MAROON}}>
-      <View style={{flex: 1}}>
-        <View style={[viewFlexCenter, {flex: 1, marginBottom: 100}]}>
-          <Text
-            style={{color: APP_COLORS.WHITE, fontSize: 25, fontWeight: '600'}}>
-            Ntuma App
-          </Text>
-        </View>
+    <View
+      style={[
+        viewFlexSpace,
+        {flex: 1, backgroundColor: APP_COLORS.MAROON, flexDirection: 'column'},
+      ]}>
+      <View style={{flex: 1, paddingTop: 50}}>
+        <Text
+          style={{color: APP_COLORS.WHITE, fontSize: 25, fontWeight: '600'}}>
+          Ntuma App
+        </Text>
       </View>
       <View
         style={{
@@ -40,11 +43,12 @@ const Welcome = ({navigation}: INavigationProp) => {
           borderTopLeftRadius: 50,
           position: 'relative',
           padding: 50,
+          width,
         }}>
         <View
           style={[
             viewFlexCenter,
-            {position: 'absolute', top: -(width - 220), width},
+            {position: 'absolute', top: -(width - 210), width},
           ]}>
           <Image
             source={require('../../assets/fruits.png')}
