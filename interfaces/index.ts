@@ -13,6 +13,11 @@ export interface IUser {
   userId: number;
 }
 
+export interface ISystemFeesReducer {
+  fees: ISystemFees;
+  isLoading: boolean;
+}
+
 export interface IRecentSearchesReducer {
   searches: string[];
 }
@@ -118,6 +123,12 @@ export interface ICategory {
   name: string;
   image: string;
   createdAt: string;
+}
+export interface ISystemFees {
+  id: number;
+  amount: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IBanner {

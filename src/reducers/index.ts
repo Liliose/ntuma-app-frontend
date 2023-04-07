@@ -16,6 +16,7 @@ import notifications from './notifications';
 import clients from './clients';
 import messages from './messages';
 import banners from './banners';
+import systemfees from './systemFees';
 const rootReducer = combineReducers({
   user,
   markets,
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   clients,
   messages,
   banners,
+  systemfees,
 });
 
 export default rootReducer;
