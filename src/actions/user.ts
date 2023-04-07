@@ -62,16 +62,21 @@ export const resetUser = () => ({type: RESET_USER});
 
 export const saveAppToken = (): any => (dispatch: any, getState: any) => {
   const {user} = getState();
-  axios
-    .post(app.BACKEND_URL + '/apptokens/', {
-      userId: user.userId,
-      fbToken: user.fbToken,
-      appType: 'CLIENT',
-    })
-    .then(res => {
-      // console.log({res});
-    })
-    .catch(error => {
-      // console.log({error});
-    });
+  try {
+    if (user.fbToken.trim() === '') {
+      return;
+    }
+    axios
+      .post(app.BACKEND_URL + '/apptokens/', {
+        userId: user.userId,
+        fbToken: user.fbToken,
+        appType: 'CLIENT',
+      })
+      .then(res => {
+        // console.log({res});
+      })
+      .catch(error => {
+        // console.log({error});
+      });
+  } catch (error) {}
 };

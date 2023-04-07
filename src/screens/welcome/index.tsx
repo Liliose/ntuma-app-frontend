@@ -37,7 +37,7 @@ const Welcome = ({navigation}: INavigationProp) => {
       </View>
       <View
         style={{
-          height: height - 300,
+          height: height - 290,
           backgroundColor: APP_COLORS.WHITE,
           borderTopRightRadius: 50,
           borderTopLeftRadius: 50,
