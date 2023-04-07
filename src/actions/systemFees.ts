@@ -32,6 +32,6 @@ export const fetchSystemFees = (): any => (dispatch: any, getState: any) => {
     })
     .catch(error => {
       dispatch(setIsLoadingSystemFees(false));
-      errorHandler(error);
+      //   errorHandler(error);
     });
 };

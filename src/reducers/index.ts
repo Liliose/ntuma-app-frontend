@@ -17,6 +17,7 @@ import clients from './clients';
 import messages from './messages';
 import banners from './banners';
 import systemfees from './systemFees';
+import packagingfees from './packagingFees';
 const rootReducer = combineReducers({
   user,
   markets,
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   messages,
   banners,
   systemfees,
+  packagingfees,
 });
 
 export default rootReducer;
