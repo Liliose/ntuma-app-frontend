@@ -156,8 +156,6 @@ const HomeTabs = ({navigation}: INavigationProp) => {
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: APP_COLORS.MAROON,
-          borderBottomColor: 'rgba(255,255,255,0.6)',
-          borderBottomWidth: 1,
         },
       }}>
       <Tab.Screen
@@ -344,8 +342,7 @@ function Navigation() {
             title: 'Order History',
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
-            cardStyleInterpolator:
-              CardStyleInterpolators.forFadeFromBottomAndroid,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           }}
         />
 
@@ -449,8 +446,7 @@ function Navigation() {
                 </View>
               </Pressable>
             ),
-            cardStyleInterpolator:
-              CardStyleInterpolators.forFadeFromBottomAndroid,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
         <Stack.Screen
