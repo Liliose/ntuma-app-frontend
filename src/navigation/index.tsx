@@ -116,14 +116,13 @@ function OrdersTab() {
         name="PendingOrders"
         component={PendingOrders}
       />
-
-      <TopTab.Screen
+      {/* <TopTab.Screen
         options={{
           tabBarLabel: 'Schedured',
         }}
         name="ScheduledOrders"
         component={PendingOrders}
-      />
+      /> */}
       <TopTab.Screen
         options={{
           tabBarLabel: 'Failed',

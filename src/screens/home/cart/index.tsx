@@ -79,7 +79,7 @@ const Cart = ({navigation}: INavigationProp) => {
                 </Text>
               </View>
             </Pressable>
-            <View style={[btnWithoutBgContainerStyles]}>
+            {/* <View style={[btnWithoutBgContainerStyles]}>
               <Text
                 style={[
                   btnWithoutBgTextStyles,
@@ -87,7 +87,7 @@ const Cart = ({navigation}: INavigationProp) => {
                 ]}>
                 Schedule Order
               </Text>
-            </View>
+            </View> */}
           </View>
         </View>
       ) : (
