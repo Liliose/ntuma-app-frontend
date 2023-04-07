@@ -35,6 +35,7 @@ import {
   setDeleteWalletTransaction,
 } from '../../actions/walletTransactions';
 import {app} from '../../constants/app';
+import {addOrdUpdateSystemFees} from '../../actions/systemFees';
 
 let mSocket: any = undefined;
 let mStore: any = undefined;
@@ -165,6 +166,14 @@ const dispatchBasicAppData = (data: ISocketData, store: any) => {
   }
   if (data.type === EVENT_NAMES_ENUM.DELETE_PRODUCT) {
     store.dispatch(setDeleteProduct(data.data));
+  }
+
+  //system fees
+  if (
+    data.type === EVENT_NAMES_ENUM.ADD_SYSTEM_FEES ||
+    data.type === EVENT_NAMES_ENUM.UPDATE_SYSTEM_FEES
+  ) {
+    store.dispatch(addOrdUpdateSystemFees(data.data));
   }
 };
 
