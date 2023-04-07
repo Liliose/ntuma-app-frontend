@@ -50,6 +50,27 @@ const AccountSettings = ({navigation}: INavigationProp) => {
           <Icon name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
       </Pressable>
+      <Pressable onPress={() => navigation.navigate('DeleteAccount')}>
+        <View
+          style={[
+            viewFlexSpace,
+            {
+              padding: 10,
+              borderBottomWidth: 1,
+              borderBottomColor: APP_COLORS.BORDER_COLOR,
+            },
+          ]}>
+          <Text
+            style={{
+              flex: 1,
+              marginHorizontal: 10,
+              color: APP_COLORS.BLACK,
+            }}>
+            Delete Account
+          </Text>
+          <Icon name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
+        </View>
+      </Pressable>
     </View>
   );
 };
