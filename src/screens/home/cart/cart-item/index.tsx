@@ -8,7 +8,6 @@ import {APP_COLORS} from '../../../../constants/colors';
 import {viewFlexSpace} from '../../../../constants/styles';
 import {app} from '../../../../constants/app';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Icon2 from 'react-native-vector-icons/Feather';
 import {currencyFormatter} from '../../../../helpers';
 import {setCart} from '../../../../actions/cart';
 interface ICartItemProps {
@@ -107,7 +106,7 @@ const CartItem = ({
                     setShowModal(true);
                   }}>
                   <View>
-                    <Icon2 name="edit-2" size={25} color={APP_COLORS.BLACK} />
+                    <Text style={{color: APP_COLORS.BLACK}}>Edit</Text>
                   </View>
                 </Pressable>
               </View>
