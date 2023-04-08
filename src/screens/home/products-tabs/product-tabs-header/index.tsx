@@ -153,10 +153,10 @@ const ProductTabsHeader = ({navigation}: INavigationProp) => {
                 }}>
                 Choose Different Market
               </Text>
-              <Icon2 name="angle-right" size={30} color={APP_COLORS.BLACK} />
+              <Icon2 name="angle-right" size={20} color={APP_COLORS.BLACK} />
             </View>
           </Pressable>
-          <Text style={{color: APP_COLORS.MAROON}}>
+          <Text style={{color: APP_COLORS.BLACK}}>
             Choose Category Within Selected Market
           </Text>
           {!showCategories ? (
@@ -192,7 +192,7 @@ const ProductTabsHeader = ({navigation}: INavigationProp) => {
                       </Text>
                       <Icon2
                         name="angle-right"
-                        size={30}
+                        size={20}
                         color={APP_COLORS.BLACK}
                       />
                     </View>
