@@ -64,6 +64,7 @@ const Checkout = ({navigation}: INavigationProp) => {
   });
   const [distance, setDistance] = useState<number>(0);
   const [cartTotal, setCartTotal] = useState<number>(0);
+  const [generalTotal, setGeneralTotal] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const isStepComplete = (step: string) => {
@@ -154,6 +155,21 @@ const Checkout = ({navigation}: INavigationProp) => {
     dispatch(fetchSystemFees());
     dispatch(fethcPackagingFees());
   }, []);
+
+  useEffect(() => {
+    let sub = true;
+    if (sub) {
+      setGeneralTotal(
+        Number(cartTotal) +
+          Number(deliveryAmount) +
+          Number(packagingfees.fees.amount) +
+          Number(systemfees.fees.amount),
+      );
+    }
+    return () => {
+      sub = false;
+    };
+  }, [deliveryAmount, packagingfees, systemfees, deliveryAmount, cartTotal]);
 
   const handleSubmit = () => {
     setShowAlert(false);

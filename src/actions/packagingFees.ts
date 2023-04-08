@@ -25,7 +25,7 @@ export const resetSystemFees = () => ({type: RESET_PACKAGING_FEES});
 export const fethcPackagingFees = (): any => (dispatch: any, getState: any) => {
   dispatch(setIsLoadingPackagingFees(true));
   axios
-    .get(app.BACKEND_URL + '/systemfees')
+    .get(app.BACKEND_URL + '/packagingfees')
     .then(res => {
       dispatch(setIsLoadingPackagingFees(false));
       dispatch(addOrUpdatePackagingFees(res.data.fees));
