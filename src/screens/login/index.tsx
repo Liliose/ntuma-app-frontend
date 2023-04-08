@@ -94,9 +94,7 @@ const Login = ({navigation}: INavigationProp) => {
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
-        '731820953075-c37jroehbn7lmnoe6qc9kg0irkmog7jb.apps.googleusercontent.com',
-      offlineAccess: true,
-      forceCodeForRefreshToken: true,
+        '152826397930-uf6moun65rfu6ov6icilpdops3cg24ce.apps.googleusercontent.com',
     });
   }, []);
 
