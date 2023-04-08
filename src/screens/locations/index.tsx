@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import {removeLocation} from '../../actions/locations';
 import {ILocation} from '../../../interfaces';
+import NotFound from '../../components/not-found';
 
 const Locations = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,9 @@ const Locations = () => {
         paddingHorizontal: 10,
         paddingVertical: 20,
       }}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{flexGrow: 1}}>
         {locations.map((item, index) => (
           <WhiteCard key={index} style={{marginBottom: 15}}>
             <View style={{padding: 10}}>
@@ -76,6 +79,7 @@ const Locations = () => {
             </View>
           </WhiteCard>
         ))}
+        {locations.length === 0 && <NotFound title="No locations saved yet" />}
       </ScrollView>
     </View>
   );
