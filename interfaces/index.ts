@@ -64,6 +64,7 @@ export interface IAppConfig {
   BACKEND_URL: string;
   SOCKET_URL: string;
   FILE_URL: string;
+  WEB_CLIENT_ID: string;
 }
 
 export interface INavigationProp {

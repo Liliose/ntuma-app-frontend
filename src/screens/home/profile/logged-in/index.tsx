@@ -110,7 +110,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
               justifyContent: 'center',
             },
           ]}>
-          {image.trim().length === 0 ? (
+          {image?.trim().length === 0 ? (
             <Icon2 name="user" size={50} color={APP_COLORS.WHITE} />
           ) : (
             <ImageLoader

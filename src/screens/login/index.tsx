@@ -22,7 +22,7 @@ import {
   viewFlexSpace,
 } from '../../constants/styles';
 import {INavigationProp, TOAST_MESSAGE_TYPES} from '../../../interfaces';
-import {errorHandler, toastMessage} from '../../helpers';
+import {errorHandler, returnErroMessage, toastMessage} from '../../helpers';
 import axios from 'axios';
 import {app} from '../../constants/app';
 import {useDispatch} from 'react-redux';
@@ -44,6 +44,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import FullPageLoader from '../../components/full-page-loader';
+import CustomErrorAlert from '../../components/custom-error-alert';
 
 const {height} = Dimensions.get('window');
 const initialState = {
@@ -54,11 +55,17 @@ const Login = ({navigation}: INavigationProp) => {
   const dispatch = useDispatch();
   const [state, setState] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [googleErrorMessage, setGoogleErrorMessage] = useState('');
 
   useEffect(() => {
     if (Platform.OS === 'android') {
       changeNavigationBarColor('maroon');
     }
+    GoogleSignin.configure({
+      webClientId: app.WEB_CLIENT_ID,
+    });
+    googleSignOut();
   }, []);
 
   const handleSubmit = () => {
@@ -91,18 +98,66 @@ const Login = ({navigation}: INavigationProp) => {
       });
   };
 
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId:
-        '152826397930-uf6moun65rfu6ov6icilpdops3cg24ce.apps.googleusercontent.com',
-    });
-  }, []);
+  const handleGoogleLogin = (userInfo: any) => {
+    try {
+      setIsLoading(true);
+      const {email, id} = userInfo.user;
+      axios
+        .post(app.BACKEND_URL + '/users/login/google', {email, googleId: id})
+        .then(res => {
+          setIsLoading(false);
+          const {
+            role,
+            walletAmounts,
+            userId,
+            names,
+            phone,
+            image,
+            email,
+            token,
+          } = res.data;
+          dispatch(setUserNames(names));
+          dispatch(setUserRole(role));
+          dispatch(setUserWalletAmount(walletAmounts));
+          dispatch(setUserId(userId));
+          dispatch(setUserPhone(phone));
+          dispatch(setUserEmail(email));
+          dispatch(setUserImage(image));
+          dispatch(saveAppToken());
+          dispatch(setUserToken(token));
+          toastMessage(TOAST_MESSAGE_TYPES.SUCCESS, res.data.msg);
+          navigation.replace('HomeTabs');
+        })
+        .catch(error => {
+          const err = returnErroMessage(error);
+          setIsLoading(false);
+          setGoogleErrorMessage(err);
+          setShowAlert(true);
+          googleSignOut();
+        });
+    } catch (error) {
+      const err = returnErroMessage(error);
+      setIsLoading(false);
+      setGoogleErrorMessage(err);
+      setShowAlert(true);
+      googleSignOut();
+    }
+  };
+
+  const googleSignOut = async () => {
+    try {
+      await GoogleSignin.signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleGoogleSignIn = async () => {
     try {
-      // await GoogleSignin.hasPlayServices();
+      await GoogleSignin.hasPlayServices();
+      setIsLoading(true);
       const userInfo = await GoogleSignin.signIn();
-      console.log({userInfo});
+      handleGoogleLogin(userInfo);
     } catch (error: any) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
@@ -116,7 +171,7 @@ const Login = ({navigation}: INavigationProp) => {
       setIsLoading(false);
       toastMessage(
         TOAST_MESSAGE_TYPES.ERROR,
-        'Something went wrong while signing in with google',
+        'Something went wrong while signing in with google.Try again later.',
       );
       console.log({error: JSON.stringify(error)});
     }
@@ -216,6 +271,11 @@ const Login = ({navigation}: INavigationProp) => {
         </View>
       </View>
       <FullPageLoader isLoading={isLoading} />
+      <CustomErrorAlert showAlert={showAlert} setShowAlert={setShowAlert}>
+        <Text style={{color: APP_COLORS.TEXT_GRAY, textAlign: 'center'}}>
+          {googleErrorMessage}
+        </Text>
+      </CustomErrorAlert>
     </KeyboardAvoidingView>
   );
 };

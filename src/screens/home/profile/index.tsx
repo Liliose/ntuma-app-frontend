@@ -17,7 +17,7 @@ const Profile = ({navigation}: INavigationProp) => {
         paddingVertical: 10,
         paddingHorizontal: 20,
       }}>
-      {token.trim() === '' ? (
+      {token?.trim() === '' ? (
         <NotLoggedIn navigation={navigation} />
       ) : (
         <LoggedIn navigation={navigation} />
