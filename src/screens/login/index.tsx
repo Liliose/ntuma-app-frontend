@@ -171,7 +171,7 @@ const Login = ({navigation}: INavigationProp) => {
       setIsLoading(false);
       toastMessage(
         TOAST_MESSAGE_TYPES.ERROR,
-        'Something went wrong while signing in with google.Try again later.',
+        'Something went wrong while signing in with google.Try again later. If this error persits, close the app and open it again.',
       );
       console.log({error: JSON.stringify(error)});
     }
