@@ -19,7 +19,7 @@ import Loader from './loader';
 import ProductItem from './product-item';
 import ProductPreview from './preview';
 import {INavigationProp, IProduct} from '../../../../interfaces';
-import {useLoadBasiData, validateSelectedMarket} from '../../../helpers';
+import {validateSelectedMarket} from '../../../helpers';
 import {resetCart} from '../../../actions/cart';
 import {resetFavourites} from '../../../actions/favourites';
 import {
@@ -40,7 +40,6 @@ interface IProductsProps extends INavigationProp {
 }
 
 const Products = ({route, navigation}: IProductsProps) => {
-  const loadBasicData = useLoadBasiData();
   const [showLoader, setShowLoader] = useState(false);
   const dispatch = useDispatch();
   const {categories, selectedCategory} = useSelector(
@@ -61,10 +60,6 @@ const Products = ({route, navigation}: IProductsProps) => {
 
   const [refreshing, setRefreshing] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-
-  // useEffect(() => {
-  //   loadBasicData();
-  // }, []);
 
   useEffect(() => {
     let sub = true;
