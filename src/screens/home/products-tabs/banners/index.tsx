@@ -35,7 +35,7 @@ const Banners = ({banners, navigation}: IBannersProps) => {
       <Carousel
         loop={true}
         showsDots={false}
-        autoplayInterval={5000}
+        autoplayInterval={10000}
         autoplay={banners.length > 0}
         containerStyle={{flexGrow: 1}}>
         {banners.map((item, index) => (
