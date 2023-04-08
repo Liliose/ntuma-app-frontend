@@ -48,7 +48,8 @@ const Item = ({item, navigation}: IItemProps) => {
                     Number(item.cartTotalAmount) +
                       Number(item.deliveryFees) +
                       Number(item.packagingFees) +
-                      Number(item.systemFees),
+                      Number(item.systemFees) +
+                      Number(item.agentFees),
                   )}{' '}
                   RWF
                 </Text>

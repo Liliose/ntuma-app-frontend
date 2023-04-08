@@ -183,7 +183,10 @@ const OrderPreview = ({
             Charges:
           </Text>
           <Text style={{color: APP_COLORS.TEXT_GRAY}}>
-            {currencyFormatter(order.systemFees)} RWF
+            {currencyFormatter(
+              Number(order.systemFees) + Number(order.agentFees),
+            )}{' '}
+            RWF
           </Text>
         </View>
         <View
@@ -203,7 +206,8 @@ const OrderPreview = ({
               Number(order.cartTotalAmount) +
                 Number(order.deliveryFees) +
                 Number(order.packagingFees) +
-                Number(order.systemFees),
+                Number(order.systemFees) +
+                Number(order.agentFees),
             )}{' '}
             RWF
           </Text>

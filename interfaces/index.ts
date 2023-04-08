@@ -305,6 +305,7 @@ export interface IOrder {
   deliveryCode: number;
   packagingFees: number;
   systemFees: number;
+  agentFees: number;
 }
 
 export interface INotificaton {

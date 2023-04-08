@@ -187,7 +187,7 @@ const Checkout = ({navigation}: INavigationProp) => {
       .post(
         app.BACKEND_URL + '/orders/',
         {
-          agentsfees: agentsfees.fees.amount,
+          agentfees: agentsfees.fees.amount,
           systemfees: systemfees.fees.amount,
           packagingfees: packagingfees.fees.amount,
           cartItems: JSON.stringify(cart),

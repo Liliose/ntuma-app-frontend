@@ -25,8 +25,8 @@ const Item = ({item, navigation}: IItemProps) => {
   return (
     <Pressable
       onPress={() => navigation.navigate('OrderPreview', {order: item})}>
-      <WhiteCard style={{marginBottom: 10}}>
-        <View style={[viewFlexSpace]}>
+      <WhiteCard style={{marginBottom: 10, padding: 10}}>
+        <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
           <View>
             <Image
               source={{uri: app.FILE_URL + product?.image}}
@@ -34,7 +34,7 @@ const Item = ({item, navigation}: IItemProps) => {
               resizeMode="contain"
             />
           </View>
-          <View style={{flex: 1, padding: 10}}>
+          <View style={{flex: 1, marginLeft: 10}}>
             <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
               {product?.name}
             </Text>
@@ -48,7 +48,8 @@ const Item = ({item, navigation}: IItemProps) => {
                     Number(item.cartTotalAmount) +
                       Number(item.deliveryFees) +
                       Number(item.packagingFees) +
-                      Number(item.systemFees),
+                      Number(item.systemFees) +
+                      Number(item.agentFees),
                   )}{' '}
                   RWF
                 </Text>
