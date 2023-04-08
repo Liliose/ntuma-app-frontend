@@ -57,6 +57,7 @@ const Item = ({item, navigation}: IItemProps) => {
                 {new Date(item.createdAt).toUTCString()}
               </Text>
             </View>
+            <Text style={{color: APP_COLORS.RED}}>{item.failureReason}</Text>
           </View>
         </View>
       </WhiteCard>
