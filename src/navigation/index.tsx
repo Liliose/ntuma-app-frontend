@@ -58,6 +58,7 @@ import ChangePassword from '../screens/change-password';
 import AccountSettings from '../screens/account-settings';
 import NotificationsCounter from '../components/notification-counter';
 import DeleteAccount from '../screens/delete-account';
+import HelpAndSupport from '../screens/help-and-support';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -664,6 +665,19 @@ function Navigation() {
           component={DeleteAccount}
           options={({route, navigation}: INavigationProp) => ({
             title: 'Delete Account',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          })}
+        />
+        <Stack.Screen
+          name="HelpAndSupport"
+          component={HelpAndSupport}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Help & Support',
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },

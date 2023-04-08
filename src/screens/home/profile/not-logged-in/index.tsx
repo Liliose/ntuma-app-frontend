@@ -1,39 +1,36 @@
-import {View, Text, Pressable, InputAccessoryView} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import React from 'react';
-import {RootState} from '../../../../reducers';
-import {useDispatch, useSelector} from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/AntDesign';
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {APP_COLORS} from '../../../../constants/colors';
 import {
   btnWithBgContainerStyles,
-  viewFlexCenter,
   viewFlexSpace,
 } from '../../../../constants/styles';
 import {INavigationProp} from '../../../../../interfaces';
-import {resetUser} from '../../../../actions/user';
 
 const NotLoggedIn = ({navigation}: INavigationProp) => {
   return (
     <View>
       <View style={{marginVertical: 15}}>
-        <View style={[viewFlexSpace, {marginVertical: 10}]}>
-          <Icon3
-            name="help-circle-outline"
-            size={25}
-            color={APP_COLORS.BLACK}
-          />
-          <Text
-            style={{
-              color: APP_COLORS.TEXT_GRAY,
-              flex: 1,
-              marginHorizontal: 10,
-            }}>
-            Help&Support
-          </Text>
-          <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
-        </View>
+        <Pressable onPress={() => navigation.navigate('HelpAndSupport')}>
+          <View style={[viewFlexSpace, {marginVertical: 10}]}>
+            <Icon3
+              name="help-circle-outline"
+              size={25}
+              color={APP_COLORS.BLACK}
+            />
+            <Text
+              style={{
+                color: APP_COLORS.TEXT_GRAY,
+                flex: 1,
+                marginHorizontal: 10,
+              }}>
+              Help&Support
+            </Text>
+            <Icon2 name="right" size={25} color={APP_COLORS.TEXT_GRAY} />
+          </View>
+        </Pressable>
       </View>
       <Pressable
         onPress={() => navigation.navigate('Login')}

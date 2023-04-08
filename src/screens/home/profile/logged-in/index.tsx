@@ -232,22 +232,28 @@ const LoggedIn = ({navigation}: INavigationProp) => {
             />
           </View>
         </Pressable>
-        <View style={[viewFlexSpace, {marginVertical: 10}]}>
-          <Icon3
-            name="help-circle-outline"
-            size={25}
-            color={APP_COLORS.BLACK}
-          />
-          <Text
-            style={{
-              color: APP_COLORS.TEXT_GRAY,
-              flex: 1,
-              marginHorizontal: 10,
-            }}>
-            Help&Support
-          </Text>
-          <Icon4 name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
-        </View>
+        <Pressable onPress={() => navigation.navigate('HelpAndSupport')}>
+          <View style={[viewFlexSpace, {marginVertical: 10}]}>
+            <Icon3
+              name="help-circle-outline"
+              size={25}
+              color={APP_COLORS.BLACK}
+            />
+            <Text
+              style={{
+                color: APP_COLORS.TEXT_GRAY,
+                flex: 1,
+                marginHorizontal: 10,
+              }}>
+              Help&Support
+            </Text>
+            <Icon4
+              name="chevron-right"
+              size={25}
+              color={APP_COLORS.TEXT_GRAY}
+            />
+          </View>
+        </Pressable>
       </View>
       <Pressable onPress={() => confirmLogout()}>
         <View style={[viewFlexSpace]}>
