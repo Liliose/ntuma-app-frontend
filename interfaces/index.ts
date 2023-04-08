@@ -17,6 +17,10 @@ export interface ISystemFeesReducer {
   fees: ISystemFees;
   isLoading: boolean;
 }
+export interface IAgentsFeesReducer {
+  fees: IAgentsFees;
+  isLoading: boolean;
+}
 export interface IPackagingFeesReducer {
   fees: ISystemFees;
   isLoading: boolean;
@@ -129,6 +133,12 @@ export interface ICategory {
   createdAt: string;
 }
 export interface ISystemFees {
+  id: number;
+  amount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+export interface IAgentsFees {
   id: number;
   amount: number;
   createdAt: string;

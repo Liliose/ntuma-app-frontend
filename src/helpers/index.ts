@@ -10,6 +10,7 @@ import {fetchDeliveryFees} from '../actions/deliveryFees';
 import {fetchBanners} from '../actions/banners';
 import {fethcPackagingFees} from '../actions/packagingFees';
 import {fetchSystemFees} from '../actions/systemFees';
+import {fetchAgentsFees} from '../actions/agentsFees';
 
 //custom dispatcher hook
 export const useResetUser = () => {
@@ -29,6 +30,7 @@ export const useLoadBasiData = (): any => {
     dispatch(fetchBanners());
     dispatch(fethcPackagingFees());
     dispatch(fetchSystemFees());
+    dispatch(fetchAgentsFees());
   };
 };
 
