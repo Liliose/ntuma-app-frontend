@@ -293,6 +293,8 @@ export interface IOrder {
   createdAt: string;
   updatedAt: string;
   deliveryCode: number;
+  packagingFees: number;
+  systemFees: number;
 }
 
 export interface INotificaton {

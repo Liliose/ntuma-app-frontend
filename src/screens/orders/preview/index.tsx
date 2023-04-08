@@ -164,11 +164,46 @@ const OrderPreview = ({
             },
           ]}>
           <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
+            Packaging Fees:
+          </Text>
+          <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+            {currencyFormatter(order.packagingFees)} RWF
+          </Text>
+        </View>
+        <View
+          style={[
+            viewFlexSpace,
+            {
+              borderBottomColor: APP_COLORS.BORDER_COLOR,
+              borderBottomWidth: 1,
+              padding: 10,
+            },
+          ]}>
+          <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
+            Charges:
+          </Text>
+          <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+            {currencyFormatter(order.systemFees)} RWF
+          </Text>
+        </View>
+        <View
+          style={[
+            viewFlexSpace,
+            {
+              borderBottomColor: APP_COLORS.BORDER_COLOR,
+              borderBottomWidth: 1,
+              padding: 10,
+            },
+          ]}>
+          <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
             Grand Total:
           </Text>
           <Text style={{color: APP_COLORS.TEXT_GRAY}}>
             {currencyFormatter(
-              Number(order.cartTotalAmount) + Number(order.deliveryFees),
+              Number(order.cartTotalAmount) +
+                Number(order.deliveryFees) +
+                Number(order.packagingFees) +
+                Number(order.systemFees),
             )}{' '}
             RWF
           </Text>

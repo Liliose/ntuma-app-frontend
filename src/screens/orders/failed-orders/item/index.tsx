@@ -45,7 +45,10 @@ const Item = ({item, navigation}: IItemProps) => {
                 </Text>
                 <Text style={{color: APP_COLORS.TEXT_GRAY}}>
                   {currencyFormatter(
-                    Number(item.cartTotalAmount) + Number(item.deliveryFees),
+                    Number(item.cartTotalAmount) +
+                      Number(item.deliveryFees) +
+                      Number(item.packagingFees) +
+                      Number(item.systemFees),
                   )}{' '}
                   RWF
                 </Text>
