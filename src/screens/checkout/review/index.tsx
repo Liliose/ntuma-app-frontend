@@ -1,6 +1,7 @@
 import {View, Text, Pressable, ScrollView} from 'react-native';
 import React from 'react';
 import {
+  IAgentsFeesReducer,
   IDeliveryFee,
   ILocation,
   IMarket,
@@ -26,6 +27,8 @@ interface IReviewProps {
   handleSubmit: any;
   systemfees: ISystemFeesReducer;
   packagingfees: IPackagingFeesReducer;
+  agentsfees: IAgentsFeesReducer;
+  generalTotal: number;
 }
 const Review = ({
   distance,
@@ -39,6 +42,8 @@ const Review = ({
   handleSubmit,
   packagingfees,
   systemfees,
+  agentsfees,
+  generalTotal,
 }: IReviewProps) => {
   return (
     <View
@@ -184,7 +189,10 @@ const Review = ({
               Charges:
             </Text>
             <Text style={{color: APP_COLORS.BLACK}}>
-              {currencyFormatter(systemfees.fees.amount)} RWF
+              {currencyFormatter(
+                Number(systemfees.fees.amount) + Number(agentsfees.fees.amount),
+              )}{' '}
+              RWF
             </Text>
           </View>
           <View
@@ -230,13 +238,7 @@ const Review = ({
               Total:
             </Text>
             <Text style={{color: APP_COLORS.BLACK}}>
-              {currencyFormatter(
-                Number(cartTotal) +
-                  Number(deliveryAmount) +
-                  Number(packagingfees.fees.amount) +
-                  Number(systemfees.fees.amount),
-              )}{' '}
-              RWF
+              {currencyFormatter(generalTotal)} RWF
             </Text>
           </View>
         </ScrollView>

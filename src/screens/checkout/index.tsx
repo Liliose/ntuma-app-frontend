@@ -41,6 +41,7 @@ const Checkout = ({navigation}: INavigationProp) => {
   const {cart} = useSelector((state: RootState) => state.cart);
   const systemfees = useSelector((state: RootState) => state.systemfees);
   const packagingfees = useSelector((state: RootState) => state.packagingfees);
+  const agentsfees = useSelector((state: RootState) => state.agentsfees);
   const [activeStep, setActiveStep] = useState(CHECKOUT_STEPS_ENUM.DELIVERY);
   const [paymentMethod, setPaymentMethod] = useState<string>('');
   const [paymentPhoneNumber, setPaymentPhoneNumber] = useState<string>('');
@@ -163,13 +164,21 @@ const Checkout = ({navigation}: INavigationProp) => {
         Number(cartTotal) +
           Number(deliveryAmount) +
           Number(packagingfees.fees.amount) +
-          Number(systemfees.fees.amount),
+          Number(systemfees.fees.amount) +
+          Number(agentsfees.fees.amount),
       );
     }
     return () => {
       sub = false;
     };
-  }, [deliveryAmount, packagingfees, systemfees, deliveryAmount, cartTotal]);
+  }, [
+    deliveryAmount,
+    packagingfees,
+    systemfees,
+    deliveryAmount,
+    agentsfees,
+    cartTotal,
+  ]);
 
   const handleSubmit = () => {
     setShowAlert(false);
@@ -178,6 +187,7 @@ const Checkout = ({navigation}: INavigationProp) => {
       .post(
         app.BACKEND_URL + '/orders/',
         {
+          agentsfees: agentsfees.fees.amount,
           systemfees: systemfees.fees.amount,
           packagingfees: packagingfees.fees.amount,
           cartItems: JSON.stringify(cart),
@@ -305,6 +315,8 @@ const Checkout = ({navigation}: INavigationProp) => {
           handleSubmit={handleSubmit}
           packagingfees={packagingfees}
           systemfees={systemfees}
+          agentsfees={agentsfees}
+          generalTotal={generalTotal}
         />
       )}
       <CustomAlert

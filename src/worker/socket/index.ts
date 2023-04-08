@@ -37,6 +37,7 @@ import {
 import {app} from '../../constants/app';
 import {addOrdUpdateSystemFees} from '../../actions/systemFees';
 import {addOrUpdatePackagingFees} from '../../actions/packagingFees';
+import {addOrdUpdateAgentsFees} from '../../actions/agentsFees';
 
 let mSocket: any = undefined;
 let mStore: any = undefined;
@@ -183,6 +184,14 @@ const dispatchBasicAppData = (data: ISocketData, store: any) => {
     data.type === EVENT_NAMES_ENUM.UPDATE_PACKAGING_FEES
   ) {
     store.dispatch(addOrUpdatePackagingFees(data.data));
+  }
+
+  //agents fees
+  if (
+    data.type === EVENT_NAMES_ENUM.ADD_AGENTS_FEES ||
+    data.type === EVENT_NAMES_ENUM.UPDATE_AGENTS_FEES
+  ) {
+    store.dispatch(addOrdUpdateAgentsFees(data.data));
   }
 };
 
