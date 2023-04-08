@@ -22,6 +22,8 @@ import {resetCart} from '../../actions/cart';
 import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 import CustomAlert from '../../components/custom-alert';
 import FastImage from 'react-native-fast-image';
+import {fetchSystemFees} from '../../actions/systemFees';
+import {fethcPackagingFees} from '../../actions/packagingFees';
 
 export enum CHECKOUT_STEPS_ENUM {
   DELIVERY = 'DELIVERY',
@@ -37,6 +39,8 @@ const Checkout = ({navigation}: INavigationProp) => {
   const {token} = useSelector((state: RootState) => state.user);
   const {selectedMarket} = useSelector((state: RootState) => state.markets);
   const {cart} = useSelector((state: RootState) => state.cart);
+  const systemfees = useSelector((state: RootState) => state.systemfees);
+  const packagingfees = useSelector((state: RootState) => state.packagingfees);
   const [activeStep, setActiveStep] = useState(CHECKOUT_STEPS_ENUM.DELIVERY);
   const [paymentMethod, setPaymentMethod] = useState<string>('');
   const [paymentPhoneNumber, setPaymentPhoneNumber] = useState<string>('');
@@ -49,7 +53,7 @@ const Checkout = ({navigation}: INavigationProp) => {
     id: 0,
     vehicleType: '',
     amountPerKilometer: 0,
-    defaultAmount: 0,
+    defaultPrice: 0,
   });
   const [address, setAddress] = useState<ILocation>({
     name: '',
@@ -120,18 +124,24 @@ const Checkout = ({navigation}: INavigationProp) => {
   }, [address]);
 
   useEffect(() => {
-    let sm = 0;
-    for (let i = 0; i < cart.length; i++) {
-      sm += cart[i].quantity * cart[i].price;
+    let sub = true;
+    if (sub) {
+      let sm = 0;
+      for (let i = 0; i < cart.length; i++) {
+        sm += cart[i].quantity * cart[i].price;
+      }
+      setCartTotal(sm);
     }
-    setCartTotal(sm);
+    return () => {
+      sub = false;
+    };
   }, [cart]);
 
   useEffect(() => {
     if (vehicle.vehicleType.trim() !== '') {
       if (distance < 5) {
         //default kilometer
-        setDeliveryAmount(vehicle.defaultAmount);
+        setDeliveryAmount(vehicle.defaultPrice);
       } else {
         setDeliveryAmount(vehicle.amountPerKilometer * distance);
       }
@@ -140,6 +150,11 @@ const Checkout = ({navigation}: INavigationProp) => {
     }
   }, [vehicle, distance]);
 
+  useEffect(() => {
+    dispatch(fetchSystemFees());
+    dispatch(fethcPackagingFees());
+  }, []);
+
   const handleSubmit = () => {
     setShowAlert(false);
     setIsLoading(true);
@@ -147,6 +162,8 @@ const Checkout = ({navigation}: INavigationProp) => {
       .post(
         app.BACKEND_URL + '/orders/',
         {
+          systemfees: systemfees.fees.amount,
+          packagingfees: packagingfees.fees.amount,
           cartItems: JSON.stringify(cart),
           cartTotalAmount: cartTotal,
           distance,
@@ -270,6 +287,8 @@ const Checkout = ({navigation}: INavigationProp) => {
           market={selectedMarket}
           deliveryAmount={deliveryAmount}
           handleSubmit={handleSubmit}
+          packagingfees={packagingfees}
+          systemfees={systemfees}
         />
       )}
       <CustomAlert

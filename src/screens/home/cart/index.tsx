@@ -68,7 +68,7 @@ const Cart = ({navigation}: INavigationProp) => {
                 fontWeight: '600',
                 fontSize: 16,
               }}>
-              TOTAL: {currencyFormatter(total)} RWF
+              SUB TOTAL: {currencyFormatter(total)} RWF
             </Text>
             <Pressable
               style={{marginBottom: 10}}

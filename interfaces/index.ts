@@ -243,7 +243,7 @@ export interface IDeliveryFee {
   id: number;
   vehicleType: string;
   amountPerKilometer: number;
-  defaultAmount: number;
+  defaultPrice: number;
 }
 
 export interface ILocation {

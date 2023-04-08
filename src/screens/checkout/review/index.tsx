@@ -1,6 +1,12 @@
 import {View, Text, Pressable, ScrollView} from 'react-native';
 import React from 'react';
-import {IDeliveryFee, ILocation, IMarket} from '../../../../interfaces';
+import {
+  IDeliveryFee,
+  ILocation,
+  IMarket,
+  IPackagingFeesReducer,
+  ISystemFeesReducer,
+} from '../../../../interfaces';
 import {APP_COLORS} from '../../../constants/colors';
 import {
   btnWithBgContainerStyles,
@@ -18,6 +24,8 @@ interface IReviewProps {
   market: IMarket | undefined;
   deliveryAmount: number;
   handleSubmit: any;
+  systemfees: ISystemFeesReducer;
+  packagingfees: IPackagingFeesReducer;
 }
 const Review = ({
   distance,
@@ -29,6 +37,8 @@ const Review = ({
   market,
   deliveryAmount,
   handleSubmit,
+  packagingfees,
+  systemfees,
 }: IReviewProps) => {
   return (
     <View
@@ -42,7 +52,7 @@ const Review = ({
         },
       ]}>
       <View style={{width: '100%'}}>
-        <ScrollView showsHorizontalScrollIndicator={false}>
+        <ScrollView>
           <Text
             style={{
               fontSize: 20,
@@ -52,6 +62,20 @@ const Review = ({
             }}>
             Order Review
           </Text>
+          <View
+            style={[
+              viewFlexSpace,
+              {
+                borderBottomWidth: 1,
+                borderBottomColor: APP_COLORS.BORDER_COLOR,
+                padding: 10,
+              },
+            ]}>
+            <Text style={{color: APP_COLORS.BLACK, fontWeight: 'bold'}}>
+              Market:
+            </Text>
+            <Text style={{color: APP_COLORS.BLACK}}>{market?.name}</Text>
+          </View>
           <View
             style={[
               viewFlexSpace,
@@ -141,6 +165,38 @@ const Review = ({
               },
             ]}>
             <Text style={{color: APP_COLORS.BLACK, fontWeight: 'bold'}}>
+              Packaging Fees:
+            </Text>
+            <Text style={{color: APP_COLORS.BLACK}}>
+              {currencyFormatter(packagingfees.fees.amount)} RWF
+            </Text>
+          </View>
+          <View
+            style={[
+              viewFlexSpace,
+              {
+                borderBottomWidth: 1,
+                borderBottomColor: APP_COLORS.BORDER_COLOR,
+                padding: 10,
+              },
+            ]}>
+            <Text style={{color: APP_COLORS.BLACK, fontWeight: 'bold'}}>
+              Charges:
+            </Text>
+            <Text style={{color: APP_COLORS.BLACK}}>
+              {currencyFormatter(systemfees.fees.amount)} RWF
+            </Text>
+          </View>
+          <View
+            style={[
+              viewFlexSpace,
+              {
+                borderBottomWidth: 1,
+                borderBottomColor: APP_COLORS.BORDER_COLOR,
+                padding: 10,
+              },
+            ]}>
+            <Text style={{color: APP_COLORS.BLACK, fontWeight: 'bold'}}>
               Payment Method:
             </Text>
             <Text style={{color: APP_COLORS.BLACK}}>{paymentMethod}</Text>
@@ -175,7 +231,10 @@ const Review = ({
             </Text>
             <Text style={{color: APP_COLORS.BLACK}}>
               {currencyFormatter(
-                cartTotal + vehicle.amountPerKilometer * distance,
+                Number(cartTotal) +
+                  Number(deliveryAmount) +
+                  Number(packagingfees.fees.amount) +
+                  Number(systemfees.fees.amount),
               )}{' '}
               RWF
             </Text>
