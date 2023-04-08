@@ -7,14 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:152826397930:android:6af846d7ed57ddf397c393",
+        "mobilesdk_app_id": "1:152826397930:android:ea940123e150c2dd97c393",
         "android_client_info": {
-          "package_name": "com.ntumaapp"
+          "package_name": "com.ntumaagentsapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "152826397930-1qsaq8dmdidg50vnqpeu76676cbae02o.apps.googleusercontent.com",
+          "client_id": "152826397930-uf6moun65rfu6ov6icilpdops3cg24ce.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +27,73 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "152826397930-1qsaq8dmdidg50vnqpeu76676cbae02o.apps.googleusercontent.com",
+              "client_id": "152826397930-07loiatgvmh0hkrpalmrkqbeq0rbtaq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152826397930:android:6af846d7ed57ddf397c393",
+        "android_client_info": {
+          "package_name": "com.ntumaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152826397930-6idllbkf6c8ujpi5o02lna5ad5rij71i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ntumaapp",
+            "certificate_hash": "08f6a22c9c3cf2b4b09343f5e68346852d23d76f"
+          }
+        },
+        {
+          "client_id": "152826397930-uf6moun65rfu6ov6icilpdops3cg24ce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCArSNnnL2bSQh6YAUaJ2AbTpeWBqkOwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152826397930-07loiatgvmh0hkrpalmrkqbeq0rbtaq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152826397930:android:9d9c0a71ba27d5be97c393",
+        "android_client_info": {
+          "package_name": "com.ntumariderapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152826397930-uf6moun65rfu6ov6icilpdops3cg24ce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCArSNnnL2bSQh6YAUaJ2AbTpeWBqkOwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152826397930-07loiatgvmh0hkrpalmrkqbeq0rbtaq7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
