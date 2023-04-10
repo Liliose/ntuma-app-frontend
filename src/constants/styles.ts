@@ -22,6 +22,7 @@ export const commonInput = {
   padding: 10,
   borderWidth: 1,
   borderColor: APP_COLORS.DARK_GRAY,
+  color: APP_COLORS.BLACK,
 };
 
 export const btnWithBgTextStyles: StyleProp<TextStyle> = {

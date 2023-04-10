@@ -113,7 +113,12 @@ const Payment = ({
                     </Text>
                     <TextInput
                       placeholder="Enter MOMO Phone Number"
-                      style={{flex: 1, marginLeft: 10, padding: 10}}
+                      style={{
+                        flex: 1,
+                        marginLeft: 10,
+                        padding: 10,
+                        color: APP_COLORS.BLACK,
+                      }}
                       onChangeText={text => setPhone(text)}
                       keyboardType="number-pad"
                     />

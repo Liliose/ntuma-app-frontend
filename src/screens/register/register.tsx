@@ -304,7 +304,12 @@ const Register = ({navigation}: INavigationProp) => {
                       </Text>
                       <TextInput
                         placeholder="Enter your phone number"
-                        style={{flex: 1, marginLeft: 10, padding: 10}}
+                        style={{
+                          flex: 1,
+                          marginLeft: 10,
+                          padding: 10,
+                          color: APP_COLORS.BLACK,
+                        }}
                         onChangeText={text => setState({...state, phone: text})}
                         keyboardType="number-pad"
                       />
@@ -446,7 +451,12 @@ const Register = ({navigation}: INavigationProp) => {
                       </Text>
                       <TextInput
                         placeholder="Enter your phone number"
-                        style={{flex: 1, marginLeft: 10, padding: 10}}
+                        style={{
+                          flex: 1,
+                          marginLeft: 10,
+                          padding: 10,
+                          color: APP_COLORS.BLACK,
+                        }}
                         onChangeText={text =>
                           setGoogleState({...googleState, phone: text})
                         }
