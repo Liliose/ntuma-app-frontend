@@ -278,7 +278,9 @@ const HomeTabs = ({navigation}: INavigationProp) => {
 function Navigation() {
   const dispatch = useDispatch();
   const loadData = useLoadBasiData();
-  const [initialRoute, setInitialRoute] = useState('Welcome');
+  const {token} = useSelector((state: RootState) => state.user);
+  const initScreen = token.trim() === '' ? 'Welcome' : 'SelectMarket';
+  const [initialRoute, setInitialRoute] = useState(initScreen);
   useEffect(() => {
     loadData();
 
