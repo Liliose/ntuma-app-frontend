@@ -101,38 +101,44 @@ const SelectMarket = ({navigation}: INavigationProp) => {
                       style={{borderRadius: 10}}
                     />
                   </Pressable>
+
                   <View style={{flex: 1, marginLeft: 10}}>
-                    <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
-                      <View style={{flex: 1, marginRight: 10}}>
-                        <Text
-                          style={{fontWeight: 'bold', color: APP_COLORS.BLACK}}>
-                          {item.name}
-                        </Text>
-                        <MarketStars />
-                        <View style={[viewFlexSpace]}>
-                          <Icon
-                            name="map-marker"
-                            color="rgba(48, 47, 47, 0.8)"
-                            size={20}
-                          />
+                    <Pressable onPress={() => handleSelectMarket(item)}>
+                      <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
+                        <View style={{flex: 1, marginRight: 10}}>
                           <Text
                             style={{
-                              flex: 1,
-                              marginLeft: 10,
-                              color: APP_COLORS.TEXT_GRAY,
+                              fontWeight: 'bold',
+                              color: APP_COLORS.BLACK,
                             }}>
-                            {item.address}
+                            {item.name}
                           </Text>
+                          <MarketStars />
+                          <View style={[viewFlexSpace]}>
+                            <Icon
+                              name="map-marker"
+                              color="rgba(48, 47, 47, 0.8)"
+                              size={20}
+                            />
+                            <Text
+                              style={{
+                                flex: 1,
+                                marginLeft: 10,
+                                color: APP_COLORS.TEXT_GRAY,
+                              }}>
+                              {item.address}
+                            </Text>
+                          </View>
+                        </View>
+                        <View>
+                          <Icon
+                            name="bookmark-o"
+                            color={APP_COLORS.BLACK}
+                            size={25}
+                          />
                         </View>
                       </View>
-                      <View>
-                        <Icon
-                          name="bookmark-o"
-                          color={APP_COLORS.BLACK}
-                          size={25}
-                        />
-                      </View>
-                    </View>
+                    </Pressable>
                   </View>
                 </View>
               </WhiteCard>
