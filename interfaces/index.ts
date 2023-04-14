@@ -85,6 +85,7 @@ export interface IMarket {
   long: string;
   image: string;
   isActive: boolean;
+  bikeMaximumKm: number;
   createdAt: string;
 }
 

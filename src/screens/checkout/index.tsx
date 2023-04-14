@@ -291,6 +291,7 @@ const Checkout = ({navigation}: INavigationProp) => {
           setVehicle={setVehicle}
           navigation={navigation}
           setActiveStep={setActiveStep}
+          distance={distance}
         />
       )}
       {activeStep === CHECKOUT_STEPS_ENUM.PAYMENT && (

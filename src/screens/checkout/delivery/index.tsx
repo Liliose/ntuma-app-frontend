@@ -1,5 +1,5 @@
-import {View, Text, Pressable} from 'react-native';
-import React from 'react';
+import {View, Text, Pressable, Dimensions} from 'react-native';
+import React, {useState, useEffect} from 'react';
 import {APP_COLORS} from '../../../constants/colors';
 import {
   btnWithBgContainerStyles,
@@ -8,6 +8,9 @@ import {
   viewFlexSpace,
 } from '../../../constants/styles';
 import Icon from 'react-native-vector-icons/Entypo';
+import Icon2 from 'react-native-vector-icons/FontAwesome5';
+import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon4 from 'react-native-vector-icons/FontAwesome';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../reducers';
 import {
@@ -17,8 +20,11 @@ import {
   VEHICLES_ENUM,
 } from '../../../../interfaces';
 import {Picker} from '@react-native-picker/picker';
+import DropDownPicker from 'react-native-dropdown-picker';
 import {toastMessage} from '../../../helpers';
 import {CHECKOUT_STEPS_ENUM} from '..';
+
+const {width} = Dimensions.get('window');
 
 interface IDeliverProps extends INavigationProp {
   vehicle: IDeliveryFee;
@@ -26,6 +32,7 @@ interface IDeliverProps extends INavigationProp {
   address: any;
   setAddress: any;
   setActiveStep: any;
+  distance: number;
 }
 const Delivery = ({
   vehicle,
@@ -34,10 +41,20 @@ const Delivery = ({
   setAddress,
   setActiveStep,
   navigation,
+  distance,
 }: IDeliverProps) => {
   const {locations} = useSelector((state: RootState) => state.locations);
   const {fees} = useSelector((state: RootState) => state.deliveryFees);
-
+  const {selectedMarket} = useSelector((state: RootState) => state.markets);
+  const [vehiclesToChooseFrom, setVehiclesToChoosefrom] = useState<
+    {
+      value: any;
+      label: string;
+      icon: any;
+      itemKey: number;
+    }[]
+  >([]);
+  const [open, setOpen] = useState(false);
   const handleNext = () => {
     if (address.name === undefined) {
       toastMessage(TOAST_MESSAGE_TYPES.INFO, 'Please select delivery address');
@@ -55,6 +72,57 @@ const Delivery = ({
       return;
     }
     setActiveStep(CHECKOUT_STEPS_ENUM.PAYMENT);
+  };
+
+  useEffect(() => {
+    let sub = true;
+    if (sub) {
+      if (
+        distance > (selectedMarket?.bikeMaximumKm as number) ||
+        selectedMarket?.bikeMaximumKm === 0
+      ) {
+        const veh = fees.filter(
+          item => item.vehicleType !== VEHICLES_ENUM.BIKE,
+        );
+        const vehicles = veh.map((item, position) => {
+          return {
+            value: item,
+            label: item.vehicleType,
+            icon: () => <Icon name="chevron-small-right" />,
+            itemKey: position,
+            key: position,
+          };
+        });
+        setVehiclesToChoosefrom(vehicles);
+      } else {
+        const vehicles = fees.map((item, position) => {
+          return {
+            value: item,
+            label: item.vehicleType,
+            icon: () => ReturnIcon(item.vehicleType),
+            itemKey: position,
+            key: position,
+          };
+        });
+        setVehiclesToChoosefrom(vehicles);
+      }
+    }
+    return () => {
+      sub = false;
+    };
+  }, [fees]);
+
+  const ReturnIcon = (icon: string) => {
+    if (icon === VEHICLES_ENUM.CAR) {
+      return <Icon2 name="car" size={25} color={APP_COLORS.BLACK} />;
+    }
+    if (icon === VEHICLES_ENUM.MOTORCYCLE) {
+      return <Icon2 name="motorcycle" size={25} color={APP_COLORS.BLACK} />;
+    }
+    if (icon === VEHICLES_ENUM.BIKE) {
+      return <Icon3 name="bike" size={25} color={APP_COLORS.BLACK} />;
+    }
+    return <></>;
   };
 
   return (
@@ -91,29 +159,28 @@ const Delivery = ({
             ))}
           </Picker>
         </View>
-        <View style={{marginHorizontal: 15}}>
+        <View style={{marginHorizontal: 15, marginVertical: 10}}>
           <Pressable onPress={() => navigation.navigate('Locations')}>
-            <Text style={{color: APP_COLORS.MAROON}}>Manage addresses</Text>
+            <View style={[viewFlexSpace]}>
+              <Icon4 name="gear" size={20} color={APP_COLORS.MAROON} />
+              <Text style={{color: APP_COLORS.MAROON, flex: 1, marginLeft: 10}}>
+                Manage addresses
+              </Text>
+            </View>
           </Pressable>
         </View>
         <View>
-          <Picker
-            selectedValue={vehicle}
-            onValueChange={(itemValue, itemIndex) => {
-              setVehicle(itemValue);
-            }}
-            style={[commonInput]}>
-            {[
-              {
-                vehicleType: 'Choose vehicle type',
-                amountPerKilometer: 0,
-                id: 0,
-              },
-              ...fees,
-            ].map((fees, i) => (
-              <Picker.Item key={i} label={fees.vehicleType} value={fees} />
-            ))}
-          </Picker>
+          <DropDownPicker
+            open={open}
+            value={vehicle}
+            items={vehiclesToChooseFrom}
+            setOpen={setOpen}
+            setValue={setVehicle}
+            // setItems={setVehiclesToChoosefrom}
+            style={[commonInput, {width: width - 20}]}
+            itemKey="1"
+            placeholder="Choose Delivery Vehicle"
+          />
         </View>
       </View>
       <Pressable style={{width: '100%'}} onPress={() => handleNext()}>
