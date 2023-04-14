@@ -4,6 +4,7 @@ import {AlertNotificationRoot} from 'react-native-alert-notification';
 import messaging from '@react-native-firebase/messaging';
 import Navigation from './src/navigation';
 import {store} from './src/store';
+import SplashScreen from 'react-native-splash-screen';
 import {subscribeToSocket, unSubscribeToSocket} from './src/worker/socket';
 import {saveAppToken, setFbToken} from './src/actions/user';
 
@@ -47,6 +48,10 @@ function App(): JSX.Element {
       // window.removeEventListener("online", handleOnline);
       // window.removeEventListener("offline", handleOffline);
     };
+  }, []);
+
+  useEffect(() => {
+    SplashScreen.hide();
   }, []);
 
   useEffect(() => {
