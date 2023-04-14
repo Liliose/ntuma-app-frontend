@@ -70,6 +70,7 @@ const ProductPreview = ({
   const {favourites} = useSelector((state: RootState) => state.favourites);
   const [productExistsInFavList, setProductExistsInFavList] = useState(false);
   const [price, setPrice] = useState<ICartItem>(initialPrice);
+  const [customPriceError, setCustomPriceError] = useState<string>('');
   const handlePlus = () => {
     setPrice({...price, quantity: price.quantity + 1});
   };
@@ -106,6 +107,19 @@ const ProductPreview = ({
         title: 'Warning',
         textBody:
           'Price can not be zero or empty. Please increase the quantity or choose a specific pricing category.',
+        button: 'OK',
+        // onHide: () => {},
+      });
+      return;
+    }
+    if (price.customPrice && price.price < Number(product?.minCustomPrice)) {
+      Dialog.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Warning',
+        textBody:
+          'Minimun custom price for this product is ' +
+          currencyFormatter(product?.minCustomPrice) +
+          ' Rwf',
         button: 'OK',
         // onHide: () => {},
       });
@@ -148,6 +162,19 @@ const ProductPreview = ({
   const removeFromFavList = (product: IProduct) => {
     dispatch(removeFavouriteItem(product));
     setProductExistsInFavList(false);
+  };
+
+  const handleCustomPriceChange = (text: string) => {
+    setCustomPriceError('');
+    if (Number(text) >= (product?.minCustomPrice as number)) {
+      setPrice({...price, price: Number(text)});
+    } else {
+      setCustomPriceError(
+        'Minimun custom price for this product is ' +
+          currencyFormatter(product?.minCustomPrice) +
+          ' Rwf',
+      );
+    }
   };
 
   return (
@@ -381,10 +408,13 @@ const ProductPreview = ({
                         }}
                         keyboardType="number-pad"
                         placeholder="Enter amount you wish to pay"
-                        onChangeText={text => {
-                          setPrice({...price, price: Number(text)});
-                        }}
+                        onChangeText={text => handleCustomPriceChange(text)}
                       />
+                      {customPriceError.trim() !== '' && (
+                        <Text style={{color: APP_COLORS.RED}}>
+                          {customPriceError}
+                        </Text>
+                      )}
                     </View>
                   )}
                 </View>

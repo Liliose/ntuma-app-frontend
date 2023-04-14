@@ -201,6 +201,7 @@ export interface IProduct {
   singlePrice: number;
   image: string;
   isActive: boolean;
+  minCustomPrice: number;
 }
 
 export interface IProductPrice {
