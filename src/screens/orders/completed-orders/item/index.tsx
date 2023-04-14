@@ -35,9 +35,20 @@ const Item = ({item, navigation}: IItemProps) => {
             />
           </View>
           <View style={{flex: 1, padding: 10}}>
-            <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
-              {product?.name}
-            </Text>
+            <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
+              <Text
+                style={{
+                  color: APP_COLORS.BLACK,
+                  fontWeight: '600',
+                  flex: 1,
+                  marginRight: 5,
+                }}>
+                {product?.name}
+              </Text>
+              <Text style={{color: APP_COLORS.BLACK, fontWeight: '600'}}>
+                Order Id: #{item.id}
+              </Text>
+            </View>
             <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
               <View>
                 <Text style={{color: APP_COLORS.TEXT_GRAY}}>
@@ -54,18 +65,36 @@ const Item = ({item, navigation}: IItemProps) => {
                   RWF
                 </Text>
               </View>
-              <Text style={{color: APP_COLORS.TEXT_GRAY, width: '50%'}}>
+              <Text
+                style={{
+                  color: APP_COLORS.TEXT_GRAY,
+                  width: '50%',
+                  textAlign: 'right',
+                }}>
                 {new Date(item.createdAt).toUTCString()}
               </Text>
             </View>
             <View style={[viewFlexSpace, {alignItems: 'flex-start'}]}>
-              <View>
+              <View style={{flex: 1}}>
                 <Text style={{color: APP_COLORS.BLACK, fontWeight: 'bold'}}>
                   Delivery Status:
                 </Text>
               </View>
-              <Text style={{color: APP_COLORS.BLACK, width: '50%'}}>
-                {item.deliveryStatus}
+              <Text
+                style={{
+                  color: APP_COLORS.WHITE,
+                  backgroundColor:
+                    item.deliveryStatus === 'Waiting'
+                      ? APP_COLORS.DARK_GRAY
+                      : item.deliveryStatus === 'COMPLETED'
+                      ? APP_COLORS.GREEN
+                      : APP_COLORS.WARNING,
+                  paddingHorizontal: 5,
+                  borderRadius: 3,
+                }}>
+                {item.deliveryStatus.toUpperCase() === 'PENDING'
+                  ? 'On The Way'
+                  : item.deliveryStatus}
               </Text>
             </View>
           </View>
