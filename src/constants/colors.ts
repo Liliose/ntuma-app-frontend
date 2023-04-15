@@ -11,4 +11,5 @@ export const APP_COLORS = {
   GREEN: '#5cb85c',
   RED: '#df4759',
   WARNING: '#f0ad4e',
+  LIGHT_BLACK: '#444',
 };

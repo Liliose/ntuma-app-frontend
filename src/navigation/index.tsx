@@ -15,7 +15,7 @@ import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/Octicons';
 import Icon4 from 'react-native-vector-icons/FontAwesome5';
 import Icon5 from 'react-native-vector-icons/AntDesign';
-import {INavigationProp} from '../../interfaces';
+import {INavigationProp, PAYMENT_STATUS_ENUM} from '../../interfaces';
 import {APP_COLORS} from '../constants/colors';
 import {RootState} from '../reducers';
 import Products from '../screens/home/products-tabs';
@@ -59,6 +59,7 @@ import AccountSettings from '../screens/account-settings';
 import NotificationsCounter from '../components/notification-counter';
 import DeleteAccount from '../screens/delete-account';
 import HelpAndSupport from '../screens/help-and-support';
+import TrackOrder from '../screens/track-order';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -492,10 +493,33 @@ function Navigation() {
           component={OrderPreview}
           options={({route, navigation}: INavigationProp) => ({
             title: 'Order Information',
+            headerRight: () =>
+              route?.params?.order?.paymentStatus ===
+              PAYMENT_STATUS_ENUM.SUCCESS ? (
+                <Pressable
+                  onPress={() =>
+                    navigation.navigate('TrackOrder', {
+                      order: route?.params?.order,
+                    })
+                  }>
+                  <View style={[viewFlexSpace, {paddingRight: 10}]}>
+                    <Icon2
+                      name="track-changes"
+                      color={APP_COLORS.WHITE}
+                      size={20}
+                    />
+                    <Text style={{color: APP_COLORS.WHITE, marginLeft: 5}}>
+                      Track Order
+                    </Text>
+                  </View>
+                </Pressable>
+              ) : (
+                <></>
+              ),
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: 'left',
             headerTintColor: APP_COLORS.WHITE,
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
@@ -680,6 +704,19 @@ function Navigation() {
           component={HelpAndSupport}
           options={({route, navigation}: INavigationProp) => ({
             title: 'Help & Support',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          })}
+        />
+        <Stack.Screen
+          name="TrackOrder"
+          component={TrackOrder}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Track Order #' + route?.params?.order?.id,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
