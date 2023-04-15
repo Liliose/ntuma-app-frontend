@@ -83,5 +83,6 @@
     "editText":"Edit",
     "ordeReviewText":"Order Review",
     "noMessagesFoundText":"No messages found",
-    "youDontHaveFailedOrder":"You don't have any failed order"
+    "youDontHaveFailedOrder":"You don't have any failed order",
+    "orderInformationText":"Order Information"
 }}

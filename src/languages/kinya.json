@@ -29,7 +29,7 @@
     "submitOrderText":"Emeza Kwishyura",
     "continueText":"Komeza",
     "yourCartIsEmptyText":"Ntabintu biri muri cart",
-    "favouriteListText":"Ibyo wakunze-",
+    "favouriteListText":"Ibyo wakunze",
     "noProductsAddedYetText":"Ntabicuruzwa bihari",
     "hotDishesText":"Amafunguro akunzwe",
     "productsText":"Ibicuruzwa",
@@ -83,5 +83,6 @@
     "editText":"Hindura",
     "ordeReviewText":"Suzuma ibyo wahisemo",
     "noMessagesFoundText":"Nta mesaje zihari",
-    "youDontHaveFailedOrder":"Ntakirimo"
+    "youDontHaveFailedOrder":"Ntakirimo",
+    "orderInformationText":"Amakuru yibyo watumije"
 }}

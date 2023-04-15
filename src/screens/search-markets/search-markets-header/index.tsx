@@ -4,6 +4,7 @@ import {commonInput, viewFlexSpace} from '../../../constants/styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../reducers';
 import {setMarketsSearchResults} from '../../../actions/markets';
+import {t} from 'i18next';
 
 const SearchMarketsHeader = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const SearchMarketsHeader = () => {
             paddingHorizontal: 15,
           },
         ]}
-        placeholder="Search Market"
+        placeholder={t('searchMarketPlaceHolderText') as string}
         ref={inputRef}
         value={keyword}
         onChangeText={text => setKeyword(text)}

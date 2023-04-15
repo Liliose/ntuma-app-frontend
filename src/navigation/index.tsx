@@ -61,6 +61,7 @@ import DeleteAccount from '../screens/delete-account';
 import HelpAndSupport from '../screens/help-and-support';
 import TrackOrder from '../screens/track-order';
 import ChangeLanguage from '../screens/change-language';
+import {t} from 'i18next';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -149,6 +150,13 @@ const HomeTabs = ({navigation}: INavigationProp) => {
   const [inactiveColor, setInactiveColor] = useState('rgba(255,255,255,0.6)');
   const {cart} = useSelector((state: RootState) => state.cart);
   const {favourites} = useSelector((state: RootState) => state.favourites);
+
+  const dishestext = t('hotDishesText');
+  const profiletext = t('profileText');
+  const carttext = t('cartText');
+  const favouritetext = t('favouriteListText');
+  const messagestext = t('messagesText');
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -188,6 +196,7 @@ const HomeTabs = ({navigation}: INavigationProp) => {
                 headerTintColor: APP_COLORS.WHITE,
                 headerStyle: {backgroundColor: APP_COLORS.MAROON},
                 headerTitleAlign: 'center',
+                title: carttext,
                 headerRight: () => (
                   <Pressable
                     onPress={() => navigation.navigate('Notifications')}>
@@ -205,6 +214,7 @@ const HomeTabs = ({navigation}: INavigationProp) => {
                 headerTintColor: APP_COLORS.WHITE,
                 headerStyle: {backgroundColor: APP_COLORS.MAROON},
                 headerTitleAlign: 'center',
+                title: carttext,
                 headerRight: () => (
                   <Pressable
                     onPress={() => navigation.navigate('Notifications')}>
@@ -222,7 +232,7 @@ const HomeTabs = ({navigation}: INavigationProp) => {
         component={Favourites}
         options={{
           headerShown: true,
-          title: 'Favourites List (' + favourites.length + ')',
+          title: favouritetext + ' (' + favourites.length + ')',
           headerStyle: {backgroundColor: APP_COLORS.MAROON},
           headerTintColor: APP_COLORS.WHITE,
           headerTitleAlign: 'center',
@@ -236,7 +246,7 @@ const HomeTabs = ({navigation}: INavigationProp) => {
         name="Dishes"
         component={Dishes}
         options={{
-          title: '🔥Hot Dishes😋',
+          title: '🔥' + dishestext + '😋',
           headerShown: true,
           headerStyle: {backgroundColor: APP_COLORS.MAROON},
           headerTintColor: APP_COLORS.WHITE,
@@ -251,6 +261,7 @@ const HomeTabs = ({navigation}: INavigationProp) => {
         name="Messages"
         component={Messages}
         options={{
+          title: messagestext,
           headerShown: true,
           headerTitleAlign: 'center',
           headerTintColor: APP_COLORS.WHITE,
@@ -264,6 +275,7 @@ const HomeTabs = ({navigation}: INavigationProp) => {
         name="Profile"
         component={Profile}
         options={{
+          title: profiletext,
           headerShown: true,
           headerTitleAlign: 'center',
           headerTintColor: APP_COLORS.WHITE,
@@ -344,7 +356,7 @@ function Navigation() {
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
-            title: 'Order History',
+            title: t('orderHistoryText') as string,
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -361,7 +373,7 @@ function Navigation() {
               </Pressable>
             ),
             headerRightContainerStyle: {paddingRight: 20},
-            title: 'Select Market',
+            title: t('selectMarketText') as string,
             headerTintColor: APP_COLORS.WHITE,
             headerStyle: {backgroundColor: APP_COLORS.MAROON},
 
@@ -408,7 +420,7 @@ function Navigation() {
           name="Login"
           component={Login}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Login',
+            title: t('signinText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -422,7 +434,7 @@ function Navigation() {
           name="Register"
           component={Register}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Sign up',
+            title: t('signupText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -436,7 +448,7 @@ function Navigation() {
           name="Locations"
           component={Locations}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Saved locations',
+            title: t('savedLocationsText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -446,7 +458,7 @@ function Navigation() {
                 <View style={[viewFlexSpace, {marginRight: 15}]}>
                   <Icon5 name="plus" size={25} color={APP_COLORS.WHITE} />
                   <Text style={{color: APP_COLORS.WHITE, marginLeft: 10}}>
-                    Add New
+                    {t('addNewText')}
                   </Text>
                 </View>
               </Pressable>
@@ -458,7 +470,7 @@ function Navigation() {
           name="AddLocation"
           component={AddLocation}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Add New Location',
+            title: t('addNewLocationText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -479,7 +491,7 @@ function Navigation() {
                 </View>
               </Pressable>
             ),
-            title: 'Checkout',
+            title: t('checkoutText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -493,7 +505,7 @@ function Navigation() {
           name="OrderPreview"
           component={OrderPreview}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Order Information',
+            title: t('orderInformationText') as string,
             headerRight: () =>
               route?.params?.order?.paymentStatus ===
               PAYMENT_STATUS_ENUM.SUCCESS ? (
@@ -529,7 +541,7 @@ function Navigation() {
           name="Wallet"
           component={Wallet}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'My Wallet',
+            title: t('myWalletText') as string,
             headerRight: () => (
               <Pressable onPress={() => dispatch(fetchWalletTransactions())}>
                 <View style={{paddingRight: 10}}>
@@ -579,7 +591,9 @@ function Navigation() {
                   dispatch(setShowClearAllNotificatonsConfirmation(true))
                 }>
                 <View style={{paddingRight: 10}}>
-                  <Text style={{color: APP_COLORS.WHITE}}>Clear All</Text>
+                  <Text style={{color: APP_COLORS.WHITE}}>
+                    {t('clearAllText')}
+                  </Text>
                 </View>
               </Pressable>
             ),
@@ -626,7 +640,7 @@ function Navigation() {
           name="ImageBeforeSendPreview"
           component={ViewAndSendSelectedFile}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Send File',
+            title: t('sendFileText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -652,7 +666,7 @@ function Navigation() {
           name="AccountSettings"
           component={AccountSettings}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Account Settings',
+            title: t('accountSettingsText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -665,7 +679,7 @@ function Navigation() {
           name="UpdateUserInfo"
           component={UpdateUserInfo}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Update Personal Information',
+            title: t('updatePersonalInfoText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -678,7 +692,7 @@ function Navigation() {
           name="ChangePassword"
           component={ChangePassword}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'ChangePassword',
+            title: t('changePasswordText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -691,7 +705,7 @@ function Navigation() {
           name="DeleteAccount"
           component={DeleteAccount}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Delete Account',
+            title: t('deleteAccountText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -704,7 +718,7 @@ function Navigation() {
           name="HelpAndSupport"
           component={HelpAndSupport}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Help & Support',
+            title: t('helpAndSupportText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
@@ -730,7 +744,7 @@ function Navigation() {
           name="ChangeLanguage"
           component={ChangeLanguage}
           options={({route, navigation}: INavigationProp) => ({
-            title: 'Change Language',
+            title: t('changeLanguageText') as string,
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
