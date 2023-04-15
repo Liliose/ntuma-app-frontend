@@ -4,6 +4,7 @@ import {APP_COLORS} from '../../constants/colors';
 import {viewFlexSpace} from '../../constants/styles';
 import Icon from 'react-native-vector-icons/Entypo';
 import {INavigationProp} from '../../../interfaces';
+import {t} from 'i18next';
 
 const AccountSettings = ({navigation}: INavigationProp) => {
   return (
@@ -24,7 +25,7 @@ const AccountSettings = ({navigation}: INavigationProp) => {
               marginHorizontal: 10,
               color: APP_COLORS.BLACK,
             }}>
-            Update Personal Information
+            {t('updatePersonalInfoText')}
           </Text>
           <Icon name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
@@ -45,7 +46,7 @@ const AccountSettings = ({navigation}: INavigationProp) => {
               marginHorizontal: 10,
               color: APP_COLORS.BLACK,
             }}>
-            Change Password
+            {t('changePasswordText')}
           </Text>
           <Icon name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>
@@ -66,7 +67,7 @@ const AccountSettings = ({navigation}: INavigationProp) => {
               marginHorizontal: 10,
               color: APP_COLORS.BLACK,
             }}>
-            Delete Account
+            {t('deleteAccountText')}
           </Text>
           <Icon name="chevron-right" size={25} color={APP_COLORS.TEXT_GRAY} />
         </View>

@@ -25,6 +25,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../reducers';
 import {TOAST_MESSAGE_TYPES} from '../../../../interfaces';
 import {addNewTransaction} from '../../../actions/walletTransactions';
+import {t} from 'i18next';
 
 interface IDepositProps {
   showModal: boolean;
@@ -105,7 +106,7 @@ const Deposit = ({showModal, setShowModal}: IDepositProps) => {
               color: APP_COLORS.BLACK,
               fontSize: 16,
             }}>
-            Make Deposit
+            {t('makeDepositText')}
           </Text>
           <View>
             <Pressable
@@ -117,7 +118,9 @@ const Deposit = ({showModal, setShowModal}: IDepositProps) => {
         </View>
         <View style={{marginTop: 5}}>
           <View style={{marginBottom: 10}}>
-            <Text style={{color: APP_COLORS.TEXT_GRAY}}>Amount to deposit</Text>
+            <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+              {t('amountToDepositText')}
+            </Text>
             <DisabledInput
               onChangeText={(text: string) =>
                 setState({...state, amount: text})
@@ -133,7 +136,7 @@ const Deposit = ({showModal, setShowModal}: IDepositProps) => {
           </View>
           <View style={{marginBottom: 10}}>
             <Text style={{color: APP_COLORS.TEXT_GRAY}}>
-              Payment phone number (MTN,AIRTEL-TIGO)
+              {t('paymentPhoneNumber')} (MTN,AIRTEL-TIGO)
             </Text>
             <DisabledInput
               onChangeText={(text: string) =>
@@ -159,7 +162,7 @@ const Deposit = ({showModal, setShowModal}: IDepositProps) => {
                   style={{marginRight: 5}}
                 />
               )}
-              <Text style={[btnWithBgTextStyles]}>Deposit</Text>
+              <Text style={[btnWithBgTextStyles]}>{t('depositText')}</Text>
             </View>
           </Pressable>
         </View>

@@ -4,6 +4,7 @@ import {APP_COLORS} from '../../constants/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {viewFlexSpace} from '../../constants/styles';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
+import {t} from 'i18next';
 
 const HelpAndSupport = () => {
   const handleCall = () => {
@@ -69,7 +70,7 @@ const HelpAndSupport = () => {
             ]}>
             <Icon name="message" size={20} color={APP_COLORS.BLACK} />
             <Text style={{flex: 1, marginLeft: 10, color: APP_COLORS.BLACK}}>
-              Contact Us
+              {t('contactUsText')}
             </Text>
             <Icon2 name="angle-right" size={20} color={APP_COLORS.BLACK} />
           </View>
@@ -90,7 +91,7 @@ const HelpAndSupport = () => {
               color={APP_COLORS.BLACK}
             />
             <Text style={{flex: 1, marginLeft: 10, color: APP_COLORS.BLACK}}>
-              Terms of use
+              {t('termsText')}
             </Text>
             <Icon2 name="angle-right" size={20} color={APP_COLORS.BLACK} />
           </View>
@@ -112,7 +113,7 @@ const HelpAndSupport = () => {
               color={APP_COLORS.BLACK}
             />
             <Text style={{flex: 1, marginLeft: 10, color: APP_COLORS.BLACK}}>
-              Privacy Policy
+              {t('privacyPolicyText')}
             </Text>
             <Icon2 name="angle-right" size={20} color={APP_COLORS.BLACK} />
           </View>
@@ -133,7 +134,7 @@ const HelpAndSupport = () => {
               color={APP_COLORS.BLACK}
             />
             <Text style={{flex: 1, marginLeft: 10, color: APP_COLORS.BLACK}}>
-              FAQ
+              {t('faqText')}
             </Text>
             <Icon2 name="angle-right" size={20} color={APP_COLORS.BLACK} />
           </View>

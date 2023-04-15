@@ -21,6 +21,7 @@ import {app} from '../../../../constants/app';
 import {toastMessage} from '../../../../helpers';
 import ImageLoader from '../../../../components/image-loader';
 import FullPageLoader from '../../../../components/full-page-loader';
+import {t} from 'i18next';
 
 const LoggedIn = ({navigation}: INavigationProp) => {
   const dispatch = useDispatch();
@@ -168,7 +169,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
                 flex: 1,
                 marginHorizontal: 10,
               }}>
-              Account Settings
+              {t('accountSettingsText')}
             </Text>
             <Icon4
               name="chevron-right"
@@ -186,7 +187,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
                 flex: 1,
                 marginHorizontal: 10,
               }}>
-              My Wallet
+              {t('myWalletText')}
             </Text>
             <Icon4
               name="chevron-right"
@@ -204,7 +205,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
                 flex: 1,
                 marginHorizontal: 10,
               }}>
-              Order History
+              {t('orderHistoryText')}
             </Text>
             <Icon4
               name="chevron-right"
@@ -224,7 +225,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
                 flex: 1,
                 marginHorizontal: 10,
               }}>
-              Saved Location
+              {t('savedLocationsText')}
             </Text>
             <Icon4
               name="chevron-right"
@@ -246,7 +247,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
                 flex: 1,
                 marginHorizontal: 10,
               }}>
-              Help&Support
+              {t('helpAndSupportText')}
             </Text>
             <Icon4
               name="chevron-right"
@@ -264,7 +265,7 @@ const LoggedIn = ({navigation}: INavigationProp) => {
                 flex: 1,
                 marginHorizontal: 10,
               }}>
-              Change Language
+              {t('changeLanguageText')}
             </Text>
             <Icon4
               name="chevron-right"

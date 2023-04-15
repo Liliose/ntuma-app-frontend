@@ -81,5 +81,7 @@
     "priceText":"Igiciro",
     "updateCartText":"Hindura ibiri muri cart",
     "editText":"Hindura",
-    "ordeReviewText":"Suzuma ibyo wahisemo"
+    "ordeReviewText":"Suzuma ibyo wahisemo",
+    "noMessagesFoundText":"Nta mesaje zihari",
+    "youDontHaveFailedOrder":"Ntakirimo"
 }}

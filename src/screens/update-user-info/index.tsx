@@ -26,6 +26,7 @@ import {
   setUserPhone,
   setUserToken,
 } from '../../actions/user';
+import {t} from 'i18next';
 
 const initialState = {
   names: '',
@@ -121,7 +122,7 @@ const UpdateUserInfo = ({navigation}: INavigationProp) => {
           </View>
           <Pressable style={{marginTop: 10}} onPress={() => handleSubmit()}>
             <View style={[btnWithBgContainerStyles]}>
-              <Text style={[btnWithBgTextStyles]}>Submit</Text>
+              <Text style={[btnWithBgTextStyles]}>{t('submitText')}</Text>
             </View>
           </Pressable>
         </ScrollView>

@@ -40,6 +40,7 @@ import FastImage from 'react-native-fast-image';
 import UserImage from '../../../components/user-image';
 import TimeAgo from '@andordavoti/react-native-timeago';
 import Loader from '../products-tabs/loader';
+import {t} from 'i18next';
 
 interface IMessageItemProps extends INavigationProp {
   item: IMessage;
@@ -249,7 +250,7 @@ const Messages = ({navigation}: INavigationProp) => {
                     <View style={{position: 'relative'}}>
                       <TextInput
                         style={[commonInput, {height: 45, paddingLeft: 45}]}
-                        placeholder="Search Messages"
+                        placeholder={t('searchMessagesText') as string}
                         value={keyword}
                         onChangeText={text => setKeyword(text)}
                       />
@@ -285,7 +286,7 @@ const Messages = ({navigation}: INavigationProp) => {
                 </View>
               ) : (
                 <NotFound
-                  title="No messages found"
+                  title={t('noMessagesFoundText')}
                   textColor={APP_COLORS.BLACK}
                 />
               )}
@@ -307,7 +308,7 @@ const Messages = ({navigation}: INavigationProp) => {
                   fontWeight: 'bold',
                   fontSize: 18,
                 }}>
-                Something Went Wrong
+                {t('somethingWentWrongText')}
               </Text>
               <Text style={{color: APP_COLORS.TEXT_GRAY}}>{loadingError}</Text>
             </View>
@@ -321,7 +322,7 @@ const Messages = ({navigation}: INavigationProp) => {
             <View style={[btnWithBgContainerStyles]}>
               <Icon3 name="login" size={25} color={APP_COLORS.WHITE} />
               <Text style={{flex: 1, marginLeft: 10, color: APP_COLORS.WHITE}}>
-                Sign in
+                {t('signinText')}
               </Text>
             </View>
           </Pressable>
@@ -329,7 +330,7 @@ const Messages = ({navigation}: INavigationProp) => {
             <View style={[btnWithBgContainerStyles]}>
               <Icon name="adduser" size={25} color={APP_COLORS.WHITE} />
               <Text style={{flex: 1, marginLeft: 10, color: APP_COLORS.WHITE}}>
-                Sign up
+                {t('signupText')}
               </Text>
             </View>
           </Pressable>

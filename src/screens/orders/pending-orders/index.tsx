@@ -8,6 +8,7 @@ import {INavigationProp, PAYMENT_STATUS_ENUM} from '../../../../interfaces';
 import NotFound from '../../../components/not-found';
 import {fetchOrders} from '../../../actions/orders';
 import Item from './item';
+import {t} from 'i18next';
 
 const PendingOrders = ({navigation}: INavigationProp) => {
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ const PendingOrders = ({navigation}: INavigationProp) => {
               <Item item={item} key={index} navigation={navigation} />
             ))
         ) : (
-          <NotFound title="You don't have any pending order" />
+          <NotFound title={t('youDontHavePeningOrder')} />
         )}
       </ScrollView>
     </View>

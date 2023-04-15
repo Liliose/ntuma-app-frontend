@@ -20,6 +20,7 @@ import axios from 'axios';
 import {app} from '../../constants/app';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../reducers';
+import {t} from 'i18next';
 
 const initialState = {oldPassword: '', newPassword: '', confirmPassword: ''};
 const ChangePassword = ({navigation}: INavigationProp) => {
@@ -104,7 +105,7 @@ const ChangePassword = ({navigation}: INavigationProp) => {
           </View>
           <Pressable style={{marginTop: 10}} onPress={() => handleSubmit()}>
             <View style={[btnWithBgContainerStyles]}>
-              <Text style={[btnWithBgTextStyles]}>Submit</Text>
+              <Text style={[btnWithBgTextStyles]}>{t('submitText')}</Text>
             </View>
           </Pressable>
         </ScrollView>

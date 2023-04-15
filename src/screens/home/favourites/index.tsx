@@ -7,6 +7,7 @@ import ProductItem from './product-item';
 import ProductPreview from '../products-tabs/preview';
 import {INavigationProp, IProduct} from '../../../../interfaces';
 import NotFound from '../../../components/not-found';
+import {t} from 'i18next';
 
 const Favourites = ({navigation}: INavigationProp) => {
   const {favourites} = useSelector((state: RootState) => state.favourites);
@@ -20,7 +21,7 @@ const Favourites = ({navigation}: INavigationProp) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{flexGrow: 1}}>
         {favourites.length === 0 ? (
-          <NotFound title="No products added yet" />
+          <NotFound title={t('noProductsAddedYetText')} />
         ) : (
           favourites.map((item, index) => (
             <ProductItem

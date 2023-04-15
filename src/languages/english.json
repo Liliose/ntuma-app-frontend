@@ -81,5 +81,7 @@
     "priceText":"Price",
     "updateCartText":"Update Cart",
     "editText":"Edit",
-    "ordeReviewText":"Order Review"
+    "ordeReviewText":"Order Review",
+    "noMessagesFoundText":"No messages found",
+    "youDontHaveFailedOrder":"You don't have any failed order"
 }}

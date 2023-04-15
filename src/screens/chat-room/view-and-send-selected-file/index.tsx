@@ -21,6 +21,7 @@ import {app} from '../../../constants/app';
 import {useDispatch, useSelector} from 'react-redux';
 import {setAddSingleMessage} from '../../../actions/messages';
 import {RootState} from '../../../reducers';
+import {t} from 'i18next';
 const {width, height} = Dimensions.get('window');
 
 const InputContainer = ({
@@ -48,7 +49,7 @@ const InputContainer = ({
             color: APP_COLORS.BLACK,
             maxHeight: 200,
           }}
-          placeholder="Add a caption (optional)"
+          placeholder={t('addCaptionText') as string}
           multiline={true}
           onChangeText={text => setMessage(text)}
           value={message}
@@ -150,7 +151,7 @@ const ViewAndSendSelectedFile = ({
                 <View style={[viewFlexSpace, {paddingHorizontal: 10}]}>
                   <Icon name="send" size={20} color={APP_COLORS.WHITE} />
                   <Text style={{color: APP_COLORS.WHITE, marginLeft: 10}}>
-                    Send File
+                    {t('sendFileText')}
                   </Text>
                 </View>
               )}

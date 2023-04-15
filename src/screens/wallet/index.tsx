@@ -17,6 +17,7 @@ import {RootState} from '../../reducers';
 import {currencyFormatter} from '../../helpers';
 import {fetchWalletTransactions} from '../../actions/walletTransactions';
 import FullPageLoader from '../../components/full-page-loader';
+import {t} from 'i18next';
 const {height} = Dimensions.get('window');
 
 const Wallet = () => {
@@ -58,7 +59,7 @@ const Wallet = () => {
                   fontSize: 20,
                   color: APP_COLORS.WHITE,
                 }}>
-                Available Balance
+                {t('availableBalanceText')}
               </Text>
               <Text
                 style={{
@@ -84,7 +85,7 @@ const Wallet = () => {
                       color={APP_COLORS.WHITE}
                     />
                     <Text style={{color: APP_COLORS.WHITE, marginLeft: 10}}>
-                      Deposit
+                      {t('depositText')}
                     </Text>
                   </View>
                 </Pressable>
@@ -108,7 +109,7 @@ const Wallet = () => {
                 color: APP_COLORS.BLACK,
                 fontWeight: '600',
               }}>
-              Wallet Transactions
+              {t('walletTransactionsText')}
             </Text>
             {transactions.map((item, index) => (
               <View
