@@ -23,6 +23,7 @@ import {Picker} from '@react-native-picker/picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {toastMessage} from '../../../helpers';
 import {CHECKOUT_STEPS_ENUM} from '..';
+import {t} from 'i18next';
 
 const {width} = Dimensions.get('window');
 
@@ -138,11 +139,10 @@ const Delivery = ({
       ]}>
       <View>
         <Text style={{color: APP_COLORS.BLACK, fontSize: 20}}>
-          Choose Delivery Address
+          {t('chooseDeliveryAddressText')}
         </Text>
         <Text style={{color: APP_COLORS.TEXT_GRAY}}>
-          Choose address from which we will deliver this order to you.To manage
-          your addresses, go to your profile and click saved locations.
+          {t('chooseDeliveryAddressDescriptionText')}
         </Text>
         <View>
           <Picker
@@ -152,7 +152,7 @@ const Delivery = ({
             }}
             style={[commonInput]}>
             {[
-              {name: 'Choose address', data: {}, details: {}},
+              {name: t('chooseDeliveryAddressText'), data: {}, details: {}},
               ...locations,
             ].map((vehicles, i) => (
               <Picker.Item key={i} label={vehicles.name} value={vehicles} />
@@ -164,7 +164,7 @@ const Delivery = ({
             <View style={[viewFlexSpace]}>
               <Icon4 name="gear" size={20} color={APP_COLORS.MAROON} />
               <Text style={{color: APP_COLORS.MAROON, flex: 1, marginLeft: 10}}>
-                Manage addresses
+                {t('manageAddressText')}
               </Text>
             </View>
           </Pressable>
@@ -179,14 +179,14 @@ const Delivery = ({
             // setItems={setVehiclesToChoosefrom}
             style={[commonInput, {width: width - 20}]}
             itemKey="1"
-            placeholder="Choose Delivery Vehicle"
+            placeholder={t('chooseDeliveryVehicleText') as string}
           />
         </View>
       </View>
       <Pressable style={{width: '100%'}} onPress={() => handleNext()}>
         <View style={[btnWithBgContainerStyles]}>
           <Text style={[btnWithBgTextStyles, {alignItems: 'center'}]}>
-            Continue
+            {t('continueText')}
           </Text>
           <Icon name="chevron-small-right" size={30} color={APP_COLORS.WHITE} />
         </View>

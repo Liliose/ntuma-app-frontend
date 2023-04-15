@@ -16,6 +16,7 @@ import {currencyFormatter} from '../../../helpers';
 import ProductPreview from '../products-tabs/preview';
 import {ICartItem, INavigationProp, IProduct} from '../../../../interfaces';
 import NotFound from '../../../components/not-found';
+import {t} from 'i18next';
 
 const Cart = ({navigation}: INavigationProp) => {
   const {cart} = useSelector((state: RootState) => state.cart);
@@ -75,7 +76,7 @@ const Cart = ({navigation}: INavigationProp) => {
               onPress={() => navigation.navigate('Checkout')}>
               <View style={[btnWithBgContainerStyles]}>
                 <Text style={[btnWithBgTextStyles, {fontWeight: '700'}]}>
-                  Checkout
+                  {t('checkoutText')}
                 </Text>
               </View>
             </Pressable>
@@ -91,7 +92,7 @@ const Cart = ({navigation}: INavigationProp) => {
           </View>
         </View>
       ) : (
-        <NotFound title="Your cart is empty" />
+        <NotFound title={t('yourCartIsEmptyText')} />
       )}
       <ProductPreview
         showModal={showModal}

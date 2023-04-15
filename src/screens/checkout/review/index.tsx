@@ -15,6 +15,7 @@ import {
   viewFlexSpace,
 } from '../../../constants/styles';
 import {currencyFormatter} from '../../../helpers';
+import {t} from 'i18next';
 interface IReviewProps {
   distance: number;
   paymentMethod: string;
@@ -65,7 +66,7 @@ const Review = ({
               color: APP_COLORS.BLACK,
               padding: 10,
             }}>
-            Order Review
+            {t('ordeReviewText')}
           </Text>
           <View
             style={[
@@ -246,7 +247,7 @@ const Review = ({
       <Pressable style={{width: '100%'}} onPress={() => handleSubmit()}>
         <View style={[btnWithBgContainerStyles, {marginHorizontal: 10}]}>
           <Text style={[btnWithBgTextStyles, {alignItems: 'center'}]}>
-            Submit Order
+            {t('submitOrderText')}
           </Text>
         </View>
       </Pressable>

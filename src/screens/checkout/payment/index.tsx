@@ -12,6 +12,7 @@ import {CHECKOUT_STEPS_ENUM, PAYMENT_METHODS} from '..';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import {TOAST_MESSAGE_TYPES} from '../../../../interfaces';
 import {toastMessage} from '../../../helpers';
+import {t} from 'i18next';
 
 interface IPaymentProps {
   paymentMethod: string;
@@ -71,11 +72,10 @@ const Payment = ({
       ]}>
       <View>
         <Text style={{color: APP_COLORS.BLACK, fontSize: 20}}>
-          Choose payment method
+          {t('choosePaymentMethodText')}
         </Text>
         <Text style={{color: APP_COLORS.TEXT_GRAY}}>
-          You will not be charged until you review and submit this order on the
-          next page.
+          {t('choosePaymentMethodDescriptionText')}
         </Text>
 
         {paymentMethod === PAYMENT_METHODS.MOBILE_MONEY ? (
@@ -90,7 +90,7 @@ const Payment = ({
                       fontWeight: '600',
                       fontSize: 16,
                     }}>
-                    Phone Number
+                    {t('phoneNumberText')}
                   </Text>
                   <View
                     style={[
@@ -145,7 +145,7 @@ const Payment = ({
           onPress={() => setPaymentMethod(PAYMENT_METHODS.WALLET)}>
           <WhiteCard style={{padding: 10}}>
             <View style={[viewFlexSpace]}>
-              <Text style={{color: APP_COLORS.BLACK}}>My Wallet</Text>
+              <Text style={{color: APP_COLORS.BLACK}}>{t('myWalletText')}</Text>
               {paymentMethod === PAYMENT_METHODS.WALLET ? (
                 <Icon2
                   name="dot-circle-o"

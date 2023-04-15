@@ -10,6 +10,7 @@ import {app} from '../../../../constants/app';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {currencyFormatter} from '../../../../helpers';
 import {setCart} from '../../../../actions/cart';
+import {t} from 'i18next';
 interface ICartItemProps {
   item: ICartItem;
   setSelectedCartItem: any;
@@ -106,7 +107,9 @@ const CartItem = ({
                     setShowModal(true);
                   }}>
                   <View>
-                    <Text style={{color: APP_COLORS.BLACK}}>Edit</Text>
+                    <Text style={{color: APP_COLORS.BLACK}}>
+                      {t('editText')}
+                    </Text>
                   </View>
                 </Pressable>
               </View>

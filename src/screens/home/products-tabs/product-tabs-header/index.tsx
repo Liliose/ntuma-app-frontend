@@ -28,6 +28,7 @@ import ImageLoader from '../../../../components/image-loader';
 import {app} from '../../../../constants/app';
 import {setSelectedCategory} from '../../../../actions/categories';
 import NotificationsCounter from '../../../../components/notification-counter';
+import {t} from 'i18next';
 
 const {height} = Dimensions.get('window');
 const ProductTabsHeader = ({navigation}: INavigationProp) => {
@@ -151,13 +152,13 @@ const ProductTabsHeader = ({navigation}: INavigationProp) => {
                   flex: 1,
                   fontWeight: '600',
                 }}>
-                Choose Different Market
+                {t('chooseDifferentMarketText')}
               </Text>
               <Icon2 name="angle-right" size={20} color={APP_COLORS.BLACK} />
             </View>
           </Pressable>
           <Text style={{color: APP_COLORS.BLACK}}>
-            Choose Category Within Selected Market
+            {t('chooseCategoryWithinText')}
           </Text>
           {!showCategories ? (
             <View style={[viewFlexCenter, {marginTop: 10}]}>
@@ -205,7 +206,7 @@ const ProductTabsHeader = ({navigation}: INavigationProp) => {
             style={{marginTop: 10}}
             onPress={() => setShowModal(false)}>
             <View style={[btnWithBgContainerStyles]}>
-              <Text style={[btnWithBgTextStyles]}>Close</Text>
+              <Text style={[btnWithBgTextStyles]}>{t('closeText')}</Text>
             </View>
           </Pressable>
         </View>

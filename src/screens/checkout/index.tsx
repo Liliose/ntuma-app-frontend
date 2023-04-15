@@ -24,6 +24,7 @@ import CustomAlert from '../../components/custom-alert';
 import FastImage from 'react-native-fast-image';
 import {fetchSystemFees} from '../../actions/systemFees';
 import {fethcPackagingFees} from '../../actions/packagingFees';
+import {t} from 'i18next';
 
 export enum CHECKOUT_STEPS_ENUM {
   DELIVERY = 'DELIVERY',
@@ -247,7 +248,7 @@ const Checkout = ({navigation}: INavigationProp) => {
                 fontSize: 16,
                 fontWeight: '600',
               }}>
-              Delivery
+              {t('deliveryText')}
             </Text>
           </View>
         </Pressable>
@@ -268,7 +269,7 @@ const Checkout = ({navigation}: INavigationProp) => {
                 fontSize: 16,
                 fontWeight: '600',
               }}>
-              Payment
+              {t('paymentText')}
             </Text>
           </View>
         </Pressable>
@@ -279,7 +280,7 @@ const Checkout = ({navigation}: INavigationProp) => {
           <CheckedCircle countNumber={3} isChecked={false} />
           <Text
             style={{color: APP_COLORS.BLACK, fontSize: 16, fontWeight: '600'}}>
-            Review
+            {t('reviewText')}
           </Text>
         </View>
       </View>
@@ -323,7 +324,7 @@ const Checkout = ({navigation}: INavigationProp) => {
       <CustomAlert
         showAlert={showAlert}
         setShowAlert={setShowAlert}
-        confirmationTitle="Try Again"
+        confirmationTitle={t('tryAgainText') as string}
         callBack={handleSubmit}>
         <View style={[viewFlexCenter]}>
           <FastImage
@@ -336,7 +337,7 @@ const Checkout = ({navigation}: INavigationProp) => {
               fontWeight: 'bold',
               fontSize: 18,
             }}>
-            Something Went Wrong
+            {t('somethingWentWrongText')}
           </Text>
           <Text style={{color: APP_COLORS.TEXT_GRAY}}>{errorMessage}</Text>
         </View>

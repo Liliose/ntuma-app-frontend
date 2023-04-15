@@ -39,6 +39,7 @@ import {
   removeFavouriteItem,
 } from '../../../../actions/favourites';
 import ImageLoader from '../../../../components/image-loader';
+import {t} from 'i18next';
 
 const {width} = Dimensions.get('window');
 
@@ -276,7 +277,7 @@ const ProductPreview = ({
                           color: APP_COLORS.BLACK,
                           fontWeight: '600',
                         }}>
-                        Price
+                        {t('priceText')}
                       </Text>
                       <Icon name="down" size={25} color={APP_COLORS.BLACK} />
                     </View>
@@ -294,7 +295,7 @@ const ProductPreview = ({
                         color: APP_COLORS.BLACK,
                         fontWeight: '600',
                       }}>
-                      Price
+                      {t('priceText')}
                     </Text>
                     <View style={[viewFlexSpace, {marginTop: 10}]}>
                       <Text style={{color: APP_COLORS.BLACK}}>
@@ -383,7 +384,7 @@ const ProductPreview = ({
                             color: APP_COLORS.BLACK,
                             fontWeight: '600',
                           }}>
-                          Custom Price
+                          {t('customPriceText')}
                         </Text>
                         <Icon name="down" size={20} color={APP_COLORS.BLACK} />
                       </View>
@@ -395,7 +396,7 @@ const ProductPreview = ({
                           color: APP_COLORS.BLACK,
                           fontWeight: '600',
                         }}>
-                        Custom Price
+                        {t('customPriceText')}
                       </Text>
                       <TextInput
                         style={{
@@ -437,13 +438,15 @@ const ProductPreview = ({
                   style={{marginBottom: 10}}>
                   <View style={[btnWithBgContainerStyles]}>
                     <Text style={btnWithBgTextStyles}>
-                      {selectedCartItem ? 'Update cart' : 'Add to cart'}
+                      {selectedCartItem
+                        ? t('updateCartText')
+                        : t('addToCartText')}
                     </Text>
                   </View>
                 </Pressable>
                 <Pressable onPress={() => setPrice({...price, quantity: 1})}>
                   <View style={btnWithoutBgContainerStyles}>
-                    <Text style={btnWithoutBgTextStyles}>Reset</Text>
+                    <Text style={btnWithoutBgTextStyles}>{t('resetText')}</Text>
                   </View>
                 </Pressable>
               </View>

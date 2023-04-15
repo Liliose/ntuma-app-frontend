@@ -74,5 +74,12 @@
     "changeLanguageText":"Hindura ururimi",
     "faqText":"Ibibazo byabajijwe",
     "signupText":"Fungura konti",
-    "foodText":"Ntuma!"
+    "foodText":"Ntuma!",
+    "addToCartText":"Shyira muri cart", 
+    "resetText":"Tangira bundi bushya",
+    "customPriceText":"Igiciro ushaka",
+    "priceText":"Igiciro",
+    "updateCartText":"Hindura ibiri muri cart",
+    "editText":"Hindura",
+    "ordeReviewText":"Suzuma ibyo wahisemo"
 }}

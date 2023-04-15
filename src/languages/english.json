@@ -74,5 +74,12 @@
     "contactUsText":"Contact Us",
     "privacyPolicyText":"Privacy Policy",
     "changeLanguageText":"Change Language",
-    "faqText":"FAQ"
+    "faqText":"FAQ",
+    "addToCartText":"Add to cart",
+    "resetText":"Reset",
+    "customPriceText":"Custom Price",
+    "priceText":"Price",
+    "updateCartText":"Update Cart",
+    "editText":"Edit",
+    "ordeReviewText":"Order Review"
 }}
