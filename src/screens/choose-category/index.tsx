@@ -24,6 +24,7 @@ import {ICategory, INavigationProp} from '../../../interfaces';
 import ImageLoader from '../../components/image-loader';
 import CustomAlert from '../../components/custom-alert';
 import FastImage from 'react-native-fast-image';
+import {t} from 'i18next';
 const {height} = Dimensions.get('window');
 const ChooseCategory = ({navigation}: INavigationProp) => {
   const dispatch = useDispatch();
@@ -95,7 +96,7 @@ const ChooseCategory = ({navigation}: INavigationProp) => {
             marginLeft: 20,
             marginVertical: 20,
           }}>
-          Product Categories
+          {t('productCategoriesText')}
         </Text>
         {isLoading && categories.length === 0 ? (
           <Loader />

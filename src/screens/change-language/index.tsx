@@ -62,8 +62,6 @@ const ChangeLanguage = () => {
           />
         </View>
       </Pressable>
-
-      <Text>{t('welcomeText')}</Text>
     </View>
   );
 };

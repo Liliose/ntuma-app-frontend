@@ -20,6 +20,8 @@
     "deliveryText":"Delivery",
     "paymentText":"Payment",
     "reviewText":"Review",
+    "signupText":"Sign up",
+    "foodText":"Food",
     "chooseDeliveryAddressText":"Choose Delivery Address",
     "chooseDeliveryAddressDescriptionText":" Choose address from which we will deliver this order to you.To manage your addresses, go to your profile and click saved locations.",
     "manageAddressText":"Manage address",

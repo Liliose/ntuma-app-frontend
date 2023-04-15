@@ -45,6 +45,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import FullPageLoader from '../../components/full-page-loader';
 import CustomErrorAlert from '../../components/custom-error-alert';
+import {t} from 'i18next';
 
 const {height} = Dimensions.get('window');
 const initialState = {
@@ -232,7 +233,7 @@ const Login = ({navigation}: INavigationProp) => {
                       style={{marginRight: 10}}
                     />
                   )}
-                  <Text style={[btnWithBgTextStyles]}>Sign in</Text>
+                  <Text style={[btnWithBgTextStyles]}>{t('signinText')}</Text>
                 </View>
               </Pressable>
               <Pressable
@@ -245,7 +246,7 @@ const Login = ({navigation}: INavigationProp) => {
                       btnWithoutBgTextStyles,
                       {color: APP_COLORS.MAROON},
                     ]}>
-                    Sign up
+                    {t('signupText')}
                   </Text>
                 </View>
               </Pressable>

@@ -46,6 +46,7 @@ import {
 import {useDispatch} from 'react-redux';
 import ImageLoader from '../../components/image-loader';
 import FullPageLoader from '../../components/full-page-loader';
+import {t} from 'i18next';
 
 const {height} = Dimensions.get('window');
 const initialState = {
@@ -363,7 +364,9 @@ const Register = ({navigation}: INavigationProp) => {
                           style={{marginRight: 10}}
                         />
                       )}
-                      <Text style={[btnWithBgTextStyles]}> Sign up</Text>
+                      <Text style={[btnWithBgTextStyles]}>
+                        {t('signupText')}
+                      </Text>
                     </View>
                   </Pressable>
                   <Pressable
@@ -376,7 +379,7 @@ const Register = ({navigation}: INavigationProp) => {
                           btnWithoutBgTextStyles,
                           {color: APP_COLORS.MAROON},
                         ]}>
-                        Sign in
+                        {t('signinText')}
                       </Text>
                     </View>
                   </Pressable>

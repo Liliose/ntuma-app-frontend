@@ -16,6 +16,7 @@ import {
 } from '../../constants/styles';
 import {INavigationProp} from '../../../interfaces';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import {t} from 'i18next';
 const {width, height} = Dimensions.get('window');
 const Welcome = ({navigation}: INavigationProp) => {
   useEffect(() => {
@@ -66,17 +67,15 @@ const Welcome = ({navigation}: INavigationProp) => {
             marginTop: 30,
             fontSize: 35,
           }}>
-          Order & Lets eat Healthy{' '}
-          <Text style={{color: APP_COLORS.MAROON}}>Food</Text>
+          {t('welcomeTitleText')}{' '}
+          <Text style={{color: APP_COLORS.MAROON}}>{t('foodText')}</Text>
         </Text>
         <Text style={{marginTop: 10, color: APP_COLORS.BLACK}}>
-          Ntuma App, the fastest and most reliable delivery service in Rwanda!.
-          With just a few taps, you can order a wide range of products and have
-          them delivered straight to your doorstep.
+          {t('welcomeText')}
         </Text>
         <TouchableOpacity onPress={() => navigation.navigate('SelectMarket')}>
           <View style={[btnWithBgContainerStyles, {marginTop: 25}]}>
-            <Text style={[btnWithBgTextStyles]}>Get Started</Text>
+            <Text style={[btnWithBgTextStyles]}>{t('getStartedTex')}</Text>
           </View>
         </TouchableOpacity>
       </View>
