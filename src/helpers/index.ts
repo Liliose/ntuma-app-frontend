@@ -11,6 +11,7 @@ import {fetchBanners} from '../actions/banners';
 import {fethcPackagingFees} from '../actions/packagingFees';
 import {fetchSystemFees} from '../actions/systemFees';
 import {fetchAgentsFees} from '../actions/agentsFees';
+import {store} from '../store';
 
 //custom dispatcher hook
 export const useResetUser = () => {
@@ -35,9 +36,11 @@ export const useLoadBasiData = (): any => {
 };
 
 export const setHeaders = (token: string) => {
+  const {language} = store.getState();
   return {
     headers: {
       token: token,
+      lang: language.language,
     },
   };
 };
