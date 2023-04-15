@@ -7,6 +7,11 @@ import {store} from './src/store';
 import SplashScreen from 'react-native-splash-screen';
 import {subscribeToSocket, unSubscribeToSocket} from './src/worker/socket';
 import {saveAppToken, setFbToken} from './src/actions/user';
+import './src/languages/i18n';
+import {setLanguage} from './src/actions/language';
+import i18next from 'i18next';
+import {useSelector} from 'react-redux';
+import {RootState} from './src/reducers';
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -36,6 +41,7 @@ const requestCloudMessagingNotificationPermissionFromUser = async () => {
 
 function App(): JSX.Element {
   const {user}: any = store.getState();
+  const {language} = useSelector((state: RootState) => state.language);
   useEffect(() => {
     subscribeToSocket(store);
     requestCloudMessagingNotificationPermissionFromUser();
@@ -63,6 +69,24 @@ function App(): JSX.Element {
       sub = false;
     };
   }, [user.fbToken]);
+
+  //language
+
+  useEffect(() => {
+    try {
+      if (language && language?.trim() === '') {
+        store.dispatch(setLanguage('en'));
+      }
+      if (language == 'kinya') {
+        i18next.changeLanguage('kinya');
+      }
+      if (language == 'en') {
+        i18next.changeLanguage('en');
+      }
+    } catch (error) {
+      store.dispatch(setLanguage('en'));
+    }
+  }, [language]);
 
   return (
     <AlertNotificationRoot theme="dark">

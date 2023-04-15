@@ -25,9 +25,11 @@ import {IMarket, INavigationProp} from '../../../interfaces';
 import ImageLoader from '../../components/image-loader';
 import CustomAlert from '../../components/custom-alert';
 import FastImage from 'react-native-fast-image';
+import {useTranslation} from 'react-i18next';
 
 const SelectMarket = ({navigation}: INavigationProp) => {
   const dispatch = useDispatch();
+  const {t, i18n} = useTranslation();
   const {markets, isLoading, loadingError} = useSelector(
     (state: RootState) => state.markets,
   );

@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/AntDesign';
 import Icon4 from 'react-native-vector-icons/Entypo';
+import Icon5 from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {APP_COLORS} from '../../../../constants/colors';
 import {viewFlexCenter, viewFlexSpace} from '../../../../constants/styles';
@@ -246,6 +247,24 @@ const LoggedIn = ({navigation}: INavigationProp) => {
                 marginHorizontal: 10,
               }}>
               Help&Support
+            </Text>
+            <Icon4
+              name="chevron-right"
+              size={25}
+              color={APP_COLORS.TEXT_GRAY}
+            />
+          </View>
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate('ChangeLanguage')}>
+          <View style={[viewFlexSpace, {marginVertical: 10}]}>
+            <Icon5 name="exchange" size={25} color={APP_COLORS.BLACK} />
+            <Text
+              style={{
+                color: APP_COLORS.TEXT_GRAY,
+                flex: 1,
+                marginHorizontal: 10,
+              }}>
+              Change Language
             </Text>
             <Icon4
               name="chevron-right"

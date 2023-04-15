@@ -19,6 +19,7 @@ import banners from './banners';
 import systemfees from './systemFees';
 import packagingfees from './packagingFees';
 import agentsfees from './agentsFees';
+import language from './language';
 const rootReducer = combineReducers({
   user,
   markets,
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   systemfees,
   packagingfees,
   agentsfees,
+  language,
 });
 
 export default rootReducer;

@@ -97,6 +97,9 @@ export enum TOAST_MESSAGE_TYPES {
 export interface ICartReducer {
   cart: ICartItem[];
 }
+export interface ILanguageReducer {
+  language: string;
+}
 export interface IMarketsReducer {
   markets: IMarket[];
   isLoading: boolean;

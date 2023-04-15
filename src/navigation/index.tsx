@@ -60,6 +60,7 @@ import NotificationsCounter from '../components/notification-counter';
 import DeleteAccount from '../screens/delete-account';
 import HelpAndSupport from '../screens/help-and-support';
 import TrackOrder from '../screens/track-order';
+import ChangeLanguage from '../screens/change-language';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -717,6 +718,19 @@ function Navigation() {
           component={TrackOrder}
           options={({route, navigation}: INavigationProp) => ({
             title: 'Track Order #' + route?.params?.order?.id,
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          })}
+        />
+        <Stack.Screen
+          name="ChangeLanguage"
+          component={ChangeLanguage}
+          options={({route, navigation}: INavigationProp) => ({
+            title: 'Change Language',
             headerStyle: {
               backgroundColor: APP_COLORS.MAROON,
             },
