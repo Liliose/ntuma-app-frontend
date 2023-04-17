@@ -32,6 +32,8 @@ const ChooseCategory = ({navigation}: INavigationProp) => {
     (state: RootState) => state.categories,
   );
 
+  const {language} = useSelector((state: RootState) => state.language);
+
   const [refreshing, setRefreshing] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
@@ -133,7 +135,7 @@ const ChooseCategory = ({navigation}: INavigationProp) => {
                       marginHorizontal: 10,
                       textTransform: 'capitalize',
                     }}>
-                    {item.name}
+                    {language == 'kinya' ? item.kName : item.name}
                   </Text>
                   <Icon name="angle-right" size={30} color={APP_COLORS.BLACK} />
                 </View>

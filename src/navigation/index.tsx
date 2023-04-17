@@ -70,6 +70,7 @@ function ProductsTabs() {
   const {categories, selectedCategory} = useSelector(
     (state: RootState) => state.categories,
   );
+  const {language} = useSelector((state: RootState) => state.language);
   return (
     <TopTab.Navigator
       initialRouteName={'category_' + selectedCategory?.id}
@@ -89,7 +90,7 @@ function ProductsTabs() {
         <TopTab.Screen
           key={i}
           options={{
-            tabBarLabel: item.name,
+            tabBarLabel: language == 'kinya' ? item.kName : item.name,
           }}
           name={'category_' + item.id}
           component={Products}

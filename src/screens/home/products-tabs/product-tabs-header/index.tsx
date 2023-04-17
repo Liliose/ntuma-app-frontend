@@ -35,6 +35,7 @@ const ProductTabsHeader = ({navigation}: INavigationProp) => {
   const dispatch = useDispatch();
   const {selectedMarket} = useSelector((state: RootState) => state.markets);
   const {categories} = useSelector((state: RootState) => state.categories);
+  const {language} = useSelector((state: RootState) => state.language);
   const [showModal, setShowModal] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
 
@@ -189,7 +190,7 @@ const ProductTabsHeader = ({navigation}: INavigationProp) => {
                           flex: 1,
                           marginHorizontal: 10,
                         }}>
-                        {item.name}
+                        {language == 'kinya' ? item.kName : item.name}
                       </Text>
                       <Icon2
                         name="angle-right"

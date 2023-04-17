@@ -34,6 +34,7 @@ import FastImage from 'react-native-fast-image';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import Banners from './banners';
 import {fetchBanners} from '../../../actions/banners';
+import {t} from 'i18next';
 const {height} = Dimensions.get('window');
 interface IProductsProps extends INavigationProp {
   route: RouteProp<any>;
@@ -168,7 +169,7 @@ const Products = ({route, navigation}: IProductsProps) => {
                       item.categoryId === selectedCategory?.id &&
                       item.marketId === selectedMarket?.mId,
                   ).length === 0 ? (
-                    <NotFound title="No products found in this category" />
+                    <NotFound title={t('noProductsFromCategoryText')} />
                   ) : (
                     products
                       .filter(
