@@ -13,6 +13,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../../reducers';
 import ImageLoader from '../../../../components/image-loader';
+import {t} from 'i18next';
 
 const {width} = Dimensions.get('window');
 
@@ -32,6 +33,7 @@ const ProductItem = ({
   setShowModal,
 }: IProductItemProps) => {
   const dispatch = useDispatch();
+  const {language} = useSelector((state: RootState) => state.language);
   const {favourites} = useSelector((state: RootState) => state.favourites);
   const [productExistsInFavList, setProductExistsInFavList] = useState(false);
   useEffect(() => {
@@ -147,9 +149,11 @@ const ProductItem = ({
             fontWeight: '600',
             textTransform: 'capitalize',
           }}>
-          {item.name}
+          {language == 'kinya' ? item.kName : item.name}
         </Text>
-        <Text style={{color: APP_COLORS.TEXT_GRAY}}>{item.description}</Text>
+        <Text style={{color: APP_COLORS.TEXT_GRAY}}>
+          {language == 'kinya' ? item.kDescription : item.description}
+        </Text>
         {item.priceType === 'single' && (
           <Text style={{color: APP_COLORS.TEXT_GRAY}}>
             <Text
@@ -157,7 +161,7 @@ const ProductItem = ({
                 color: APP_COLORS.BLACK,
                 fontWeight: 'bold',
               }}>
-              Price:
+              {t('priceText')}:
             </Text>{' '}
             {currencyFormatter(item.singlePrice)} RWF
           </Text>

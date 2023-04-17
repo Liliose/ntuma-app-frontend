@@ -202,6 +202,7 @@ export interface IProduct {
   categoryId: number;
   name: string;
   kName?: string;
+  kDescription: string;
   description: string;
   priceType: string;
   supportsDynamicPrice: boolean;

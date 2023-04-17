@@ -68,6 +68,7 @@ const ProductPreview = ({
 }: IProductPreviewProps) => {
   const dispatch = useDispatch();
   const {token} = useSelector((state: RootState) => state.user);
+  const {language} = useSelector((state: RootState) => state.language);
   const {favourites} = useSelector((state: RootState) => state.favourites);
   const [productExistsInFavList, setProductExistsInFavList] = useState(false);
   const [price, setPrice] = useState<ICartItem>(initialPrice);
@@ -216,7 +217,7 @@ const ProductPreview = ({
                     paddingRight: 10,
                     textTransform: 'capitalize',
                   }}>
-                  {product?.name}
+                  {language == 'kinya' ? product?.kName : product?.name}
                 </Text>
                 {productExistsInFavList ? (
                   <Pressable
@@ -250,7 +251,9 @@ const ProductPreview = ({
                 )}
               </View>
               <Text style={{color: APP_COLORS.TEXT_GRAY}}>
-                {product?.description}
+                {language == 'kinya'
+                  ? product?.kDescription
+                  : product?.description}
               </Text>
               {product?.priceType === 'single' ? (
                 price.customPrice ? (
