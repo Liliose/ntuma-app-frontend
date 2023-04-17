@@ -22,6 +22,7 @@ import {RootState} from '../../../reducers';
 import {addCartItem} from '../../../actions/cart';
 import ProductPreview from '../products-tabs/preview';
 import Icon from 'react-native-vector-icons/Entypo';
+import {t} from 'i18next';
 
 const initialPrice: ICartItem = {
   price: 0,
@@ -193,7 +194,7 @@ const DishDetails = ({route, navigation}: INavigationPropWithRouteRequired) => {
                   color={APP_COLORS.GREEN}
                 />
                 <Text style={{color: APP_COLORS.GREEN, flex: 1}}>
-                  If quantity is zero(0), Product won't be added to cart.
+                  {t('dishInfoText')}
                 </Text>
               </View>
             </View>

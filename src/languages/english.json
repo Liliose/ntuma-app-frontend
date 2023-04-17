@@ -87,5 +87,6 @@
     "youDontHaveFailedOrder":"You don't have any failed order",
     "orderInformationText":"Order Information",
     "openMarketText":"Open from",
-    "closeMarketText":"Until"
+    "closeMarketText":"Until",
+    "dishInfoText":"If quantity is zero(0), Product won't be added to cart."
 }}

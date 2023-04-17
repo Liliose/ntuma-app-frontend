@@ -87,5 +87,6 @@
     "orderInformationText":"Amakuru yibyo watumije", 
     "openMarketText":"Gufungura ni saa",
     "closeMarketText":"Kugeza saa", 
-    "noProductsFromCategoryText":"Nta bicuruzwa biri muriki cyiciro"
+    "noProductsFromCategoryText":"Nta bicuruzwa biri muriki cyiciro",
+    "dishInfoText":"Iyo kantinte yigicuruzwa ibaye zero ntabwo kijya muri cart"
 }}
