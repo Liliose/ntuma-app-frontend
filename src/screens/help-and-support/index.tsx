@@ -5,8 +5,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {viewFlexSpace} from '../../constants/styles';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import {t} from 'i18next';
+import {INavigationProp} from '../../../interfaces';
 
-const HelpAndSupport = () => {
+const HelpAndSupport = ({navigation}: INavigationProp) => {
   const handleCall = () => {
     Linking.openURL(`tel:0788712248`);
   };
@@ -14,10 +15,11 @@ const HelpAndSupport = () => {
     if (await Linking.canOpenURL(url)) {
       await Linking.openURL(url);
     } else {
-      console.log(`Unable to open URL: ${url}`);
-      //@ts-ignore
-      alert(`Unable to open URL: ${url}`);
-      //@ts-ignore
+      // console.log(`Unable to open URL: ${url}`);
+      // //@ts-ignore
+      // alert(`Unable to open URL: ${url}`);
+      // //@ts-ignore
+      navigation.navigate('URLPreview', {url});
     }
   };
   return (
