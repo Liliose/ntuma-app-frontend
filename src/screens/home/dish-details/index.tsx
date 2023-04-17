@@ -143,10 +143,11 @@ const DishDetails = ({route, navigation}: INavigationPropWithRouteRequired) => {
     if (await Linking.canOpenURL(url)) {
       await Linking.openURL(url);
     } else {
-      console.log(`Unable to open URL: ${url}`);
-      //@ts-ignore
-      alert(`Unable to open URL: ${url}`);
-      //@ts-ignore
+      // console.log(`Unable to open URL: ${url}`);
+      // //@ts-ignore
+      // alert(`Unable to open URL: ${url}`);
+      // //@ts-ignore
+      navigation.navigate('URLPreview', {url});
     }
   };
 

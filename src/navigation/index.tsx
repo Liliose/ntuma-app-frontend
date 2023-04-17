@@ -62,6 +62,7 @@ import HelpAndSupport from '../screens/help-and-support';
 import TrackOrder from '../screens/track-order';
 import ChangeLanguage from '../screens/change-language';
 import {t} from 'i18next';
+import UrlPreview from '../screens/url-preview';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -751,6 +752,20 @@ function Navigation() {
             },
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          })}
+        />
+        <Stack.Screen
+          name="URLPreview"
+          component={UrlPreview}
+          options={({route, navigation}: INavigationProp) => ({
+            title: '',
+            headerStyle: {
+              backgroundColor: APP_COLORS.MAROON,
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: APP_COLORS.WHITE,
+            headerShown: false,
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
