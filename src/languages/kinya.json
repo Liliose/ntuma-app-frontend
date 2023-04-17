@@ -84,5 +84,7 @@
     "ordeReviewText":"Suzuma ibyo wahisemo",
     "noMessagesFoundText":"Nta mesaje zihari",
     "youDontHaveFailedOrder":"Ntakirimo",
-    "orderInformationText":"Amakuru yibyo watumije"
+    "orderInformationText":"Amakuru yibyo watumije", 
+    "openMarketText":"Gufungura ni saa",
+    "closeMarketText":"Kugeza saa"
 }}

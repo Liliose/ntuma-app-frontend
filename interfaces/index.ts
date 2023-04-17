@@ -84,6 +84,8 @@ export interface IMarket {
   lat: string;
   long: string;
   image: string;
+  open: string;
+  close: string;
   isActive: boolean;
   bikeMaximumKm: number;
   createdAt: string;
@@ -134,6 +136,7 @@ export interface IDishesReducer {
 export interface ICategory {
   id: number;
   name: string;
+  kName?: string;
   image: string;
   createdAt: string;
 }
@@ -198,6 +201,7 @@ export interface IProduct {
   marketId: number;
   categoryId: number;
   name: string;
+  kName?: string;
   description: string;
   priceType: string;
   supportsDynamicPrice: boolean;

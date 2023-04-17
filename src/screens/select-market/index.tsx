@@ -115,7 +115,11 @@ const SelectMarket = ({navigation}: INavigationProp) => {
                             }}>
                             {item.name}
                           </Text>
-                          <MarketStars />
+                          <Text
+                            style={{color: APP_COLORS.TEXT_GRAY, marginTop: 5}}>
+                            {t('openMarketText')} {item.open}{' '}
+                            {t('closeMarketText')} {item.close}
+                          </Text>
                           <View style={[viewFlexSpace]}>
                             <Icon
                               name="map-marker"

@@ -84,5 +84,7 @@
     "ordeReviewText":"Order Review",
     "noMessagesFoundText":"No messages found",
     "youDontHaveFailedOrder":"You don't have any failed order",
-    "orderInformationText":"Order Information"
+    "orderInformationText":"Order Information",
+    "openMarketText":"Open from",
+    "closeMarketText":"Until"
 }}

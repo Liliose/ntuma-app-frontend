@@ -24,6 +24,7 @@ import MarketStars from './market-stars';
 import {IMarket, INavigationProp} from '../../../interfaces';
 import ImageLoader from '../../components/image-loader';
 import NotFound from '../../components/not-found';
+import {t} from 'i18next';
 
 const SelectMarket = ({navigation}: INavigationProp) => {
   const dispatch = useDispatch();
@@ -89,7 +90,11 @@ const SelectMarket = ({navigation}: INavigationProp) => {
                           style={{fontWeight: 'bold', color: APP_COLORS.BLACK}}>
                           {item.name}
                         </Text>
-                        <MarketStars />
+                        <Text
+                          style={{color: APP_COLORS.TEXT_GRAY, marginTop: 5}}>
+                          {t('openMarketText')} {item.open}{' '}
+                          {t('closeMarketText')} {item.close}
+                        </Text>
                         <View style={[viewFlexSpace]}>
                           <Icon
                             name="map-marker"
