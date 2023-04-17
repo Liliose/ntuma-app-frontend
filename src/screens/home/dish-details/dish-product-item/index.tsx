@@ -36,6 +36,7 @@ const DishProductItem = ({
   setShowModal,
   setSelectedProduct,
 }: IDishProductItemProps) => {
+  const {language} = useSelector((state: RootState) => state.language);
   const {products} = useSelector((state: RootState) => state.products);
   const {prices} = useSelector((state: RootState) => state.productPrices);
   const [product, setProduct] = useState<IProduct | undefined>(undefined);
@@ -111,7 +112,9 @@ const DishProductItem = ({
             />
           </Pressable>
           <View style={{flex: 1, marginHorizontal: 10}}>
-            <Text style={{color: APP_COLORS.BLACK}}>{product?.name}</Text>
+            <Text style={{color: APP_COLORS.BLACK}}>
+              {language == 'kinya' ? product?.kName : product?.name}
+            </Text>
             <Text style={{color: APP_COLORS.TEXT_GRAY}}>
               {currencyFormatter(price.price * price.quantity)} Rwf
             </Text>
