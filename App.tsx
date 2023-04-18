@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {LogBox, SafeAreaView} from 'react-native';
+import {LogBox, SafeAreaView, Platform} from 'react-native';
 import {AlertNotificationRoot} from 'react-native-alert-notification';
 import messaging from '@react-native-firebase/messaging';
 import Navigation from './src/navigation';
@@ -12,6 +12,7 @@ import {setLanguage} from './src/actions/language';
 import i18next from 'i18next';
 import {useSelector} from 'react-redux';
 import {RootState} from './src/reducers';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -58,6 +59,10 @@ function App(): JSX.Element {
 
   useEffect(() => {
     SplashScreen.hide();
+
+    if (Platform.OS === 'android') {
+      changeNavigationBarColor('maroon');
+    }
   }, []);
 
   useEffect(() => {
