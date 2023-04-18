@@ -62,7 +62,7 @@ const NotLoggedIn = ({navigation}: INavigationProp) => {
         <View style={[btnWithBgContainerStyles]}>
           <Icon2 name="adduser" size={25} color={APP_COLORS.WHITE} />
           <Text style={{flex: 1, marginLeft: 10, color: APP_COLORS.WHITE}}>
-            {t('signoutText')}
+            {t('signupText')}
           </Text>
         </View>
       </Pressable>
