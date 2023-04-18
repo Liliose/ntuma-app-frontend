@@ -578,8 +578,7 @@ function Navigation() {
             headerShadowVisible: false,
             headerTitleAlign: 'center',
             headerTintColor: APP_COLORS.WHITE,
-            cardStyleInterpolator:
-              CardStyleInterpolators.forFadeFromBottomAndroid,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           })}
         />
         <Stack.Screen
