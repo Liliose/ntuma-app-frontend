@@ -1,5 +1,5 @@
 import {View, Text, Pressable} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {APP_COLORS} from '../../constants/colors';
 import {viewFlexSpace} from '../../constants/styles';
 import Icon from 'react-native-vector-icons/Fontisto';
@@ -7,18 +7,26 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../reducers';
 import {setLanguage} from '../../actions/language';
 import i18next, {t} from 'i18next';
+import RNRestart from 'react-native-restart';
+import FullPageLoader from '../../components/full-page-loader';
 
 const ChangeLanguage = () => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const {language} = useSelector((state: RootState) => state.language);
+  const handleChangeLanguage = (lang: string) => {
+    dispatch(setLanguage(lang));
+    i18next.changeLanguage(lang);
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      RNRestart.restart();
+    }, 1000);
+  };
   return (
     <View
       style={{flex: 1, paddingVertical: 20, backgroundColor: APP_COLORS.WHITE}}>
-      <Pressable
-        onPress={() => {
-          dispatch(setLanguage('en'));
-          i18next.changeLanguage('en');
-        }}>
+      <Pressable onPress={() => handleChangeLanguage('en')}>
         <View
           style={[
             viewFlexSpace,
@@ -40,11 +48,7 @@ const ChangeLanguage = () => {
           />
         </View>
       </Pressable>
-      <Pressable
-        onPress={() => {
-          dispatch(setLanguage('kinya'));
-          i18next.changeLanguage('kinya');
-        }}>
+      <Pressable onPress={() => handleChangeLanguage('kinya')}>
         <View
           style={[
             viewFlexSpace,
@@ -62,6 +66,7 @@ const ChangeLanguage = () => {
           />
         </View>
       </Pressable>
+      <FullPageLoader isLoading={isLoading} />
     </View>
   );
 };
